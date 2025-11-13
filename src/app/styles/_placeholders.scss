@@ -1,0 +1,44 @@
+@use "variables" as *;
+
+//=========================
+//* Flex utilities *//
+//=========================
+%shared-flexible {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+%normal-flexible {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+//=========================
+//* Card styling *//
+//=========================
+%product-card-style {
+  background-color: $secondary-bg-color;
+  border-radius: $radius-lg;
+}
+//==============================
+//* Button styling *//
+//==============================
+%basic-button-style {
+  background-color: $button-color;
+  border-radius: $radius-md;
+  color: $primary-color;
+}
+%button-xl-style {
+  padding: 16px 210px;
+}
+%button-lg-style {
+  padding: 16px 121px;
+}
+%button-md-style {
+  padding: 13px 20px;
+}
+%button-sm-style {
+  padding: 8px 16px;
+}
