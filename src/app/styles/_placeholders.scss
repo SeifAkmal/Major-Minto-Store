@@ -8,6 +8,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
 }
 %normal-flexible {
   display: flex;
@@ -29,6 +30,11 @@
   background-color: $button-color;
   border-radius: $radius-md;
   color: $primary-color;
+  font-size: $font-size-sm;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: $basic-transition;
 }
 %button-xl-style {
   padding: 16px 210px;

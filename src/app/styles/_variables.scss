@@ -5,11 +5,13 @@ $primary-color: #f5fdf7;
 $secondary-color: #66bb6a;
 $thirdly-color: #bfdcc9;
 $primary-bg-color: #07120d;
-$secondary-bg-color: #0B1F15;
+$secondary-bg-color: #0b1f15;
+$primary-border-color: #6f8478;
+$secondary-border-color: #0f2b20;
 $button-color: #137a3f;
+$button-hover-color: #0e5e31;
 $cart-counter-color: #e0564b;
 $delete-color: #e0564b;
-$border-color: #6f8478;
 //=========================
 //* Fonts *//
 //=========================
@@ -24,3 +26,8 @@ $font-size-sm: 14px;
 $radius-lg: 10px;
 $radius-md: 8px;
 $radius-sm: 6px;
+//=========================
+//* Transition *//
+//=========================
+$basic-transition: 0.3s;
+
