@@ -1,0 +1,27 @@
+<section class="sort-section">
+  <button class="toggle-filters">
+    <img src="icons/filter-icon.svg" alt="" />
+    <p>Filters</p>
+  </button>
+  <div class="dropdown">
+    <div class="dropdown-toggle" (click)="toggleDropdown()">
+      {{ selectedSort }}
+    </div>
+
+    <div
+      class="dropdown-menu"
+      [ngStyle]="{ display: isOpen ? 'flex' : 'none' }"
+    >
+      <div class="item" (click)="selectItem('Sort by: Featured')">
+        Sort by: Featured
+      </div>
+      <div class="item" (click)="selectItem('Price: Low to High')">
+        Price: Low to High
+      </div>
+      <div class="item" (click)="selectItem('Price: High to Low')">
+        Price: High to Low
+      </div>
+      <div class="item" (click)="selectItem('Rating')">Rating</div>
+    </div>
+  </div>
+</section>

@@ -14,6 +14,7 @@ nav {
     @extend %shared-flexible;
     width: 100%;
     max-width: 1350px;
+    padding: 0 20px;
     h1 {
       color: $secondary-color;
       font-size: $font-size-xl;
@@ -36,11 +37,8 @@ nav {
       }
     }
     .cart-button {
-      @extend %basic-button-style;
+      @extend %primary-button-style;
       @extend %button-md-style;
-      &:hover {
-        background-color: $button-hover-color;
-      }
     }
     @include respond(small-phone) {
       h1 {

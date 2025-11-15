@@ -1,0 +1,46 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/placeholders" as *;
+@use "../../../styles/_mixins.scss" as *;
+
+.sort-section {
+  @extend %shared-flexible;
+  font-size: $font-size-sm;
+  .toggle-filters {
+    @extend %secondary-button-style;
+    @extend %button-filter-style;
+    border: none;
+  }
+  .dropdown {
+    position: relative;
+    cursor: pointer;
+    color: $thirdly-color;
+    min-width: 163px;
+    .dropdown-toggle {
+      @extend %secondary-button-style;
+      @extend %button-filter-style;
+      color: $thirdly-color;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      width: 100%;
+      background: $secondary-bg-color;
+      border-radius: 6px;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 50;
+      .item {
+        padding: 8px;
+        border-radius: 4px;
+        color: $thirdly-color;
+        transition: $basic-transition;
+      }
+
+      .item:hover {
+        background: $button-color;
+      }
+    }
+  }
+}
