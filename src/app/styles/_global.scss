@@ -1,6 +1,10 @@
 @use "variables" as *;
 @use "placeholders" as *;
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $secondary-border-color transparent;
+}
 body {
   margin: 0;
   padding: 0;
@@ -19,13 +23,18 @@ h3,
 h4,
 h5,
 h6,
+ul,
 p {
   margin: 0;
   padding: 0;
 }
+ul {
+  list-style: none;
+}
 a {
   text-decoration: none;
 }
+
 .page-layout {
   max-width: 1350px;
   margin: 24px auto;

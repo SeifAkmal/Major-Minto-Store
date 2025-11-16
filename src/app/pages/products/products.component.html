@@ -1,9 +1,9 @@
 <div class="container">
-  <aside>
-    <app-filters-sidebar></app-filters-sidebar>
-  </aside>
+  <app-filters-sidebar
+    [ngStyle]="{ display: filterToggle ? 'none' : 'flex' }"
+  ></app-filters-sidebar>
   <article>
-    <app-sort-dropdown></app-sort-dropdown>
+    <app-filter-controls (filtersEvent)="changeDisplay()"></app-filter-controls>
     <app-products-list></app-products-list>
   </article>
 </div>
