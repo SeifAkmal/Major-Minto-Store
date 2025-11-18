@@ -56,6 +56,9 @@
       }
     }
   }
+  //=========================
+  //* BADGE STYLE *//
+  //=========================
   .badge {
     position: absolute;
     top: 15px;
@@ -71,7 +74,6 @@
   .badge.New {
     background-color: #1976d2;
   }
-
   .badge.Premium {
     background-color: #f57c00;
   }
@@ -80,5 +82,18 @@
   }
   .badge.Trending {
     background-color: #7b1fa2;
+  }
+}
+
+.productNav {
+  @extend %normal-flexible;
+  gap: 10px;
+  margin: 40px 0;
+  button {
+    @include button(thirdly, add);
+    &:focus {
+      background-color: $button-color;
+      outline: none;
+    }
   }
 }

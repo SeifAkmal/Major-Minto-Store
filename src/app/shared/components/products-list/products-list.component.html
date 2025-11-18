@@ -7,13 +7,15 @@
     </div>
     <article class="product-info">
       <h2>{{ item.title }}</h2>
+
       <section class="rating-section">
-        @for (star of getStarsArray(item.rating ?? 0 ); track $index) {
+        @for (star of getStarsArray(item.rating ?? 0); track $index) {
         <img src="icons/1-star.svg" alt="" />
         }@if (item.rating ?? 0) {
         <span class="rating-value">{{ item.rating }}</span>
         }
       </section>
+
       <section class="price-section">
         <span class="price">{{ item.price | currency : "USD" }}</span>
         <button>Add to Cart</button>
@@ -27,4 +29,9 @@
   </li>
   }
 </ul>
+<div class="productNav">
+  <button #firstButton (click)="reOrderProducts()">1</button>
+  <button (click)="reOrderProducts(5)">2</button>
+  <button (click)="reOrderProducts(4)">3</button>
+</div>
 }

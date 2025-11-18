@@ -1,5 +1,8 @@
 @use "variables" as *;
 
+//=========================
+//* RESPONSIVE *//
+//=========================
 $breakpoints: (
   desktop: 1400px,
   laptop: 1200px,
@@ -13,20 +16,22 @@ $breakpoints: (
     @content;
   }
 }
-
+//=========================
+//* BUTTONS STYLE *//
+//=========================
 @mixin button($type, $size) {
   // BASIC SHARED BUTTON
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  cursor: pointer;
-  border: none;
   border-radius: $radius-md;
-  transition: $basic-transition;
   font-size: $font-size-sm;
   font-weight: 500;
   color: $primary-color;
+  cursor: pointer;
+  border: none;
+  transition: $basic-transition;
 
   // TYPE HANDLING
   @if $type == primary {
@@ -37,7 +42,7 @@ $breakpoints: (
   } @else if $type == secondary {
     background-color: $secondary-bg-color;
     border: 1px solid $primary-border-color;
-  } @else if thirdly {
+  } @else if $type == thirdly {
     background-color: $secondary-bg-color;
   }
 
