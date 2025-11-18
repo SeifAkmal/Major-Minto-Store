@@ -5,7 +5,7 @@ import { FiltersSidebarComponent } from '../../shared/components/filters-sidebar
 import { ProductsListComponent } from '../../shared/components/products-list/products-list.component';
 
 @Component({
-  selector: 'app-products',
+  selector: 'app-home',
   standalone: true,
   imports: [
     filterControlsComponent,
@@ -13,10 +13,10 @@ import { ProductsListComponent } from '../../shared/components/products-list/pro
     ProductsListComponent,
     NgStyle,
   ],
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.scss',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
 })
-export class ProductsComponent {
+export class HomeComponent {
   // ===== FILTER-TOOGLE ===== \\
   filterToggle: boolean = false;
   changeDisplay() {

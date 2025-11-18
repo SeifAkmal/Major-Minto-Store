@@ -1,0 +1,84 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/placeholders" as *;
+@use "../../../styles/mixins" as *;
+
+.product-list {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.product-card {
+  background-color: $secondary-bg-color;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  position: relative;
+  .image-wrapper {
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .product-info {
+    padding: 16px;
+
+    h2 {
+      font-size: $font-size-md;
+      margin-bottom: 8px;
+    }
+
+    .rating-section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      img {
+        margin-right: 4px;
+      }
+
+      .rating-value {
+        font-size: $font-size-sm;
+        color: $thirdly-color;
+      }
+    }
+
+    .price-section {
+      @extend %shared-flexible;
+
+      .price {
+        color: $secondary-color;
+        font-size: $font-size-lg;
+        font-weight: 500;
+      }
+
+      button {
+        @include button(primary, add);
+      }
+    }
+  }
+  .badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border-radius: 20px;
+    z-index: 99;
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+  .badge.BestSeller {
+    background-color: #137a3f;
+  }
+  .badge.New {
+    background-color: #1976d2;
+  }
+
+  .badge.Premium {
+    background-color: #f57c00;
+  }
+  .badge.Popular {
+    background-color: #c2185b;
+  }
+  .badge.Trending {
+    background-color: #7b1fa2;
+  }
+}

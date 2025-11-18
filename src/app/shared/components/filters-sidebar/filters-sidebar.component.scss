@@ -2,3 +2,8 @@
 @use "../../../styles/placeholders" as *;
 @use "../../../styles/mixins" as *;
 
+h3 {
+  min-width: 280px;
+  height: 400px;
+  background-color: #0b1f15;
+}

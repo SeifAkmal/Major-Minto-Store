@@ -1,4 +1,7 @@
+@use "variables" as *;
+
 $breakpoints: (
+  desktop: 1400px,
   laptop: 1200px,
   tablet: 964px,
   phone: 768px,
@@ -8,5 +11,46 @@ $breakpoints: (
 @mixin respond($bp) {
   @media (max-width: map-get($breakpoints, $bp)) {
     @content;
+  }
+}
+
+@mixin button($type, $size) {
+  // BASIC SHARED BUTTON
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: $radius-md;
+  transition: $basic-transition;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $primary-color;
+
+  // TYPE HANDLING
+  @if $type == primary {
+    background-color: $button-color;
+    &:hover {
+      background-color: $button-hover-color;
+    }
+  } @else if $type == secondary {
+    background-color: $secondary-bg-color;
+    border: 1px solid $primary-border-color;
+  } @else if thirdly {
+    background-color: $secondary-bg-color;
+  }
+
+  // SIZE HANDLING
+  @if $size == add-xl {
+    padding: 16px 210px;
+  } @else if $size == checkout {
+    padding: 16px 121px;
+  } @else if $size == cart {
+    padding: 13px 20px;
+  } @else if $size == add {
+    padding: 8px 16px;
+  } @else if $size == sort {
+    padding: 12px 21px;
   }
 }

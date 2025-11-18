@@ -7,8 +7,8 @@
   font-size: $font-size-sm;
   margin-bottom: 24px;
   .toggle-filters {
-    @extend %secondary-button-style;
-    @extend %button-filter-style;
+    @include button(thirdly, sort);
+
     border: none;
   }
   .dropdown {
@@ -18,8 +18,7 @@
       border-radius: $radius-md;
     }
     .dropdown-toggle {
-      @extend %secondary-button-style;
-      @extend %button-filter-style;
+      @include button(secondary, sort);
       color: $thirdly-color;
       min-width: 163px;
     }

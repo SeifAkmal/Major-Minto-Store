@@ -1,1 +1,30 @@
-<p>products-list works!</p>
+@if (productsList.length) {
+<ul class="product-list">
+  @for (item of productsList; track $index) {
+  <li class="product-card">
+    <div class="image-wrapper">
+      <img [src]="item.image" alt="{{ item.title }}" />
+    </div>
+    <article class="product-info">
+      <h2>{{ item.title }}</h2>
+      <section class="rating-section">
+        @for (star of getStarsArray(item.rating ?? 0 ); track $index) {
+        <img src="icons/1-star.svg" alt="" />
+        }@if (item.rating ?? 0) {
+        <span class="rating-value">{{ item.rating }}</span>
+        }
+      </section>
+      <section class="price-section">
+        <span class="price">{{ item.price | currency : "USD" }}</span>
+        <button>Add to Cart</button>
+      </section>
+    </article>
+    @if (item.badge) {
+    <div [ngClass]="'badge ' + item.badge">
+      {{ item.badge }}
+    </div>
+    }
+  </li>
+  }
+</ul>
+}

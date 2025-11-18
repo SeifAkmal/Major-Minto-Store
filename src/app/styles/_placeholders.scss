@@ -26,44 +26,45 @@
 //==============================
 //* Button styling *//
 //==============================
-%basic-button-style {
-  border-radius: $radius-md;
-  color: $primary-color;
-  font-size: $font-size-sm;
-  gap: 5px;
-  display: flex;
-  align-items: center;
-  border: none;
-  justify-content: center;
-  transition: $basic-transition;
-}
-%primary-button-style {
-  @extend %basic-button-style;
-  background-color: $button-color;
-  &:hover {
-    background-color: $button-hover-color;
-  }
-}
-%secondary-button-style {
-  @extend %basic-button-style;
-  background-color: $secondary-bg-color;
-  border: none;
-  cursor: pointer;
-  border: 1px solid $primary-border-color;
-}
+// %basic-button-style {
+//   border-radius: $radius-md;
+//   color: $primary-color;
+//   font-size: $font-size-sm;
+//   gap: 5px;
+//   display: flex;
+//   align-items: center;
+//   border: none;
+//   justify-content: center;
+//   cursor: pointer;
+//   transition: $basic-transition;
+// }
+// %primary-button-style {
+//   @extend %basic-button-style;
+//   background-color: $button-color;
+//   &:hover {
+//     background-color: $button-hover-color;
+//   }
+// }
+// %secondary-button-style {
+//   @extend %basic-button-style;
+//   background-color: $secondary-bg-color;
+//   border: none;
+//   cursor: pointer;
+//   border: 1px solid $primary-border-color;
+// }
 
-%button-xl-style {
-  padding: 16px 210px;
-}
-%button-lg-style {
-  padding: 16px 121px;
-}
-%button-md-style {
-  padding: 13px 20px;
-}
-%button-sm-style {
-  padding: 8px 16px;
-}
-%button-filter-style {
-  padding: 12px 21px;
-}
+// %button-xl-style {
+//   padding: 16px 210px;
+// }
+// %button-lg-style {
+//   padding: 16px 121px;
+// }
+// %button-md-style {
+//   padding: 13px 20px;
+// }
+// %button-sm-style {
+//   padding: 8px 16px;
+// }
+// %button-filter-style {
+//   padding: 12px 21px;
+// }

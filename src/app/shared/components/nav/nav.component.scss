@@ -36,8 +36,7 @@ nav {
       }
     }
     .cart-button {
-      @extend %primary-button-style;
-      @extend %button-md-style;
+      @include button(primary, cart);
     }
     @include respond(small-phone) {
       h1 {
