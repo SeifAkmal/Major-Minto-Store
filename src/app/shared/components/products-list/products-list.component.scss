@@ -91,9 +91,5 @@
   margin: 40px 0;
   button {
     @include button(thirdly, add);
-    &:focus {
-      background-color: $button-color;
-      outline: none;
-    }
   }
 }

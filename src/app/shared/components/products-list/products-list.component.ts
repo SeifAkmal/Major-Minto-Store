@@ -1,22 +1,16 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../../core/services/products.service';
 import { Product } from '../../../core/interfaces/product';
-import { CurrencyPipe, NgClass } from '@angular/common';
+import { CurrencyPipe, NgClass, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [CurrencyPipe, NgClass],
+  imports: [CurrencyPipe, NgClass, NgStyle],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
 })
-export class ProductsListComponent implements OnInit, AfterViewInit {
+export class ProductsListComponent implements OnInit {
   constructor(public ProductsService: ProductsService) {}
   // ===== GET-PRODUCTS ===== \\
   productsList: Product[] = [];
@@ -28,11 +22,12 @@ export class ProductsListComponent implements OnInit, AfterViewInit {
     return Array(Math.floor(rating)).fill(0);
   }
   // ===== PRODUCT-NAV ===== \\
-  reOrderProducts(maxShow?: number) {
-    this.productsList = this.ProductsService.getProducts().slice(0, maxShow);
-  }
-  @ViewChild('firstButton') firstButton!: ElementRef;
-  ngAfterViewInit() {
-    this.firstButton.nativeElement.focus();
+  activatedpage: number | undefined = 1;
+  reOrderProducts(maxShow?: number, activated?: number) {
+    this.productsList = maxShow
+      ? this.ProductsService.getProducts().slice(0, maxShow)
+      : this.ProductsService.getProducts();
+
+    this.activatedpage = activated;
   }
 }

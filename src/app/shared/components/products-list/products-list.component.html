@@ -30,8 +30,30 @@
   }
 </ul>
 <div class="productNav">
-  <button #firstButton (click)="reOrderProducts()">1</button>
-  <button (click)="reOrderProducts(5)">2</button>
-  <button (click)="reOrderProducts(4)">3</button>
+  <button
+    [ngStyle]="{
+      'background-color': activatedpage === 1 ? '#137A3F' : '#0B1F15'
+    }"
+    (click)="reOrderProducts(undefined, 1)"
+  >
+    1
+  </button>
+  <button
+    [ngStyle]="{
+      'background-color': activatedpage === 2 ? '#137A3F' : '#0B1F15'
+    }"
+    (click)="reOrderProducts(5, 2)"
+  >
+    2
+  </button>
+  <button
+    [ngStyle]="{
+      'background-color': activatedpage === 3 ? '#137A3F' : '#0B1F15'
+    }"
+    (click)="reOrderProducts(4, 3)"
+  >
+    3
+  </button>
 </div>
+
 }
