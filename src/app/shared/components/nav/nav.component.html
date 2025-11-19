@@ -1,9 +1,14 @@
 <nav>
   <div class="navbar">
+
     <a routerLink="/home"><h1>Minto Store</h1> </a>
-    <input name="search" type="text" placeholder="Search products..." />
+
+    <input name="search" type="text" placeholder="Search products..." [(ngModel)]="searchWord" (keyup)="searchNow()" /> 
+    <!-- <button (click)="searchNow()">search</button> -->
+
     <a class="cart-button" routerLink="/cart"
       ><img src="icons/cart-icon.svg" alt="Cart Icon" /> <span>Cart</span>
     </a>
+
   </div>
 </nav>

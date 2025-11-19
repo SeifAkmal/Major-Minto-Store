@@ -1,4 +1,4 @@
-import { Product } from '../interfaces/product';
+import { Product } from './../interfaces/product';
 import { PRODUCTS } from './../../../data/products';
 import { Injectable } from '@angular/core';
 
@@ -6,7 +6,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProductsService {
-  getProducts(): Product[] {
-    return [...PRODUCTS.sort(() => Math.random() - 0.5)];
+  originalProducts: Product[] = [...PRODUCTS.sort(() => Math.random() - 0.5)];
+  productsList: Product[] = [...PRODUCTS.sort(() => Math.random() - 0.5)];
+
+  getSearchResults(keyWord: string) {
+this.productsList = this.originalProducts.filter(u => {
+  const titleWords = u.title.toLowerCase().split(" ");
+  const key = keyWord.toLowerCase();
+
+  return titleWords.some(w => w.startsWith(key));
+});
   }
 }

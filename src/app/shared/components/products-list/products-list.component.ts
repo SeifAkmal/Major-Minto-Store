@@ -10,23 +10,19 @@ import { CurrencyPipe, NgClass, NgStyle } from '@angular/common';
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent {
   constructor(public ProductsService: ProductsService) {}
-  // ===== GET-PRODUCTS ===== \\
-  productsList: Product[] = [];
-  ngOnInit(): void {
-    this.productsList = this.ProductsService.getProducts();
-  }
   // ===== GET-STARS ===== \\
   getStarsArray(rating: number): number[] {
     return Array(Math.floor(rating)).fill(0);
   }
   // ===== PRODUCT-NAV ===== \\
+  productsList: Product[] = [];
   activatedpage: number | undefined = 1;
   reOrderProducts(maxShow?: number, activated?: number) {
-    this.productsList = maxShow
-      ? this.ProductsService.getProducts().slice(0, maxShow)
-      : this.ProductsService.getProducts();
+    this.ProductsService.productsList = maxShow
+      ? this.ProductsService.productsList.slice(0, maxShow)
+      : this.ProductsService.originalProducts;
 
     this.activatedpage = activated;
   }

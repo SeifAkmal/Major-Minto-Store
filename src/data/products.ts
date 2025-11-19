@@ -4,7 +4,7 @@ export const PRODUCTS: Product[] = [
   // Herbs
   {
     id: 1,
-    title: 'Herbal-Sleep-Blend',
+    title: 'Herbal Sleep Blend',
     price: 24.99,
     category: 'Herbs',
     image: 'Herbs/Herbal-Sleep-Blend.png',
@@ -12,7 +12,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 2,
-    title: 'Lavender-Tea',
+    title: 'Lavender Tea',
     price: 18.5,
     category: 'Herbs',
     image: 'Herbs/Lavender-Tea.png',
@@ -20,7 +20,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 3,
-    title: 'Matcha-Powder-Premium',
+    title: 'Matcha Powder Premium',
     price: 32.99,
     category: 'Herbs',
     image: 'Herbs/Matcha-Powder-Premium.png',
@@ -29,7 +29,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 4,
-    title: 'Organic-Green-Tea',
+    title: 'Organic Green Tea',
     price: 21.25,
     category: 'Herbs',
     image: 'Herbs/Organic-Green-Tea.png',
@@ -66,7 +66,7 @@ export const PRODUCTS: Product[] = [
   // Supplements
   {
     id: 8,
-    title: 'Magnesium-Glycinate',
+    title: 'Magnesium Glycinate',
     price: 29.99,
     category: 'Supplements',
     image: 'Supplements/Magnesium-Glycinate.png',
@@ -74,7 +74,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 9,
-    title: 'Omega-3-Softgels',
+    title: 'Omega 3 Softgels',
     price: 34.5,
     category: 'Supplements',
     image: 'Supplements/Omega-3-Softgels.png',
@@ -83,7 +83,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 10,
-    title: 'VitaminC-Chewables',
+    title: 'Vitamin C Chewables',
     price: 12.99,
     category: 'Supplements',
     image: 'Supplements/VitaminC-Chewables.png',
@@ -92,7 +92,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 11,
-    title: 'Zinc-Tablets',
+    title: 'Zinc Tablets',
     price: 14.75,
     category: 'Supplements',
     image: 'Supplements/Zinc-Tablets.png',

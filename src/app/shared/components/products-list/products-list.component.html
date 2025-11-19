@@ -1,6 +1,6 @@
-@if (productsList.length) {
+@if (ProductsService.productsList) {
 <ul class="product-list">
-  @for (item of productsList; track $index) {
+  @for (item of ProductsService.productsList; track $index) {
   <li class="product-card">
     <div class="image-wrapper">
       <img [src]="item.image" alt="{{ item.title }}" />
