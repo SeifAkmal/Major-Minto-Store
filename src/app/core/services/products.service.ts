@@ -10,11 +10,11 @@ export class ProductsService {
   productsList: Product[] = [...PRODUCTS.sort(() => Math.random() - 0.5)];
 
   getSearchResults(keyWord: string) {
-this.productsList = this.originalProducts.filter(u => {
-  const titleWords = u.title.toLowerCase().split(" ");
-  const key = keyWord.toLowerCase();
+    this.productsList = this.originalProducts.filter((u) => {
+      const titleWords = u.title.toLowerCase().split(' ');
+      const key = keyWord.toLowerCase();
 
-  return titleWords.some(w => w.startsWith(key));
-});
+      return titleWords.some((w) => w.startsWith(key));
+    });
   }
 }
