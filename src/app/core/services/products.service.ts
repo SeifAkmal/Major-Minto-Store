@@ -6,14 +6,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProductsService {
-  originalProducts: Product[] = [...PRODUCTS.sort(() => Math.random() - 0.5)];
-  productsList: Product[] = [...PRODUCTS.sort(() => Math.random() - 0.5)];
+  shuffledProducts = [...PRODUCTS].sort(() => Math.random() - 0.5);
+  originalProducts: Product[] = [...this.shuffledProducts];
+  productsList: Product[] = [...this.shuffledProducts];
 
   getSearchResults(keyWord: string) {
+    const key = keyWord.trim().toLowerCase();
+
+    if (!key) {
+      this.productsList = [...this.originalProducts];
+      return;
+    }
+
     this.productsList = this.originalProducts.filter((u) => {
       const titleWords = u.title.toLowerCase().split(' ');
-      const key = keyWord.toLowerCase();
-
       return titleWords.some((w) => w.startsWith(key));
     });
   }
