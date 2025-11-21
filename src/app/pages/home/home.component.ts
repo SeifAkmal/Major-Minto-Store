@@ -17,9 +17,9 @@ import { ProductsListComponent } from '../../shared/components/products-list/pro
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  // ===== FILTER-TOOGLE ===== \\
-  filterToggle: boolean = false;
+  // ===== FILTERS TOOGLE ===== \\
+  filtersToggle: boolean = false;
   changeDisplay() {
-    this.filterToggle = !this.filterToggle;
+    this.filtersToggle = !this.filtersToggle;
   }
 }

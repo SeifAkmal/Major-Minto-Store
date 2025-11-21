@@ -12,11 +12,11 @@ import { CurrencyPipe, NgClass, NgStyle } from '@angular/common';
 })
 export class ProductsListComponent {
   constructor(public ProductsService: ProductsService) {}
-  // ===== GET-STARS ===== \\
+  // ===== GET STARS ===== \\
   getStarsArray(rating: number): number[] {
     return Array(Math.floor(rating)).fill(0);
   }
-  // ===== PRODUCT-NAV ===== \\
+  // ===== PRODUCTS NAV ===== \\
   productsList: Product[] = [];
   activatedpage: number | undefined = 1;
   reOrderProducts(maxShow?: number, activated?: number) {

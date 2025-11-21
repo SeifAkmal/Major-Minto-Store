@@ -6,10 +6,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProductsService {
+  // ===== ALL PRODUCTS LISTS ===== \\
   shuffledProducts = [...PRODUCTS].sort(() => Math.random() - 0.5);
+
   originalProducts: Product[] = [...this.shuffledProducts];
   productsList: Product[] = [...this.shuffledProducts];
 
+  // ===== ALL ABOUT SEARCH ===== \\
   getSearchResults(keyWord: string) {
     const key = keyWord.trim().toLowerCase();
 
@@ -23,4 +26,5 @@ export class ProductsService {
       return titleWords.some((w) => w.startsWith(key));
     });
   }
+    // ===== ALL ABOUT SORTING ===== \\
 }

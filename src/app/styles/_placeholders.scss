@@ -1,7 +1,7 @@
 @use "variables" as *;
 
 //=========================
-//* Flex utilities *//
+//* FLEX UTILITIES *//
 //=========================
 %shared-flexible {
   display: flex;
@@ -17,7 +17,7 @@
   justify-content: center;
 }
 //=========================
-//* Card styling *//
+//* CARD STYLING *//
 //=========================
 %product-card-style {
   background-color: $secondary-bg-color;

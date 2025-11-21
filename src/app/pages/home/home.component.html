@@ -1,6 +1,6 @@
 <div class="container">
   <app-filters-sidebar
-    [ngStyle]="{ display: filterToggle ? 'none' : 'flex' }"
+    [ngStyle]="{ display: filtersToggle ? 'none' : 'flex' }"
   ></app-filters-sidebar>
   <article>
     <app-filter-controls (filtersEvent)="changeDisplay()"></app-filter-controls>

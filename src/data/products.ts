@@ -5,7 +5,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 1,
     title: 'Herbal Sleep Blend',
-    price: 24.99,
+    price: 9.99,
     category: 'Herbs',
     image: 'Herbs/Herbal-Sleep-Blend.png',
     rating: 3.5,
@@ -13,7 +13,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 2,
     title: 'Lavender Tea',
-    price: 18.5,
+    price: 7.5,
     category: 'Herbs',
     image: 'Herbs/Lavender-Tea.png',
     rating: 2.6,
@@ -21,7 +21,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 3,
     title: 'Matcha Powder Premium',
-    price: 32.99,
+    price: 14.99,
     category: 'Herbs',
     image: 'Herbs/Matcha-Powder-Premium.png',
     rating: 2.8,
@@ -30,7 +30,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 4,
     title: 'Organic Green Tea',
-    price: 21.25,
+    price: 8.75,
     category: 'Herbs',
     image: 'Herbs/Organic-Green-Tea.png',
     rating: 2.7,
@@ -40,7 +40,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 5,
     title: 'Almonds',
-    price: 15.99,
+    price: 10.99,
     category: 'Nuts',
     image: 'Nuts/Almonds.png',
     rating: 4.4,
@@ -48,7 +48,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 6,
     title: 'Cashews',
-    price: 17.49,
+    price: 12.49,
     category: 'Nuts',
     image: 'Nuts/Cashews.png',
     rating: 4.5,
@@ -56,7 +56,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 7,
     title: 'Pistachios',
-    price: 22.99,
+    price: 15.99,
     category: 'Nuts',
     image: 'Nuts/Pistachios.png',
     rating: 4.7,
@@ -67,7 +67,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 8,
     title: 'Magnesium Glycinate',
-    price: 29.99,
+    price: 19.99,
     category: 'Supplements',
     image: 'Supplements/Magnesium-Glycinate.png',
     rating: 3.7,
@@ -75,7 +75,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 9,
     title: 'Omega 3 Softgels',
-    price: 34.5,
+    price: 22.5,
     category: 'Supplements',
     image: 'Supplements/Omega-3-Softgels.png',
     rating: 4.6,
@@ -84,7 +84,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 10,
     title: 'Vitamin C Chewables',
-    price: 12.99,
+    price: 6.99,
     category: 'Supplements',
     image: 'Supplements/VitaminC-Chewables.png',
     rating: 4.4,
@@ -93,7 +93,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 11,
     title: 'Zinc Tablets',
-    price: 14.75,
+    price: 7.5,
     category: 'Supplements',
     image: 'Supplements/Zinc-Tablets.png',
     rating: 3.5,

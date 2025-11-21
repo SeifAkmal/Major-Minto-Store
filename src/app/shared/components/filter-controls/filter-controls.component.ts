@@ -8,7 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './filter-controls.component.scss',
 })
 export class filterControlsComponent {
-  // ===== SORTING-TOOGLE  ===== \\
+  // ===== SORTING TOOGLE  ===== \\
   isOpen: boolean = false;
   selectedSort: string = 'Sort by: Featured';
   toggleDropdown() {
@@ -18,7 +18,7 @@ export class filterControlsComponent {
     this.selectedSort = item;
     this.isOpen = false;
   }
-  // ===== FILTERS-TOGGLE-EVENT ===== \\
+  // ===== FILTERS TOGGLE EVENT ===== \\
   @Output() filtersEvent = new EventEmitter<void>();
 
   toggleFilters() {
