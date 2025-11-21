@@ -26,5 +26,23 @@ export class ProductsService {
       return titleWords.some((w) => w.startsWith(key));
     });
   }
-    // ===== ALL ABOUT SORTING ===== \\
+  // ===== ALL ABOUT SORTING ===== \\
+  getSortResults(item: string) {
+    if (item === 'Sort by: Featured') {
+      this.productsList = [...this.originalProducts];
+      return;
+    } else if (item === 'Price: Low to High') {
+      this.productsList = [...this.productsList].sort(
+        (a, b) => a.price - b.price
+      );
+    } else if (item === 'Price: High to Low') {
+      this.productsList = [...this.productsList].sort(
+        (a, b) => b.price - a.price
+      );
+    } else if (item === 'Rating') {
+      this.productsList = [...this.productsList].sort(
+        (a, b) => (b.rating ?? 0) - (a.rating ?? 0)
+      );
+    }
+  }
 }

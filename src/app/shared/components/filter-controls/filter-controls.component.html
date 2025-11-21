@@ -10,16 +10,15 @@
 
     @if (isOpen) {
     <ul class="dropdown-menu">
-      <li class="item" (click)="selectItem('Sort by: Featured')">
-        Sort by: Featured
+      @for (option of sortOptions; track $index) {
+      <li
+        class="item"
+        (click)="selectItem(option)"
+        [class.selected]="selectedSort == option"
+      >
+        {{ option }}
       </li>
-      <li class="item" (click)="selectItem('Price: Low to High')">
-        Price: Low to High
-      </li>
-      <li class="item" (click)="selectItem('Price: High to Low')">
-        Price: High to Low
-      </li>
-      <li class="item" (click)="selectItem('Rating')">Rating</li>
+      }
     </ul>
     }
   </div>
