@@ -2,7 +2,7 @@
 @use "../../../styles/placeholders" as *;
 @use "../../../styles/_mixins.scss" as *;
 
-.toggle-section {
+.filters-toggle-section {
   @extend %shared-flexible;
   font-size: $font-size-sm;
   margin-bottom: 24px;
@@ -11,16 +11,17 @@
 
     border: none;
   }
-  .dropdown {
+  .sort-toggle-section {
     position: relative;
     cursor: pointer;
+    min-width: 163px;
     * {
       border-radius: $radius-md;
     }
     .dropdown-toggle {
       @include button(secondary, sort);
       color: $thirdly-color;
-      min-width: 163px;
+      width: 100%;
     }
     .dropdown-menu {
       background: $secondary-bg-color;
@@ -28,14 +29,15 @@
       top: 110%;
       left: 0;
       width: 100%;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       gap: 6px;
       text-align: center;
       z-index: 999;
-      padding: 10px 0;
+      padding: 5px;
       .item {
-        padding: 12px 21px;
+        padding: 12px 0;
         color: $thirdly-color;
         transition: $fast-transition;
         &:hover {
