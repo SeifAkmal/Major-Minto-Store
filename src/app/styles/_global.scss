@@ -4,12 +4,12 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: $secondary-border-color transparent;
+  box-sizing: border-box;
 }
 body {
   margin: 0;
   padding: 0;
   color: $primary-color;
-  box-sizing: border-box;
   font-family: $font-family;
   background-color: $primary-bg-color;
 }
