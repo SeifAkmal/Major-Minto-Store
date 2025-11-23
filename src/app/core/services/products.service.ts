@@ -7,10 +7,8 @@ import { Injectable } from '@angular/core';
 })
 export class ProductsService {
   // ===== ALL PRODUCTS LISTS ===== \\
-  shuffledProducts = [...PRODUCTS].sort(() => Math.random() - 0.5);
-
-  originalProducts: Product[] = [...this.shuffledProducts];
-  productsList: Product[] = [...this.shuffledProducts];
+  originalProducts: Product[] = [...PRODUCTS].sort(() => Math.random() - 0.5);
+  productsList: Product[] = [...this.originalProducts];
 
   // ===== ALL ABOUT SEARCH ===== \\
   getSearchResults(keyWord: string) {
@@ -26,23 +24,52 @@ export class ProductsService {
       return titleWords.some((w) => w.startsWith(key));
     });
   }
-  // ===== ALL ABOUT SORTING ===== \\
-  getSortResults(item: string) {
-    if (item === 'Sort by: Featured') {
-      this.productsList = [...this.originalProducts];
-      return;
-    } else if (item === 'Price: Low to High') {
-      this.productsList = [...this.productsList].sort(
-        (a, b) => a.price - b.price
-      );
-    } else if (item === 'Price: High to Low') {
-      this.productsList = [...this.productsList].sort(
-        (a, b) => b.price - a.price
-      );
-    } else if (item === 'Rating') {
-      this.productsList = [...this.productsList].sort(
-        (a, b) => (b.rating ?? 0) - (a.rating ?? 0)
+  // ===== ALL ABOUT FILTERS & SORT  ===== \\
+  currentSort: string = 'Sort by: Featured';
+  currentCategory: string = 'All Products';
+  currentRating: number = 0;
+
+  applyFiltersAndSort() {
+    let userFilters: Product[] = [...this.originalProducts];
+
+    // apply filter
+    if (this.currentCategory != 'All Products') {
+      userFilters = userFilters.filter(
+        (p) => p.category == this.currentCategory
       );
     }
+
+    // apply rating
+    if (this.currentRating) {
+      userFilters = userFilters.filter(
+        (p) => (p.rating ?? 0) >= this.currentRating
+      );
+    }
+
+    // apply sort
+    if (this.currentSort === 'Price: Low to High') {
+      userFilters.sort((a, b) => a.price - b.price);
+    } else if (this.currentSort === 'Price: High to Low') {
+      userFilters.sort((a, b) => b.price - a.price);
+    } else if (this.currentSort === 'Rating') {
+      userFilters.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+    }
+
+    this.productsList = userFilters;
+  }
+
+  getSortResults(sort: string) {
+    this.currentSort = sort;
+    this.applyFiltersAndSort();
+  }
+
+  getCategoryResults(cat: string) {
+    this.currentCategory = cat;
+    this.applyFiltersAndSort();
+  }
+
+  getRatingResults(rate: number) {
+    this.currentRating = rate;
+    this.applyFiltersAndSort();
   }
 }

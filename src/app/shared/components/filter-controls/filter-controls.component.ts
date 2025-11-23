@@ -5,7 +5,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-filter-controls',
   standalone: true,
-  imports: [NgStyle],
+  imports: [],
   templateUrl: './filter-controls.component.html',
   styleUrl: './filter-controls.component.scss',
 })

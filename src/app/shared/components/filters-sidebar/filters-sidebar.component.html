@@ -1,2 +1,30 @@
- <h3>Filters</h3>
-
+<section class="filters-section">
+  <h2>Filters</h2>
+  <div class="category">
+    @for (filter of category; track $index) {
+    <input
+      type="radio"
+      name="categoryFilter"
+      [id]="filter"
+      [value]="filter"
+      [checked]="filter === productsService.currentCategory"
+      (change)="sendCategoryValue(filter)"
+    />
+    <label [for]="filter">{{ filter }}</label>
+    }
+  </div>
+  <div class="Price"></div>
+  <div class="Rating">
+    @for (filter of rating; track $index) {
+    <input
+      type="radio"
+      name="ratingFilter"
+      [id]="filter"
+      [value]="filter"
+      [checked]="filter === productsService.currentRating"
+      (change)="sendRatingValue(filter)"
+    />
+    <label [for]="filter">{{ filter }}+ ⭐</label>
+    }
+  </div>
+</section>
