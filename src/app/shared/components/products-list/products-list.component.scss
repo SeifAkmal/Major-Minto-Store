@@ -6,6 +6,13 @@
   display: grid;
   gap: 25px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  @include respond(phone) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  @include respond(small-phone) {
+    grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
+  }
 }
 
 .product-card {

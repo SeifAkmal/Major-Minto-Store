@@ -7,8 +7,8 @@ $breakpoints: (
   desktop: 1400px,
   laptop: 1200px,
   tablet: 964px,
-  phone: 768px,
-  small-phone: 484px,
+  phone: 665px,
+  small-phone: 497px,
 );
 
 @mixin respond($bp) {
