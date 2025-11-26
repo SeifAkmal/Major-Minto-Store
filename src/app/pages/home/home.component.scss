@@ -6,12 +6,19 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  flex-wrap: wrap;
   gap: 24px;
-  .filters{
-    max-width: 280px;
-  }
-  article {
+  .sidebar {
     flex: 1;
+
+    &.open {
+      display: inline-block;
+    }
+    &:not(.open) {
+      display: none;
+    }
+  }
+
+  .controls {
+    flex: 4;
   }
 }

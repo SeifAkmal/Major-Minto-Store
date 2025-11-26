@@ -1,11 +1,9 @@
 <div class="container">
-  <article class="filters">
-    <app-filters-sidebar
-      [ngStyle]="{ display: filtersToggle ? 'none' : 'flex' }"
-    ></app-filters-sidebar>
+  <article class="sidebar" [class.open]="isSidebarOpen">
+    <app-filter-sidebar></app-filter-sidebar>
   </article>
 
-  <article>
+  <article class="controls">
     <app-filter-controls (filtersEvent)="changeDisplay()"></app-filter-controls>
     <app-products-list></app-products-list>
   </article>
