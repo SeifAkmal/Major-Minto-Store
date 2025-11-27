@@ -9,7 +9,7 @@
       <h2>{{ item.title }}</h2>
 
       <section class="rating-section">
-        @for (star of getStarsArray(item.rating ?? 0); track $index) {
+        @for (star of (item.rating ?? 0)| stars; track $index) {
         <img src="icons/1-star.svg" alt="" />
         }@if (item.rating ?? 0) {
         <span class="rating-value">{{ item.rating }}</span>

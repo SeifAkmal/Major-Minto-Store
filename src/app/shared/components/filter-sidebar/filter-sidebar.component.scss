@@ -10,15 +10,16 @@
     margin-bottom: 24px;
     font-size: 20px;
   }
-  p {
+  h3 {
     margin-bottom: 12px;
   }
-  .filter {
+  .category-filter,
+  .price-filter,
+  .rating-filter {
     margin-bottom: 24px;
   }
   .input-section {
     margin-bottom: 15px;
-    display: flex;
     align-items: center;
     label {
       padding-left: 10px;
@@ -38,6 +39,10 @@
       &:checked {
         background-color: #137a3f;
       }
+    }
+    img {
+      width: 15px;
+      margin-right: 4px;
     }
   }
 }

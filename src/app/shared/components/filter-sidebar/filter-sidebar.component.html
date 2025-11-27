@@ -1,38 +1,50 @@
 <section class="filter-section">
   <h2>Filters</h2>
-  <div class="category filter">
-    <p>Category</p>
-    @for (filter of category; track $index) {
+  <div class="category-filter">
+    <h3>Category</h3>
+    @for (cat of category; track $index) {
     <div class="input-section">
       <input
         type="radio"
         class="custom-radio"
         name="categoryFilter"
-        [id]="filter"
-        [value]="filter"
-        [checked]="filter === productsService.currentCategory"
-        (change)="sendCategoryValue(filter)"
+        [id]="'category-' + cat"
+        [value]="cat"
+        [checked]="cat === productsService.currentCategory"
+        (change)="sendCategoryValue(cat)"
       />
-      <label [for]="filter">{{ filter }}</label>
+      <label [for]="'category-' + cat">{{ cat }}</label>
     </div>
 
     }
   </div>
-  <div class="Price filter"></div>
-  <div class="Rating filter">
-    <p>Rating</p>
-    @for (filter of rating; track $index) {
+  <div class="price-filter"></div>
+  <div class="rating-filter">
+    <h3>Rating</h3>
     <div class="input-section">
       <input
         type="radio"
         class="custom-radio"
         name="ratingFilter"
-        [id]="filter"
-        [value]="filter"
-        [checked]="filter === productsService.currentRating"
-        (change)="sendRatingValue(filter)"
+        id="all-rating"
+        [checked]="productsService.currentRating === 0"
+        (change)="sendRatingValue(0)"
       />
-      <label [for]="filter">{{ filter }}+ ⭐</label>
+      <label for="all-rating">All Rating</label>
+    </div>
+    @for (rate of rating; track $index) {
+    <div class="input-section">
+      <input
+        type="radio"
+        class="custom-radio"
+        name="ratingFilter"
+        [id]="'rating-' + rate"
+        [value]="rate"
+        [checked]="rate === productsService.currentRating"
+        (change)="sendRatingValue(rate)"
+      />
+      <label [for]="'rating-' + rate">{{ rate }}+ </label> @for (item of rate |
+      stars; track $index) { <img src="icons/1-star.svg" alt="" /> }
     </div>
 
     }
