@@ -11,7 +11,7 @@
         [id]="'category-' + cat"
         [value]="cat"
         [checked]="cat === productsService.currentCategory"
-        (change)="sendCategoryValue(cat)"
+        (change)="sendCategoryChange(cat)"
       />
       <label [for]="'category-' + cat">{{ cat }}</label>
     </div>
@@ -28,7 +28,7 @@
         name="ratingFilter"
         id="all-rating"
         [checked]="productsService.currentRating === 0"
-        (change)="sendRatingValue(0)"
+        (change)="sendRatingChange(0)"
       />
       <label for="all-rating">All Rating</label>
     </div>
@@ -41,10 +41,12 @@
         [id]="'rating-' + rate"
         [value]="rate"
         [checked]="rate === productsService.currentRating"
-        (change)="sendRatingValue(rate)"
+        (change)="sendRatingChange(rate)"
       />
-      <label [for]="'rating-' + rate">{{ rate }}+ </label> @for (item of rate |
-      stars; track $index) { <img src="icons/1-star.svg" alt="" /> }
+      <label [for]="'rating-' + rate"
+        >{{ rate }}+ @for (item of rate | stars; track $index) {
+        <img src="icons/1-star.svg" alt="" /> }
+      </label>
     </div>
 
     }

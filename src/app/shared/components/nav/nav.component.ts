@@ -12,9 +12,9 @@ import { ProductsService } from '../../../core/services/products.service';
 })
 export class NavComponent {
   constructor(public ProductsService: ProductsService) {}
+  // ABOUT SEARCH INPUT
   searchWord: string = '';
-
-  searchNow() {
+  searchProducts() {
     this.ProductsService.getSearchResults(this.searchWord);
   }
 }

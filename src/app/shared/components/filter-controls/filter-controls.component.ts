@@ -11,20 +11,20 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class filterControlsComponent {
   constructor(private _ProductsService: ProductsService) {}
-  // ===== SORTING ===== \\
+  // ALL ABOUT SORTING
   isOpen: boolean = false;
-  selectedSort: string = 'Sort by: Featured';
+  selectedOption: string = 'Sort by: Featured';
   sortOptions:string[] = ['Sort by: Featured', 'Price: Low to High', 'Price: High to Low', 'Rating'];
 
   toggleDropdown() {
     this.isOpen = !this.isOpen;
   }
-  selectItem(item: string) {
-    this.selectedSort = item;
+  selectOption(sort: string) {
+    this.selectedOption = sort;
     this.isOpen = false;
-    this._ProductsService.getSortResults(item);
+    this._ProductsService.updateFiltersResults({sort:sort});
   }
-  // ===== FILTERS TOGGLE EVENT ===== \\
+  // FILTERS TOGGLE EVENT
   @Output() filtersEvent = new EventEmitter<void>();
 
   toggleFilters() {

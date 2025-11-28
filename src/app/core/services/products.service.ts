@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProductsService {
-  // ===== ALL PRODUCTS LISTS ===== \\
+  // ALL PRODUCTS LISTS
   originalProducts: Product[] = [...PRODUCTS].sort(() => Math.random() - 0.5);
   productsList: Product[] = [...this.originalProducts];
 
-  // ===== ALL ABOUT SEARCH ===== \\
+  // ALL ABOUT SEARCH
   getSearchResults(keyWord: string) {
     const key = keyWord.trim().toLowerCase();
 
@@ -24,29 +24,29 @@ export class ProductsService {
       return titleWords.some((w) => w.startsWith(key));
     });
   }
-  // ===== ALL ABOUT FILTERS & SORT  ===== \\
+  //  ALL ABOUT FILTERS & SORTING
   currentSort: string = 'Sort by: Featured';
   currentCategory: string = 'All Products';
   currentRating: number = 0;
 
-  applyFiltersAndSort() {
+  applyFiltersResults() {
     let userFilters: Product[] = [...this.originalProducts];
 
-    // apply filter
+    // APPLY FILTERS
     if (this.currentCategory != 'All Products') {
       userFilters = userFilters.filter(
         (p) => p.category == this.currentCategory
       );
     }
 
-    // apply rating
+    // APPLY RATING
     if (this.currentRating) {
       userFilters = userFilters.filter(
         (p) => (p.rating ?? 0) >= this.currentRating
       );
     }
 
-    // apply sort
+    // APPLY SORTING
     if (this.currentSort === 'Price: Low to High') {
       userFilters.sort((a, b) => a.price - b.price);
     } else if (this.currentSort === 'Price: High to Low') {
@@ -58,18 +58,20 @@ export class ProductsService {
     this.productsList = userFilters;
   }
 
-  getSortResults(sort: string) {
-    this.currentSort = sort;
-    this.applyFiltersAndSort();
-  }
-
-  getCategoryResults(cat: string) {
-    this.currentCategory = cat;
-    this.applyFiltersAndSort();
-  }
-
-  getRatingResults(rate: number) {
-    this.currentRating = rate;
-    this.applyFiltersAndSort();
+  updateFiltersResults(options: {
+    sort?: string;
+    category?: string;
+    rating?: number;
+  }) {
+    if (options.sort !== undefined) {
+      this.currentSort = options.sort;
+    }
+    if (options.category !== undefined) {
+      this.currentCategory = options.category;
+    }
+    if (options.rating !== undefined) {
+      this.currentRating = options.rating;
+    }
+    this.applyFiltersResults();
   }
 }

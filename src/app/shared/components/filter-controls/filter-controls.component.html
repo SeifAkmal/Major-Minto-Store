@@ -5,7 +5,7 @@
   </button>
   <div class="sort-toggle-section">
     <button class="dropdown-toggle" (click)="toggleDropdown()">
-      {{ selectedSort }}
+      {{ selectedOption }}
     </button>
 
     @if (isOpen) {
@@ -13,8 +13,8 @@
       @for (option of sortOptions; track $index) {
       <li
         class="item"
-        (click)="selectItem(option)"
-        [class.selected]="selectedSort == option"
+        (click)="selectOption(option)"
+        [class.selected]="selectedOption == option"
       >
         {{ option }}
       </li>

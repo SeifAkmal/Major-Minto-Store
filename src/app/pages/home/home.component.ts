@@ -15,11 +15,13 @@ import { FilteridebarComponent } from '../../shared/components/filter-sidebar/fi
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-  // ===== FILTERS TOOGLE ===== \\
+  // FILTERS TOOGLE
   isSidebarOpen: boolean = true;
   changeDisplay() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
+
+  // CLOSE SIDEBAR ON TABLET SCREENS
   ngOnInit(): void {
     this.checkScreen();
   }

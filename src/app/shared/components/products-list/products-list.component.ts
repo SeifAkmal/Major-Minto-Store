@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductsService } from '../../../core/services/products.service';
 import { Product } from '../../../core/interfaces/product';
 import { CurrencyPipe, NgClass, NgStyle } from '@angular/common';
@@ -13,7 +13,7 @@ import { StarsPipe } from '../../pipes/stars.pipe';
 })
 export class ProductsListComponent {
   constructor(public ProductsService: ProductsService) {}
-  // ===== PRODUCTS NAV ===== \\
+  // UPDATE PRODUCTS LIST BASED ON NAVIGATION SETTINGS
   productsList: Product[] = [];
   activatedpage: number | undefined = 1;
   reOrderProducts(maxShow?: number, activated?: number) {
