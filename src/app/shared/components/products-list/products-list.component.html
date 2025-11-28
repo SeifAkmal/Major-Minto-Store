@@ -29,28 +29,28 @@
   </li>
   }
 </ul>
-<div class="products-Nav">
+<div class="products-nav">
   <button
     [ngStyle]="{
-      'background-color': activatedpage === 1 ? '#137A3F' : '#0B1F15'
+      'background-color': activatedPage === 1 ? '#137A3F' : '#0B1F15'
     }"
-    (click)="reOrderProducts(undefined, 1)"
+    (click)="reOrderProducts(1, undefined)"
   >
     1
   </button>
   <button
     [ngStyle]="{
-      'background-color': activatedpage === 2 ? '#137A3F' : '#0B1F15'
+      'background-color': activatedPage === 2 ? '#137A3F' : '#0B1F15'
     }"
-    (click)="reOrderProducts(5, 2)"
+    (click)="reOrderProducts(2, 7)"
   >
     2
   </button>
   <button
     [ngStyle]="{
-      'background-color': activatedpage === 3 ? '#137A3F' : '#0B1F15'
+      'background-color': activatedPage === 3 ? '#137A3F' : '#0B1F15'
     }"
-    (click)="reOrderProducts(4, 3)"
+    (click)="reOrderProducts(3, 5)"
   >
     3
   </button>

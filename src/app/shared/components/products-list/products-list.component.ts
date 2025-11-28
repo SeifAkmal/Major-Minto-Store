@@ -1,6 +1,6 @@
+import { Product } from './../../../core/interfaces/product';
 import { Component } from '@angular/core';
 import { ProductsService } from '../../../core/services/products.service';
-import { Product } from '../../../core/interfaces/product';
 import { CurrencyPipe, NgClass, NgStyle } from '@angular/common';
 import { StarsPipe } from '../../pipes/stars.pipe';
 
@@ -14,13 +14,17 @@ import { StarsPipe } from '../../pipes/stars.pipe';
 export class ProductsListComponent {
   constructor(public ProductsService: ProductsService) {}
   // UPDATE PRODUCTS LIST BASED ON NAVIGATION SETTINGS
-  productsList: Product[] = [];
-  activatedpage: number | undefined = 1;
-  reOrderProducts(maxShow?: number, activated?: number) {
-    this.ProductsService.productsList = maxShow
-      ? this.ProductsService.productsList.slice(0, maxShow)
+  activatedPage: number | undefined = 1;
+  reOrderProducts(activated: number, maxShow?: number) {
+    let splicedProducts: Product[] = [
+      ...this.ProductsService.originalProducts,
+    ].sort(() => Math.random() - 0.5);
+
+    splicedProducts = maxShow
+      ? splicedProducts.slice(0, maxShow)
       : this.ProductsService.originalProducts;
 
-    this.activatedpage = activated;
+    this.ProductsService.productsList = splicedProducts;
+    this.activatedPage = activated;
   }
 }

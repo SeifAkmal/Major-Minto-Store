@@ -8,7 +8,7 @@ export const PRODUCTS: Product[] = [
     price: 9.99,
     category: 'Herbs',
     image: 'Herbs/Herbal-Sleep-Blend.png',
-    rating: 3.5,
+    rating: 4.5,
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ export const PRODUCTS: Product[] = [
     price: 7.5,
     category: 'Herbs',
     image: 'Herbs/Lavender-Tea.png',
-    rating: 2.6,
+    rating: 3.6,
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export const PRODUCTS: Product[] = [
     price: 14.99,
     category: 'Herbs',
     image: 'Herbs/Matcha-Powder-Premium.png',
-    rating: 2.8,
+    rating: 4.8,
     badge: 'New',
   },
   {
@@ -51,7 +51,7 @@ export const PRODUCTS: Product[] = [
     price: 12.49,
     category: 'Nuts',
     image: 'Nuts/Cashews.png',
-    rating: 4.5,
+    rating: 3.5,
   },
   {
     id: 7,
