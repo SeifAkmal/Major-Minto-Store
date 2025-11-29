@@ -42,8 +42,13 @@
       cursor: pointer;
       background-color: $primary-bg-color;
       transition: all $basic-transition ease;
-      &:checked {
-        background-color: $button-color;
+    }
+
+    .custom-radio:checked {
+      background-color: $button-color;
+      box-shadow: $button-hover-shadow;
+      & + label {
+        text-shadow: $text-shadow;
       }
     }
   }

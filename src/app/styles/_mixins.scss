@@ -31,7 +31,13 @@ $breakpoints: (
   color: $primary-color;
   cursor: pointer;
   border: none;
+  box-shadow: $primary-shadow;
   transition: $basic-transition;
+
+  &:hover {
+    box-shadow: $button-hover-shadow;
+    text-shadow: $text-shadow;
+  }
 
   // TYPE HANDLING
   @if $type == primary {
