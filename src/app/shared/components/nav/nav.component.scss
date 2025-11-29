@@ -8,7 +8,7 @@ nav {
   justify-content: center;
   background-color: $secondary-bg-color;
   border-bottom: 1px solid $secondary-border-color;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: $primary-shadow;
   .navbar {
     @extend %shared-flexible;
     width: 100%;

@@ -44,7 +44,7 @@ $breakpoints: (
     background-color: $secondary-bg-color;
     border: 1px solid $primary-border-color;
     &:hover {
-      background-color: #07120d;
+      background-color: $primary-bg-color;
     }
   } @else if $type == thirdly {
     background-color: $secondary-bg-color;

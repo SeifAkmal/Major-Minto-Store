@@ -37,13 +37,13 @@
       margin: 0;
       width: 20px;
       height: 20px;
-      border: 2px solid #0f2b20;
+      border: 2px solid $secondary-border-color;
       border-radius: $radius-sm;
       cursor: pointer;
-      background-color: #07120d;
+      background-color: $primary-bg-color;
       transition: all $basic-transition ease;
       &:checked {
-        background-color: #137a3f;
+        background-color: $button-color;
       }
     }
   }

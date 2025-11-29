@@ -42,7 +42,7 @@
         transition: $fast-transition;
         &:hover {
           border-color: $button-color;
-          background-color: #07120d;
+          background-color: $primary-bg-color;
         }
         &.selected {
           background-color: $button-color;
