@@ -1,1 +1,36 @@
-<p>product-details works!</p>
+@for (item of productDetails; track $index) {
+<article>
+  <section class="product-images">
+    <div class="big-image-wrapper">
+      <img [src]="item.image" alt="" />
+    </div>
+    <div class="small-images-wrapper">
+      <img src="" alt="" />
+    </div>
+  </section>
+  <section class="product-description">
+    <h1>{{ item.title }}</h1>
+    <div class="rating-section">
+      @for (star of (item.rating ?? 0)| stars; track $index) {
+      <img src="icons/1-star.svg" alt="" />
+      }@if (item.rating ?? 0) {
+      <span class="rating-value">{{ item.rating }}</span>
+      <span> (128 reviews)</span>
+      }
+    </div>
+    <span>{{ item.price | currency : "USD" }}</span>
+    <p>
+      Product made with reliable materials and consistent care to ensure solid
+      quality.Offers a smooth experience and dependable value for everyday use.
+    </p>
+    <div class="add-product">
+      <div class="counter">
+        <button>-</button>
+        <span>1</span>
+        <button>+</button>
+      </div>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+  </section>
+</article>
+}

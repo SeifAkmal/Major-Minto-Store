@@ -1,7 +1,7 @@
 <div class="container">
-  <article class="sidebar" [class.open]="isSidebarOpen">
+  <aside class="sidebar" [class.open]="isSidebarOpen">
     <app-filter-sidebar></app-filter-sidebar>
-  </article>
+  </aside>
 
   <article class="controls">
     <app-filter-controls (filtersEvent)="changeDisplay()"></app-filter-controls>

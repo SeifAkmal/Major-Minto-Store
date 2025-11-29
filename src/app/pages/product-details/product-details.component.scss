@@ -1,3 +1,16 @@
 @use "../../styles/variables" as *;
 @use "../../styles/placeholders" as *;
 @use "../../styles/_mixins.scss" as *;
+
+article {
+  .product-images {
+    .big-image-wrapper {
+      img {
+      }
+    }
+    .small-images-wrapper {
+      img {
+      }
+    }
+  }
+}
