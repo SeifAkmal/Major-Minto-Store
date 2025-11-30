@@ -30,7 +30,7 @@ $breakpoints: (
   font-weight: 500;
   color: $primary-color;
   cursor: pointer;
-  border: none;
+  border-color: transparent;
   box-shadow: $primary-shadow;
   transition: $basic-transition;
 
@@ -41,18 +41,25 @@ $breakpoints: (
   // TYPE HANDLING
   @if $type == primary {
     background-color: $button-color;
-    border: 2px solid $button-color;
+    border: 2px solid transparent;
     &:hover {
-      background-color: #07120d;
+      background-color: $primary-bg-color;
+      border-color: $button-color;
     }
   } @else if $type == secondary {
     background-color: $secondary-bg-color;
     border: 1px solid $primary-border-color;
     &:hover {
       background-color: $primary-bg-color;
+      border-color: $button-color;
     }
   } @else if $type == thirdly {
     background-color: $secondary-bg-color;
+    border: 1px solid transparent;
+    &:hover {
+      background-color: $primary-bg-color;
+      border-color: $button-color;
+    }
   }
 
   // SIZE HANDLING

@@ -1,7 +1,7 @@
 @if (ProductsService.productsList) {
 <ul class="product-list">
   @for (item of ProductsService.productsList; track $index) {
-  <a [routerLink]="['/home' , item.id]">
+  <a [routerLink]="['/home', item.id]">
     <li class="product-card">
       <div class="image-wrapper">
         <img [src]="item.image" alt="{{ item.title }}" />
@@ -34,25 +34,19 @@
 </ul>
 <div class="products-nav">
   <button
-    [ngStyle]="{
-      'background-color': activatedPage === 1 ? '#137A3F' : '#0B1F15'
-    }"
+    [ngStyle]="activatedPage === 1 ? activeStyles : inactiveStyles"
     (click)="reOrderProducts(1, undefined)"
   >
     1
   </button>
   <button
-    [ngStyle]="{
-      'background-color': activatedPage === 2 ? '#137A3F' : '#0B1F15'
-    }"
+    [ngStyle]="activatedPage === 2 ? activeStyles : inactiveStyles"
     (click)="reOrderProducts(2, 7)"
   >
     2
   </button>
   <button
-    [ngStyle]="{
-      'background-color': activatedPage === 3 ? '#137A3F' : '#0B1F15'
-    }"
+    [ngStyle]="activatedPage === 3 ? activeStyles : inactiveStyles"
     (click)="reOrderProducts(3, 5)"
   >
     3

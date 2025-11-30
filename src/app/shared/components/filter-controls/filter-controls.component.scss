@@ -8,8 +8,6 @@
   margin-bottom: 24px;
   .toggle-filters {
     @include button(thirdly, sort);
-
-    border: none;
   }
   .sort-toggle-section {
     position: relative;
