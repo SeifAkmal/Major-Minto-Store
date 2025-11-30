@@ -28,12 +28,5 @@ export class ProductsListComponent {
     this.ProductsService.productsList = splicedProducts;
     this.activatedPage = activated;
   }
-  // UPDATE PL-NAV STYLE BASED ON SELECTED PAGE
-  activeStyles = {
-    backgroundColor: '#137A3F',
-    boxShadow: '0px 0px 15px rgba(19, 122, 63, 0.5)',
-  };
-  inactiveStyles = {
-    backgroundColor: '#0B1F15',
-  };
+
 }

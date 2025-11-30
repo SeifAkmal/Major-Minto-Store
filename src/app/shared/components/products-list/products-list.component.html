@@ -34,19 +34,22 @@
 </ul>
 <div class="products-nav">
   <button
-    [ngStyle]="activatedPage === 1 ? activeStyles : inactiveStyles"
+    [class.active]="activatedPage === 1"
+    [class.inactive]="activatedPage != 1"
     (click)="reOrderProducts(1, undefined)"
   >
     1
   </button>
   <button
-    [ngStyle]="activatedPage === 2 ? activeStyles : inactiveStyles"
+    [class.active]="activatedPage === 2"
+    [class.inactive]="activatedPage != 2"
     (click)="reOrderProducts(2, 7)"
   >
     2
   </button>
   <button
-    [ngStyle]="activatedPage === 3 ? activeStyles : inactiveStyles"
+    [class.active]="activatedPage === 3"
+    [class.inactive]="activatedPage != 3"
     (click)="reOrderProducts(3, 5)"
   >
     3

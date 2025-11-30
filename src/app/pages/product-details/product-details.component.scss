@@ -3,13 +3,94 @@
 @use "../../styles/_mixins.scss" as *;
 
 article {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+
+  p {
+    color: $thirdly-color;
+    margin-bottom: 16px;
+    line-height: 25.6px;
+  }
   .product-images {
+    flex: 1 0 250px;
     .big-image-wrapper {
+      width: 100%;
+      border-radius: $radius-lg;
       img {
+        border-radius: $radius-lg;
+        width: 100%;
+        object-fit: cover;
       }
     }
     .small-images-wrapper {
       img {
+      }
+    }
+  }
+  .product-description {
+    flex: 1 0 250px;
+    h1 {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+    .rating-section {
+      margin-bottom: 16px;
+      img {
+        padding-right: 5px;
+        width: 15px;
+        &:last-of-type {
+          margin-right: 7px;
+        }
+      }
+      span {
+        font-size: 16px;
+        color: $thirdly-color;
+      }
+    }
+    .price {
+      font-size: 36px;
+      color: $secondary-color;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .add-product {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      .counter {
+        display: flex;
+        border-radius: 6px;
+        button {
+          @include button(thirdly, add);
+          &:first-child {
+            border-radius: 8px 0 0 8px;
+          }
+          &:last-child {
+            border-radius: 0 8px 8px 0;
+          }
+
+          box-shadow: none;
+        }
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          font-size: $font-size-sm;
+          font-weight: 500;
+          color: $primary-color;
+          background-color: $secondary-bg-color;
+          padding: 8px 16px;
+          cursor: default;
+        }
+      }
+      .add-cart-btn {
+        flex-grow: 1;
+        @include button(primary, add-xl);
+        padding: 16px 0;
       }
     }
   }

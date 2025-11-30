@@ -110,4 +110,8 @@
   button {
     @include button(thirdly, add);
   }
+  .active {
+    background-color: $button-color;
+    box-shadow: $button-hover-shadow;
+  }
 }
