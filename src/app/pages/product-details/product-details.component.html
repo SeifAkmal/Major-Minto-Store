@@ -1,4 +1,7 @@
 @for (item of productDetails; track $index) {
+<a routerLink="/home" class="back-btn">
+  <img src="/icons/back-arrow.svg" alt="" />Back to Products</a
+>
 <article>
   <section class="product-images">
     <div class="big-image-wrapper">
@@ -32,6 +35,112 @@
         <button>+</button>
       </div>
       <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Full Description
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Crafted from thoughtfully sourced materials designed for dependable
+            quality, each item is prepared with care to maintain balanced
+            performance and consistency, formulated to support everyday use
+            while aligning with wellness-minded standards, with careful handling
+            that helps retain its natural character and overall freshness,
+            delivering a clean, pleasant experience suitable for a wide range of
+            lifestyles.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            Ingredients
+          </button>
+        </h2>
+        <div
+          id="collapseTwo"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo quia
+            nam illum, fugiat aliquid temporibus ratione libero soluta hic eius
+            reiciendis dignissimos totam, aperiam provident impedit voluptatum
+            tempore blanditiis dicta.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          >
+            Shipping Info
+          </button>
+        </h2>
+        <div
+          id="collapseThree"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio
+            deleniti dolorem sed impedit eos asperiores repellendus, numquam
+            reiciendis recusandae aut.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFour"
+            aria-expanded="false"
+            aria-controls="collapseFour"
+          >
+            How to Brew
+          </button>
+        </h2>
+        <div
+          id="collapseFour"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id libero
+            quos similique dolore? Saepe, quo.
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </article>

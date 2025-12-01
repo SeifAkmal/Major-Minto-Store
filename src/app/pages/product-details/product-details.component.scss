@@ -1,7 +1,19 @@
 @use "../../styles/variables" as *;
 @use "../../styles/placeholders" as *;
 @use "../../styles/_mixins.scss" as *;
+@import "bootstrap/dist/css/bootstrap.min.css";
 
+.back-btn {
+  text-decoration: none;
+  color: #bfdcc9;
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: 24px;
+  img {
+    margin-right: 8px;
+    width: 7.5px;
+  }
+}
 article {
   display: flex;
   justify-content: space-between;
@@ -12,6 +24,7 @@ article {
     color: $thirdly-color;
     margin-bottom: 16px;
     line-height: 25.6px;
+    font-weight: 300;
   }
   .product-images {
     flex: 1 0 250px;
@@ -39,13 +52,14 @@ article {
       margin-bottom: 16px;
       img {
         padding-right: 5px;
-        width: 15px;
+        width: 20px;
         &:last-of-type {
           margin-right: 7px;
         }
       }
       span {
         font-size: 16px;
+        font-weight: 300;
         color: $thirdly-color;
       }
     }
@@ -91,6 +105,44 @@ article {
         flex-grow: 1;
         @include button(primary, add-xl);
         padding: 16px 0;
+      }
+    }
+    .accordion {
+      margin-top: 16px;
+      .accordion-item {
+        border: none;
+        padding: 0 16px;
+        background-color: $secondary-bg-color;
+        margin-bottom: 12px;
+        border-radius: $radius-md;
+        box-shadow: $primary-shadow;
+        .accordion-header {
+          margin: 0;
+          padding: 0;
+          .accordion-button {
+            padding: 0;
+            margin: 0;
+            padding: 18px 0;
+            &:focus {
+              box-shadow: none;
+            }
+            &::after {
+              display: none;
+            }
+          }
+        }
+
+        .accordion-collapse {
+          margin: 0;
+          padding: 0;
+          .accordion-body {
+            padding: 0 0 16px 0;
+            margin: 0;
+            color: $thirdly-color;
+            line-height: 25.6px;
+            font-weight: 300;
+          }
+        }
       }
     }
   }

@@ -1,6 +1,6 @@
 import { ProductsService } from './../../core/services/products.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
 import { CurrencyPipe } from '@angular/common';
@@ -8,7 +8,7 @@ import { CurrencyPipe } from '@angular/common';
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [StarsPipe, CurrencyPipe],
+  imports: [StarsPipe, CurrencyPipe, RouterLink],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })

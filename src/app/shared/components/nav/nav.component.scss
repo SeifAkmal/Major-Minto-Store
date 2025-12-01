@@ -28,6 +28,7 @@ nav {
       color: $thirdly-color;
       max-width: 600px;
       flex-grow: 1;
+      box-shadow: $primary-shadow;
       transition: all $basic-transition;
       &::placeholder {
         color: $thirdly-color;
@@ -36,7 +37,7 @@ nav {
         outline: none;
         max-width: 700px;
         border-color: $button-color;
-        box-shadow: 0px 8px 20px rgba(19, 122, 63, 0.3)
+        box-shadow: 0px 8px 20px rgba(19, 122, 63, 0.3);
       }
     }
     .cart-button {

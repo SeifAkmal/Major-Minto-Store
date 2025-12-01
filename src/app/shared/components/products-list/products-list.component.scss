@@ -20,6 +20,7 @@
       overflow: hidden;
       position: relative;
       border: 1px solid $secondary-bg-color;
+      box-shadow: $primary-shadow;
       transition: all $fast-transition;
 
       .image-wrapper {
