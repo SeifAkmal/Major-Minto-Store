@@ -7,7 +7,7 @@
         <img [src]="item.image" alt="{{ item.title }}" />
       </div>
       <article class="product-info">
-        <h2>{{ item.title }}</h2>
+        <h3>{{ item.title }}</h3>
 
         <section class="rating-section">
           @for (star of (item.rating ?? 0)| stars; track $index) {

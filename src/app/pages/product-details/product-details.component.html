@@ -2,13 +2,23 @@
 <a routerLink="/home" class="back-btn">
   <img src="/icons/back-arrow.svg" alt="" />Back to Products</a
 >
-<article>
+<article class="container">
   <section class="product-images">
     <div class="big-image-wrapper">
       <img [src]="item.image" alt="" />
     </div>
-    <div class="small-images-wrapper">
-      <img src="" alt="" />
+
+    <div class="small-images">
+      @for (item of smallImages; track $index) {
+      <div
+        class="small-images-wrapper"
+        [class.active]="activatedImage == $index"
+        [class.inactive]="!activatedImage"
+        (click)="selectImage($index)"
+      >
+        <img src="{{ item }}" alt="" />
+      </div>
+      }
     </div>
   </section>
   <section class="product-description">
@@ -30,9 +40,9 @@
     </p>
     <div class="add-product">
       <div class="counter">
-        <button>-</button>
+        <button><img src="/icons/minus.svg" alt="" /></button>
         <span>1</span>
-        <button>+</button>
+        <button><img src="/icons/plus.svg" alt="" /></button>
       </div>
       <button class="add-cart-btn">Add to Cart</button>
     </div>
@@ -145,3 +155,38 @@
   </section>
 </article>
 }
+<section class="similar-products-container">
+  <h2>Similar Products</h2>
+  <ul class="similar-products">
+    @for (item of similarProducts; track $index) {
+    <a [routerLink]="['/home', item.id]" (click)="changeThePorduct(item.id)">
+      <li class="product-card">
+        <div class="image-wrapper">
+          <img [src]="item.image" alt="{{ item.title }}" />
+        </div>
+        <article class="product-info">
+          <h3>{{ item.title }}</h3>
+
+          <section class="rating-section">
+            @for (star of (item.rating ?? 0)| stars; track $index) {
+            <img src="icons/1-star.svg" alt="" />
+            }@if (item.rating ?? 0) {
+            <span class="rating-value">{{ item.rating }}</span>
+            }
+          </section>
+
+          <section class="price-section">
+            <span class="price">{{ item.price | currency : "USD" }}</span>
+          </section>
+        </article>
+        @if (item.badge) {
+        <div [ngClass]="'badge ' + item.badge">
+          {{ item.badge }}
+        </div>
+        }
+      </li></a
+    >
+
+    }
+  </ul>
+</section>

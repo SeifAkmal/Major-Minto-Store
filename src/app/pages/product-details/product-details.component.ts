@@ -3,25 +3,50 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [StarsPipe, CurrencyPipe, RouterLink],
+  imports: [StarsPipe, CurrencyPipe, RouterLink, NgClass],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
 export class ProductDetailsComponent implements OnInit {
   constructor(
     private _ActivatedRoute: ActivatedRoute,
-    private _ProductsService: ProductsService
+    private _productsService: ProductsService
   ) {}
   productDetails: Product[] = [];
+  similarProducts: Product[] = [];
+
   ngOnInit(): void {
+    // GET PRODUCT DETAILS THEN SAVE THE CATEGORY TYPE
     const id = Number(this._ActivatedRoute.snapshot.paramMap.get('id'));
-    this.productDetails = this._ProductsService.productsList.filter(
+    this.productDetails = this._productsService.productsList.filter(
       (p) => p.id == id
+    );
+    let category = this.productDetails[0].category;
+
+    this.similarProducts = this._productsService.productsList.filter(
+      (p) => p.category == category
+    );
+  }
+
+  smallImages: string[] = [
+    '/icons/details-img-1.svg',
+    '/icons/details-img-2.svg',
+    '/icons/details-img-3.svg',
+    '/icons/details-img-4.svg',
+  ];
+  activatedImage: number = 0;
+  selectImage(index: number) {
+    this.activatedImage = index;
+  }
+
+  changeThePorduct(id: number) {
+    this.productDetails = this._productsService.productsList.filter(
+      (p) => p.id === id
     );
   }
 }

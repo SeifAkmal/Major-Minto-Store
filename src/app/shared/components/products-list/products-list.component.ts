@@ -1,14 +1,14 @@
 import { Product } from './../../../core/interfaces/product';
 import { Component } from '@angular/core';
 import { ProductsService } from '../../../core/services/products.service';
-import { CurrencyPipe, NgClass, NgStyle } from '@angular/common';
+import { CurrencyPipe, NgClass } from '@angular/common';
 import { StarsPipe } from '../../pipes/stars.pipe';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [CurrencyPipe, NgClass, NgStyle, StarsPipe, RouterLink],
+  imports: [CurrencyPipe, NgClass, StarsPipe, RouterLink],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
 })
