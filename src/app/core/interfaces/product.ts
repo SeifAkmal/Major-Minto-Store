@@ -6,4 +6,5 @@ export interface Product {
   image: string;
   rating?: number;
   badge?: string;
+  quantity?: number;
 }
