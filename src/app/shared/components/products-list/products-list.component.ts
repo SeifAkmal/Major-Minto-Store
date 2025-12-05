@@ -1,3 +1,4 @@
+import { CartService } from './../../../core/services/cart.service';
 import { Product } from './../../../core/interfaces/product';
 import { Component } from '@angular/core';
 import { ProductsService } from '../../../core/services/products.service';
@@ -13,7 +14,10 @@ import { RouterLink } from '@angular/router';
   styleUrl: './products-list.component.scss',
 })
 export class ProductsListComponent {
-  constructor(public ProductsService: ProductsService) {}
+  constructor(
+    public ProductsService: ProductsService,
+    private _cartService: CartService
+  ) {}
   // UPDATE PRODUCTS LIST BASED ON NAVIGATION SETTINGS
   activatedPage: number | undefined = 1;
   reOrderProducts(activated: number, maxShow?: number) {
@@ -28,5 +32,23 @@ export class ProductsListComponent {
     this.ProductsService.productsList = splicedProducts;
     this.activatedPage = activated;
   }
+  // ADD TO CART
 
+  selectedQuantity: number = 1;
+
+  minusProduct() {
+    if (this.selectedQuantity !== 1) {
+      this.selectedQuantity--;
+    }
+  }
+  plusProduct() {
+    if (this.selectedQuantity !== 10) {
+      this.selectedQuantity++;
+    }
+  }
+  sendProductToCart(event: Event, item: Product) {
+    event.preventDefault();
+    event.stopPropagation();
+    this._cartService.addProductToCart(item, this.selectedQuantity);
+  }
 }

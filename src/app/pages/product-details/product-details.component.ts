@@ -54,19 +54,19 @@ export class ProductDetailsComponent implements OnInit {
 
   // ADD TO CART
 
-  productQuantity: number = 1;
+  selectedQuantity: number = 1;
 
   minusProduct() {
-    if (this.productQuantity !== 1) {
-      this.productQuantity--;
+    if (this.selectedQuantity !== 1) {
+      this.selectedQuantity--;
     }
   }
   plusProduct() {
-    if (this.productQuantity !== 10) {
-      this.productQuantity++;
+    if (this.selectedQuantity !== 10) {
+      this.selectedQuantity++;
     }
   }
   sendProductToCart(item: Product) {
-    this._cartService.addProductToCart(item, this.productQuantity);
+    this._cartService.addProductToCart(item, this.selectedQuantity);
   }
 }
