@@ -48,9 +48,13 @@
           <img src="/icons/plus.svg" alt="" />
         </button>
       </div>
-      <button class="add-cart-btn" (click)="sendProductToCart(item)">
-        Add to Cart
-      </button>
+      <div class="add-cart-btn">
+        <app-add-to-cart
+          buttonSize="add-xl"
+          [product]="item"
+          [quantity]="selectedQuantity"
+        ></app-add-to-cart>
+      </div>
     </div>
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">

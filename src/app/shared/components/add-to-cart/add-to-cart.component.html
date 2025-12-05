@@ -1,1 +1,6 @@
-<p>add-to-cart works!</p>
+<button
+  (click)="sendProductToCart($event, product)"
+  [class.add-xl]="buttonSize == 'add-xl'"
+>
+  Add to Cart
+</button>

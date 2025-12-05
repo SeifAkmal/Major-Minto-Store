@@ -1,0 +1,12 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/placeholders" as *;
+@use "../../../styles/mixins" as *;
+
+button {
+  @include button(primary, add);
+}
+.add-xl {
+  @include button(primary, add-xl);
+  padding: 16px 0;
+  width: 100%;
+}

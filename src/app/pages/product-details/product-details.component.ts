@@ -5,11 +5,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
 import { CurrencyPipe, NgClass } from '@angular/common';
+import { AddToCartComponent } from "../../shared/components/add-to-cart/add-to-cart.component";
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [StarsPipe, CurrencyPipe, RouterLink, NgClass],
+  imports: [StarsPipe, CurrencyPipe, RouterLink, NgClass, AddToCartComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })

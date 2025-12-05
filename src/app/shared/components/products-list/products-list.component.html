@@ -19,7 +19,7 @@
 
         <section class="price-section" >
           <span class="price">{{ item.price | currency : "USD" }}</span>
-          <button (click)="sendProductToCart($event, item)">Add to Cart</button>
+          <app-add-to-cart [product]="item"></app-add-to-cart>
         </section>
       </article>
       @if (item.badge) {

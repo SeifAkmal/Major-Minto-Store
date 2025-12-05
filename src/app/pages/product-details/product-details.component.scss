@@ -124,8 +124,6 @@
       }
       .add-cart-btn {
         flex-grow: 1;
-        @include button(primary, add-xl);
-        padding: 16px 0;
       }
     }
     .accordion {
