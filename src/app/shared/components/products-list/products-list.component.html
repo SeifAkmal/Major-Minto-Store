@@ -1,7 +1,7 @@
 @if (ProductsService.productsList) {
 <ul class="product-list">
   @for (item of ProductsService.productsList; track $index) {
-  <a [routerLink]="['/home', item.id]" >
+  <a [routerLink]="['/home', item.id]">
     <li class="product-card">
       <div class="image-wrapper">
         <img [src]="item.image" alt="{{ item.title }}" />
@@ -17,9 +17,18 @@
           }
         </section>
 
-        <section class="price-section" >
+        <section class="price-section">
           <span class="price">{{ item.price | currency : "USD" }}</span>
-          <app-add-to-cart [product]="item"></app-add-to-cart>
+          @if (cartService.isInCart(item.id) && selectedQuantity >= 1 ) {
+          <div class="counter">
+            <app-quantity-counter [product]="item"></app-quantity-counter>
+          </div>
+          }@else {
+          <app-add-to-cart
+            [product]="item"
+            [quantity]="selectedQuantity"
+          ></app-add-to-cart
+          >}
         </section>
       </article>
       @if (item.badge) {

@@ -40,13 +40,7 @@
     </p>
     <div class="add-product">
       <div class="counter">
-        <button (click)="minusProduct()">
-          <img src="/icons/minus.svg" alt="" />
-        </button>
-        <span>{{ selectedQuantity }}</span>
-        <button (click)="plusProduct()">
-          <img src="/icons/plus.svg" alt="" />
-        </button>
+        <app-quantity-counter [product]="item"></app-quantity-counter>
       </div>
       <div class="add-cart-btn">
         <app-add-to-cart

@@ -1,1 +1,9 @@
-<p>quantity-counter works!</p>
+<div class="counter">
+  <button (click)="minusProduct($event)">
+    <img src="/icons/minus.svg" alt="" />
+  </button>
+  <span>{{ selectedQuantity }}</span>
+  <button (click)="plusProduct($event)">
+    <img src="/icons/plus.svg" alt="" />
+  </button>
+</div>

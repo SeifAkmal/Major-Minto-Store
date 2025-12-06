@@ -1,0 +1,32 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/placeholders" as *;
+@use "../../../styles/mixins" as *;
+
+.counter {
+  display: flex;
+  border-radius: 6px;
+  height: 100%;
+  button {
+    @include button(thirdly, add);
+    &:first-child {
+      border-radius: 8px 0 0 8px;
+    }
+    &:last-child {
+      border-radius: 0 8px 8px 0;
+    }
+    background-color: #0f2b20 !important;
+    box-shadow: none;
+  }
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $primary-color;
+    background-color: #0f2b20;
+    padding: 8px 16px;
+    cursor: default;
+  }
+}

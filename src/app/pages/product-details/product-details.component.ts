@@ -5,12 +5,20 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
 import { CurrencyPipe, NgClass } from '@angular/common';
-import { AddToCartComponent } from "../../shared/components/add-to-cart/add-to-cart.component";
+import { AddToCartComponent } from '../../shared/components/add-to-cart/add-to-cart.component';
+import { QuantityCounterComponent } from '../../shared/components/quantity-counter/quantity-counter.component';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [StarsPipe, CurrencyPipe, RouterLink, NgClass, AddToCartComponent],
+  imports: [
+    StarsPipe,
+    CurrencyPipe,
+    RouterLink,
+    NgClass,
+    AddToCartComponent,
+    QuantityCounterComponent,
+  ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
@@ -53,21 +61,7 @@ export class ProductDetailsComponent implements OnInit {
     );
   }
 
-  // ADD TO CART
+  // ADD PRODUCT AND QUANTITY TO CART
 
   selectedQuantity: number = 1;
-
-  minusProduct() {
-    if (this.selectedQuantity !== 1) {
-      this.selectedQuantity--;
-    }
-  }
-  plusProduct() {
-    if (this.selectedQuantity !== 10) {
-      this.selectedQuantity++;
-    }
-  }
-  sendProductToCart(item: Product) {
-    this._cartService.addProductToCart(item, this.selectedQuantity);
-  }
 }

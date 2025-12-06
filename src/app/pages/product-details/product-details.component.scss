@@ -98,29 +98,6 @@
       .counter {
         display: flex;
         border-radius: 6px;
-        button {
-          @include button(thirdly, add);
-          &:first-child {
-            border-radius: 8px 0 0 8px;
-          }
-          &:last-child {
-            border-radius: 0 8px 8px 0;
-          }
-
-          box-shadow: none;
-        }
-        span {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 5px;
-          font-size: $font-size-sm;
-          font-weight: 500;
-          color: $primary-color;
-          background-color: $secondary-bg-color;
-          padding: 8px 16px;
-          cursor: default;
-        }
       }
       .add-cart-btn {
         flex-grow: 1;

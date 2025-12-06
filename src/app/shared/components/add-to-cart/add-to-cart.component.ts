@@ -11,13 +11,21 @@ import { Product } from '../../../core/interfaces/product';
 })
 export class AddToCartComponent {
   constructor(private _cartService: CartService) {}
+
   @Input() product!: Product;
-  @Input() quantity: number = 1;
-  @Input() buttonSize!: string 
+
+  // QUANTITY COMING FROM PARENT
+  @Input() quantity!: number;
+
+  // USED TO STYLE THE BUTTON
+  @Input() buttonSize!: string;
 
   sendProductToCart(event: Event, item: Product) {
     event.preventDefault();
     event.stopPropagation();
+
+    // TRIGGER CART LOGIC
     this._cartService.addProductToCart(item, this.quantity);
   }
 }
+
