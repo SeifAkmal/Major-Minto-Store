@@ -28,27 +28,24 @@ export class ProductsListComponent {
     public cartService: CartService
   ) {}
 
-  // USED TO HIGHLIGHT ACTIVE NAV PAGE
+  // USED TO HIGHLIGHT ACTIVE NAVIGATION PAGE
   activatedPage: number | undefined = 1;
 
   reOrderProducts(activated: number, maxShow?: number) {
-    // USED TO RANDOMIZE PRODUCTS EACH TIME
+    // RANDOMIZE ORIGINAL PRODUCTS FOR DISPLAY
     let splicedProducts: Product[] = [
       ...this.ProductsService.originalProducts,
     ].sort(() => Math.random() - 0.5);
 
-    // OPTIONAL LIMIT FOR HOME/GALLERY SECTIONS
+    // LIMIT NUMBER OF DISPLAYED PRODUCTS IF NEEDED
     splicedProducts = maxShow
       ? splicedProducts.slice(0, maxShow)
       : this.ProductsService.originalProducts;
 
-    // UPDATE LIST SHOWN ON SCREEN
+    // UPDATE VISIBLE PRODUCTS LIST
     this.ProductsService.productsList = splicedProducts;
 
-    // SYNC UI WITH CURRENT PAGE
+    // UPDATE ACTIVE PAGE STATE
     this.activatedPage = activated;
   }
-
-  // DEFAULT QUANTITY USED WHEN ADDING FROM LIST VIEW
-  selectedQuantity: number = 1;
 }

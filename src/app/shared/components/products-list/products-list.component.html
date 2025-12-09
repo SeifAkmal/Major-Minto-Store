@@ -19,16 +19,12 @@
 
         <section class="price-section">
           <span class="price">{{ item.price | currency : "USD" }}</span>
-          @if (cartService.isInCart(item.id) && selectedQuantity >= 1 ) {
+          @if (cartService.isInCart(item.id)) {
           <div class="counter">
             <app-quantity-counter [product]="item"></app-quantity-counter>
           </div>
           }@else {
-          <app-add-to-cart
-            [product]="item"
-            [quantity]="selectedQuantity"
-          ></app-add-to-cart
-          >}
+          <app-add-to-cart [product]="item"></app-add-to-cart>}
         </section>
       </article>
       @if (item.badge) {

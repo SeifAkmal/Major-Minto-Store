@@ -9,4 +9,10 @@ button {
   @include button(primary, add-xl);
   padding: 16px 0;
   width: 100%;
+  &:disabled {
+    background-color: #0f2b20;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+  }
 }

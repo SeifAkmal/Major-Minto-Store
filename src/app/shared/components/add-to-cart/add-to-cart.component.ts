@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '../../../core/services/cart.service';
 import { Product } from '../../../core/interfaces/product';
 
@@ -9,23 +9,29 @@ import { Product } from '../../../core/interfaces/product';
   templateUrl: './add-to-cart.component.html',
   styleUrl: './add-to-cart.component.scss',
 })
-export class AddToCartComponent {
-  constructor(private _cartService: CartService) {}
+export class AddToCartComponent implements OnInit {
+  constructor(public _cartService: CartService) {}
 
   @Input() product!: Product;
 
-  // QUANTITY COMING FROM PARENT
-  @Input() quantity!: number;
-
-  // USED TO STYLE THE BUTTON
+  // USED TO STYLE BUTTON SIZE FROM PARENT
   @Input() buttonSize!: string;
 
-  sendProductToCart(event: Event, item: Product) {
+  // HOLDS CURRENT QUANTITY FOR THIS PRODUCT
+  selectedQuantity!: any;
+
+  ngOnInit(): void {
+    // DEFAULT QUANTITY WHEN PRODUCT IS NOT IN CART
+    if (this._cartService.getQuantity(this.product.id) == 0) {
+      this.selectedQuantity = 1;
+    }
+  }
+
+  sendProduct(event: Event, item: Product) {
     event.preventDefault();
     event.stopPropagation();
 
-    // TRIGGER CART LOGIC
-    this._cartService.addProductToCart(item, this.quantity);
+    // TRIGGER CART UPDATE
+    this._cartService.addProductToCart(item, this.selectedQuantity);
   }
 }
-
