@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Signal } from '@angular/core';
 import { CartService } from '../../../core/services/cart.service';
 import { Product } from '../../../core/interfaces/product';
 
@@ -14,16 +14,18 @@ export class AddToCartComponent implements OnInit {
 
   @Input() product!: Product;
 
-  // USED TO STYLE BUTTON SIZE FROM PARENT
   @Input() buttonSize!: string;
 
-  // HOLDS CURRENT QUANTITY FOR THIS PRODUCT
-  selectedQuantity!: any;
+  quantitySignal!: Signal<number>;
+
+  selectedQuantity!: number;
 
   ngOnInit(): void {
-    // DEFAULT QUANTITY WHEN PRODUCT IS NOT IN CART
-    if (this._cartService.getQuantity(this.product.id) == 0) {
+    this.quantitySignal = this._cartService.getQuantity(this.product.id);
+    if (this.quantitySignal() === 0) {
       this.selectedQuantity = 1;
+    } else {
+      this.selectedQuantity = this.quantitySignal();
     }
   }
 
@@ -31,7 +33,6 @@ export class AddToCartComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
 
-    // TRIGGER CART UPDATE
     this._cartService.addProductToCart(item, this.selectedQuantity);
   }
 }

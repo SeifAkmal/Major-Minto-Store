@@ -19,7 +19,7 @@
 
         <section class="price-section">
           <span class="price">{{ item.price | currency : "USD" }}</span>
-          @if (cartService.isInCart(item.id)) {
+          @if (cartService.isInCart(item.id)()) {
           <div class="counter">
             <app-quantity-counter [product]="item"></app-quantity-counter>
           </div>

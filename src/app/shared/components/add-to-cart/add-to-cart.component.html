@@ -1,7 +1,7 @@
-@if (_cartService.isInCart(product.id)) {
+@if (_cartService.isInCart(product.id)()) {
 <button
   [class.add-xl]="buttonSize == 'add-xl'"
-  [disabled]="_cartService.isInCart(product.id)"
+  [disabled]="_cartService.isInCart(product.id)()"
 >
   Already Added
 </button>

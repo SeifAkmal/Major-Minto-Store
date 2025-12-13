@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Signal } from '@angular/core';
 import { Product } from '../../../core/interfaces/product';
 import { CartService } from '../../../core/services/cart.service';
 import { ActivatedRoute } from '@angular/router';
@@ -18,40 +18,65 @@ export class QuantityCounterComponent implements OnInit {
 
   @Input() product!: Product;
 
-  // HOLDS CURRENT QUANTITY FOR THIS PRODUCT
-  selectedQuantity!: any;
+  quantitySignal!: Signal<number>;
 
   ngOnInit(): void {
-    // UPDATE QUANTITY WHEN ROUTE PARAM CHANGES (DETAIL PAGE)
-    this._activatedRoute.paramMap.subscribe((params) => {
-      const id = Number(params.get('id'));
-      this.selectedQuantity = this._cartService.getQuantity(id);
-    });
-
-    // INITIAL QUANTITY FOR LIST VIEW / NON-ROUTED USAGE
-    this.selectedQuantity = this._cartService.getQuantity(this.product.id);
+    this.quantitySignal = this._cartService.getQuantity(this.product.id);
   }
 
   minusProduct(event: any) {
     event.preventDefault();
     event.stopPropagation();
 
-    if (this.selectedQuantity > 0) {
-      this.selectedQuantity--;
-      // SYNC UPDATED QUANTITY WITH CART
-      this._cartService.addProductToCart(this.product, this.selectedQuantity);
+    const current = this.quantitySignal();
+
+    if (current > 0) {
+      this._cartService.addProductToCart(this.product, current - 1);
     }
   }
-
   plusProduct(event: any) {
     event.preventDefault();
     event.stopPropagation();
 
-    if (this.selectedQuantity < 10) {
-      this.selectedQuantity++;
-    }
+    const current = this.quantitySignal();
 
-    // SYNC UPDATED QUANTITY WITH CART
-    this._cartService.addProductToCart(this.product, this.selectedQuantity);
+    if (current < 10) {
+      this._cartService.addProductToCart(this.product, current + 1);
+    }
   }
+
+  // @Input() product!: Product;
+
+  // selectedQuantity!: any;
+
+  // ngOnInit(): void {
+  //   this._activatedRoute.paramMap.subscribe((params) => {
+  //     const id = Number(params.get('id'));
+  //     this.selectedQuantity = this._cartService.getQuantity(id);
+  //   });
+
+  //   this.selectedQuantity = this._cartService.getQuantity(this.product.id);
+  // }
+
+  // minusProduct(event: any) {
+  //   event.preventDefault();
+  //   event.stopPropagation();
+
+  //   if (this.selectedQuantity > 0) {
+  //     this.selectedQuantity--;
+
+  //     this._cartService.addProductToCart(this.product, this.selectedQuantity);
+  //   }
+  // }
+
+  // plusProduct(event: any) {
+  //   event.preventDefault();
+  //   event.stopPropagation();
+
+  //   if (this.selectedQuantity < 10) {
+  //     this.selectedQuantity++;
+  //   }
+
+  //   this._cartService.addProductToCart(this.product, this.selectedQuantity);
+  // }
 }
