@@ -33,6 +33,6 @@ export class AddToCartComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
 
-    this._cartService.addProductToCart(item, this.selectedQuantity);
+    this._cartService.updateCart(item, this.selectedQuantity);
   }
 }

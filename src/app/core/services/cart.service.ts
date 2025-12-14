@@ -9,23 +9,43 @@ export class CartService {
 
   private readonly cart = signal<Product[]>([]);
 
-  addProductToCart(product: Product, quantity: number) {
+  updateCart(product: Product, quantity: number) {
     this.cart.update((currentCart) => {
       const index = currentCart.findIndex((p) => p.id === product.id);
 
       if (quantity <= 0 && index !== -1) {
-        return currentCart.filter((p) => p.id !== product.id);
+        return this.deleteProduct(currentCart, product.id);
       }
 
-      if (index == -1) {
-        return [...currentCart, { ...product, quantity }];
+      if (index === -1) {
+        return this.addProduct(currentCart, product, quantity);
       }
 
-      return currentCart.map((p) =>
-        p.id === product.id ? { ...p, quantity } : p
-      );
+      return this.changeQuantity(currentCart, product.id, quantity);
     });
+
     console.log(this.cart());
+  }
+
+  private deleteProduct(currentCart: Product[], productId: number) {
+    return currentCart.filter((p) => p.id !== productId);
+  }
+
+  private addProduct(
+    currentCart: Product[],
+    product: Product,
+    quantity: number
+  ) {
+    return [...currentCart, { ...product, quantity }];
+  }
+  private changeQuantity(
+    currentCart: Product[],
+    productId: number,
+    quantity: number
+  ) {
+    return currentCart.map((p) =>
+      p.id === productId ? { ...p, quantity } : p
+    );
   }
 
   getQuantity = (id: number) =>
