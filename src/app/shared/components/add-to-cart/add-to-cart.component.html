@@ -1,13 +1,7 @@
-@if (_cartService.isInCart(product.id)()) {
-<button
-  [class.add-xl]="buttonSize == 'add-xl'"
-  [disabled]="_cartService.isInCart(product.id)()"
->
-  Already Added
+@if (isInCartSignal()) {
+<button [class.add-xl]="buttonSize == 'add-xl'" disabled>Already Added</button>
+} @else {
+<button (click)="sendProduct($event)" [class.add-xl]="buttonSize == 'add-xl'">
+  Add to Cart
 </button>
-}@else {<button
-  (click)="sendProduct($event, product)"
-  [class.add-xl]="buttonSize == 'add-xl'"
->
-  Add to Cart</button
->}
+}
