@@ -11,7 +11,7 @@ import { StarsPipe } from '../../pipes/stars.pipe';
 })
 export class FilteridebarComponent {
   constructor(public productsService: ProductsService) {}
-  // FILTERS OPTIONS
+  
   readonly category: string[] = [
     'All Products',
     'Nuts',
@@ -19,7 +19,7 @@ export class FilteridebarComponent {
     'Supplements',
   ];
   readonly rating: number[] = [4, 3, 2];
-  // FILTER CHANGE ACTIONS
+  
   sendCategoryChange(cat: string) {
     this.productsService.updateFiltersResults({ category: cat });
   }

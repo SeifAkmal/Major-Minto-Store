@@ -6,11 +6,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProductsService {
-  // ALL PRODUCTS LISTS
   originalProducts: Product[] = [...PRODUCTS].sort(() => Math.random() - 0.5);
   productsList: Product[] = [...this.originalProducts];
 
-  // ALL ABOUT SEARCH
   getSearchResults(keyWord: string) {
     const key = keyWord.trim().toLowerCase();
 
@@ -24,7 +22,7 @@ export class ProductsService {
       return titleWords.some((w) => w.startsWith(key));
     });
   }
-  //  ALL ABOUT FILTERS & SORTING
+
   currentSort: string = 'Sort by: Featured';
   currentCategory: string = 'All Products';
   currentRating: number = 0;
@@ -32,21 +30,18 @@ export class ProductsService {
   applyFiltersResults() {
     let userFilters: Product[] = [...this.originalProducts];
 
-    // APPLY FILTERS
     if (this.currentCategory != 'All Products') {
       userFilters = userFilters.filter(
         (p) => p.category == this.currentCategory
       );
     }
 
-    // APPLY RATING
     if (this.currentRating) {
       userFilters = userFilters.filter(
         (p) => (p.rating ?? 0) >= this.currentRating
       );
     }
 
-    // APPLY SORTING
     if (this.currentSort === 'Price: Low to High') {
       userFilters.sort((a, b) => a.price - b.price);
     } else if (this.currentSort === 'Price: High to Low') {

@@ -11,7 +11,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class filterControlsComponent {
   constructor(private _ProductsService: ProductsService) {}
-  // ALL ABOUT SORTING
+
   isOpen: boolean = false;
   selectedOption: string = 'Sort by: Featured';
   sortOptions:string[] = ['Sort by: Featured', 'Price: Low to High', 'Price: High to Low', 'Rating'];
@@ -24,7 +24,7 @@ export class filterControlsComponent {
     this.isOpen = false;
     this._ProductsService.updateFiltersResults({sort:sort});
   }
-  // FILTERS TOGGLE EVENT
+
   @Output() filtersEvent = new EventEmitter<void>();
 
   toggleFilters() {
