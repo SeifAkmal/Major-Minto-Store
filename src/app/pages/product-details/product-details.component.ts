@@ -24,7 +24,7 @@ import { QuantityCounterComponent } from '../../shared/components/quantity-count
 })
 export class ProductDetailsComponent implements OnInit {
   constructor(
-    private _activatedRoute: ActivatedRoute,
+    private _route: ActivatedRoute,
     private _productsService: ProductsService,
     private _cartService: CartService
   ) {}
@@ -34,11 +34,14 @@ export class ProductDetailsComponent implements OnInit {
   similarProducts: Product[] = [];
 
   ngOnInit(): void {
-    const id = Number(this._activatedRoute.snapshot.paramMap.get('id'));
-
-    this.productDetails = this._productsService.productsList.filter(
-      (p) => p.id == id
-    );
+    this._route.paramMap.subscribe((params) => {
+      const id = Number(params.get('id'));
+      if (id) {
+        this.productDetails = this._productsService.productsList.filter(
+          (p) => p.id == id
+        );
+      }
+    });
 
     let category = this.productDetails[0].category;
 
