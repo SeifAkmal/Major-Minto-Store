@@ -1,1 +1,55 @@
-<p>cart works!</p>
+<h2>Shopping Cart</h2>
+<article class="container">
+  <section class="shopping-cart">
+    @if (cartService.cart().length) { @for (item of cartService.cart(); track
+    $index) {
+    <a [routerLink]="['/home', item.id]" class="product-card">
+      <div class="content">
+        <div class="image-wrapper">
+          <img [src]="item.image" alt="{{ item.image }}" />
+        </div>
+        <div class="product-titles">
+          <h4>{{ item.title }}</h4>
+          <span>{{ item.price | currency : "USD" }}</span>
+        </div>
+      </div>
+      <div class="content">
+        <div class="counter">
+          <app-quantity-counter [product]="item"></app-quantity-counter>
+        </div>
+        <button><img src="icons/delete.svg" alt="" /></button>
+      </div>
+    </a>
+    } }@else {
+    <div class="empty-cart dark">
+      <h3>Your cart is empty</h3>
+      <p>
+        You haven't added any items yet. Browse the store and pick what you
+        like.
+      </p>
+    </div>
+    }
+  </section>
+  <section class="order-summary">
+    <h3>Order Summary</h3>
+    <div>
+      <p>Subtotal</p>
+      <span>$101.96</span>
+    </div>
+    <div>
+      <p>Tax (8%)</p>
+      <span>$8.16</span>
+    </div>
+    <div>
+      <p>Shipping</p>
+      <span>FREE</span>
+    </div>
+    <hr />
+    <div>
+      <p>Total</p>
+      <span>$110.12</span>
+    </div>
+    <button>Proceed to Checkout</button>
+    <p class="free-shipping">You qualify for free shipping! 🎉</p>
+  </section>
+</article>

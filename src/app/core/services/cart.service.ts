@@ -7,7 +7,7 @@ import { Product } from '../interfaces/product';
 export class CartService {
   constructor() {}
 
-  private readonly cart = signal<Product[]>([]);
+  public readonly cart = signal<Product[]>([]);
 
   updateCart(product: Product, quantity: number) {
     this.cart.update((currentCart) => {

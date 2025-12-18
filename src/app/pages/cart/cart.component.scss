@@ -1,3 +1,129 @@
 @use "../../styles/variables" as *;
 @use "../../styles/placeholders" as *;
 @use "../../styles/_mixins.scss" as *;
+
+.container {
+  @extend %shared-flexible;
+  align-items: start;
+  margin-top: 20px;
+  gap: 24px;
+  .shopping-cart {
+    flex: 2;
+    .product-card {
+      @extend %shared-flexible;
+
+      gap: 25px;
+      background-color: $secondary-bg-color;
+      box-shadow: $primary-shadow;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 16px;
+      border: 2px solid transparent;
+      transition: $basic-transition;
+      .content {
+        @extend %shared-flexible;
+        gap: 15px;
+        .image-wrapper {
+          width: 130px;
+          img {
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+          }
+        }
+        .product-titles {
+          h4 {
+            padding-bottom: 7.5px;
+          }
+          span {
+            color: $secondary-color;
+            font-weight: 500;
+          }
+        }
+
+        button {
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 10px;
+        }
+      }
+
+      &:hover {
+        box-shadow: $button-hover-shadow;
+        border-color: $button-color;
+      }
+    }
+    .empty-cart {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 48px 24px;
+      border-radius: 16px;
+      background: $secondary-bg-color;
+      box-shadow: $primary-shadow;
+      color: $thirdly-color;
+      h3 {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      p {
+        font-size: 15px;
+        color: $primary-border-color;
+        line-height: 1.6;
+        text-align: center;
+      }
+    }
+  }
+  .order-summary {
+    flex: 1;
+    background-color: $secondary-bg-color;
+    box-shadow: $primary-shadow;
+    border-radius: 10px;
+    padding: 20px;
+    div {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      gap: 100px;
+      &:first-of-type {
+        margin-top: 20px;
+      }
+      &:last-of-type {
+        padding: 0;
+        p {
+          color: $primary-color;
+        }
+        span {
+          color: $secondary-color;
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+      p {
+        color: $thirdly-color;
+      }
+
+      span {
+        font-weight: 300;
+      }
+    }
+    button {
+      @include button(primary, sort);
+      width: 100%;
+      margin-top: 24px;
+    }
+    hr {
+      border: 1px solid $primary-border-color;
+      margin: 20px 0;
+    }
+    .free-shipping {
+      color: $thirdly-color;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 12px;
+    }
+  }
+}
