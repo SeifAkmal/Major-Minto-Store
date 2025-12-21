@@ -42,6 +42,24 @@ nav {
     }
     .cart-button {
       @include button(primary, cart);
+      position: relative;
+      &::before {
+        content: attr(cart-count);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -12.5px;
+        right: -12.5px;
+        background-color: #e0564b;
+        width: clamp(1.4rem, 4vw, 1.5rem);
+        height: clamp(1.4rem, 4vw, 1.5rem);
+        color: #f5fdf7;
+        border-radius: 50%;
+      }
+      &[cart-count="0"]::before {
+        display: none;
+      }
     }
     @include respond(small-phone) {
       h1 {

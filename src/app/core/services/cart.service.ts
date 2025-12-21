@@ -5,7 +5,9 @@ import { Product } from '../interfaces/product';
   providedIn: 'root',
 })
 export class CartService {
-  constructor() {}
+  constructor() {
+    this.cart.set(this.getStorage());
+  }
 
   public readonly cart = signal<Product[]>([]);
 
@@ -24,7 +26,16 @@ export class CartService {
       return this.changeQuantity(currentCart, product.id, quantity);
     });
 
+    this.updateStorage(this.cart());
+
     console.log(this.cart());
+  }
+  updateStorage(cart: Product[]) {
+    localStorage.setItem('userCart', JSON.stringify(cart));
+  }
+  getStorage() {
+    const storedCart = localStorage.getItem('userCart');
+    return storedCart ? JSON.parse(storedCart) : [];
   }
 
   addProduct(currentCart: Product[], product: Product, quantity: number) {

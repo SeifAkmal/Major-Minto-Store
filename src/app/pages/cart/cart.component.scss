@@ -64,6 +64,7 @@
       }
     }
     .empty-cart {
+      min-width: 232px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -137,10 +138,10 @@
   }
 }
 .recommended-products-container {
-  & > h2 {
+  & > h3 {
     margin-top: 50px;
     margin-bottom: 25px;
-    font-size: $font-size-xl;
+    font-size: $font-size-lg;
   }
   .recommended-products {
     margin-bottom: 75px;

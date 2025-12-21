@@ -156,7 +156,7 @@
 </article>
 }
 <section class="similar-products-container">
-  <h2>Similar Products</h2>
+  <h3>Similar Products</h3>
   <ul class="similar-products">
     @for (item of similarProducts; track $index) {
     <a [routerLink]="['/home', item.id]" (click)="changeThePorduct(item.id)">

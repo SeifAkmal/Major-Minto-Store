@@ -9,10 +9,9 @@
       [(ngModel)]="searchWord"
       (keyup)="searchProducts()"
     />
-    
 
-    <a class="cart-button" routerLink="/cart"
-      ><img src="icons/cart-icon.svg" alt="Cart Icon" /> <span>Cart</span>
+    <a class="cart-button" routerLink="/cart" [attr.cart-count]=" cartService.cart().length">
+      <img src="icons/cart-icon.svg" alt="Cart Icon" /> <span>Cart</span>
     </a>
   </div>
 </nav>

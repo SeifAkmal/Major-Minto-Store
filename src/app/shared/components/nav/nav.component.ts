@@ -1,3 +1,4 @@
+import { CartService } from './../../../core/services/cart.service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -11,7 +12,10 @@ import { ProductsService } from '../../../core/services/products.service';
   styleUrl: './nav.component.scss',
 })
 export class NavComponent {
-  constructor(public ProductsService: ProductsService) {}
+  constructor(
+    public ProductsService: ProductsService,
+    public cartService: CartService
+  ) {}
 
   searchWord: string = '';
   searchProducts() {

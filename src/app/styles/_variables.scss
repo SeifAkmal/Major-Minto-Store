@@ -16,10 +16,11 @@ $delete-color: #e0564b;
 //* FONTS *\\
 //=========================
 $font-family: "Inter", sans-serif;
-$font-size-xl: 24px;
-$font-size-lg: 19px;
-$font-size-md: 18px;
-$font-size-sm: 14px;
+$font-size-xl: clamp(1.4rem, 4vw, 1.5rem); // 22px → 24px
+$font-size-lg: clamp(1.1rem, 3vw, 1.187rem); // 17.6px → 19px
+$font-size-md: clamp(1rem, 2.5vw, 1.125rem); // 16px → 18px
+$font-size-sm: clamp(0.85rem, 2vw, 0.875rem); // 13.6px → 14px
+
 //=========================
 //* BORDER RADIUS *\\
 //=========================
