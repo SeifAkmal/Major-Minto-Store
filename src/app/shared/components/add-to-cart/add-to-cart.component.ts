@@ -3,24 +3,21 @@ import {
   computed,
   Input,
   OnChanges,
-  OnInit,
   signal,
-  Signal,
   SimpleChanges,
 } from '@angular/core';
 import { CartService } from '../../../core/services/cart.service';
 import { Product } from '../../../core/interfaces/product';
-import { ActivatedRoute } from '@angular/router';
-
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-add-to-cart',
   standalone: true,
-  imports: [],
+  imports: [MatSnackBarModule],
   templateUrl: './add-to-cart.component.html',
   styleUrl: './add-to-cart.component.scss',
 })
 export class AddToCartComponent implements OnChanges {
-  constructor(public cartService: CartService) {}
+  constructor(public cartService: CartService, private snackBar: MatSnackBar) {}
 
   @Input() product!: Product;
   @Input() buttonSize!: string;
@@ -50,5 +47,11 @@ export class AddToCartComponent implements OnChanges {
     event.preventDefault();
     event.stopPropagation();
     this.cartService.updateCart(this.product, this.selectedQuantity);
+    this.snackBar.open(this.product.title + ' added to cart', '', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      panelClass: ['custom-snackbar'],
+    });
   }
 }

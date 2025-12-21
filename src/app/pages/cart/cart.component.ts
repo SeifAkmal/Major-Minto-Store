@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
 import { ProductsService } from '../../core/services/products.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +17,7 @@ import { ProductsService } from '../../core/services/products.service';
     StarsPipe,
     RouterLink,
     NgClass,
+    MatSnackBarModule,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
@@ -23,12 +25,19 @@ import { ProductsService } from '../../core/services/products.service';
 export class CartComponent implements OnInit {
   constructor(
     public cartService: CartService,
-    public productsService: ProductsService
+    public productsService: ProductsService,
+    private snackBar: MatSnackBar
   ) {}
   deleteProduct(item: Product, event: Event) {
     event.preventDefault();
     event.stopPropagation();
     this.cartService.updateCart(item, 0);
+    this.snackBar.open(item.title + ' removed from cart', '', {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      panelClass: ['custom-snackbar-delete'],
+    });
   }
   recommendedProducts: Product[] = [];
   ngOnInit(): void {

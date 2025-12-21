@@ -36,7 +36,7 @@
     <h3>Order Summary</h3>
     <div>
       <p>Subtotal</p>
-      <span>{{ cartService.subtotal() | currency : "USD"  }}</span>
+      <span>{{ cartService.subtotal() | currency : "USD" }}</span>
     </div>
     <div>
       <p>Tax (8%)</p>
@@ -51,7 +51,7 @@
       <p>Total</p>
       <span>{{ cartService.total() | currency : "USD" }}</span>
     </div>
-    <button>Proceed to Checkout</button>
+    <button>Oops! Please log in before checkout</button>
     <p class="free-shipping">You qualify for free shipping! 🎉</p>
   </section>
 </article>
