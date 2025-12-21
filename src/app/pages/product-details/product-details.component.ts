@@ -25,13 +25,12 @@ import { QuantityCounterComponent } from '../../shared/components/quantity-count
 export class ProductDetailsComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
-    private _productsService: ProductsService,
-    private _cartService: CartService
+    private _productsService: ProductsService
   ) {}
 
   productDetails: Product[] = [];
-
   similarProducts: Product[] = [];
+  activatedImage: number = 0;
 
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {
@@ -50,6 +49,12 @@ export class ProductDetailsComponent implements OnInit {
     );
   }
 
+  changeThePorduct(id: number) {
+    this.productDetails = this._productsService.productsList.filter(
+      (p) => p.id === id
+    );
+  }
+
   smallImages: string[] = [
     '/icons/details-img-1.svg',
     '/icons/details-img-2.svg',
@@ -57,15 +62,7 @@ export class ProductDetailsComponent implements OnInit {
     '/icons/details-img-4.svg',
   ];
 
-  activatedImage: number = 0;
-
   selectImage(index: number) {
     this.activatedImage = index;
-  }
-
-  changeThePorduct(id: number) {
-    this.productDetails = this._productsService.productsList.filter(
-      (p) => p.id === id
-    );
   }
 }

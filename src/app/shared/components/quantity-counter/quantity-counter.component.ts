@@ -2,13 +2,13 @@ import {
   Component,
   computed,
   Input,
+  OnChanges,
   OnInit,
-  signal,
   Signal,
+  SimpleChanges,
 } from '@angular/core';
 import { Product } from '../../../core/interfaces/product';
 import { CartService } from '../../../core/services/cart.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quantity-counter',
@@ -17,34 +17,18 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './quantity-counter.component.html',
   styleUrl: './quantity-counter.component.scss',
 })
-export class QuantityCounterComponent implements OnInit {
-  constructor(
-    private _cartService: CartService,
-    private _route: ActivatedRoute
-  ) {}
+export class QuantityCounterComponent implements OnChanges {
+  constructor(private _cartService: CartService) {}
 
   @Input() product!: Product;
 
-  productId = signal<number | null>(null);
-
   quantity!: Signal<number>;
 
-  ngOnInit(): void {
-    if (this.product) {
-      this.productId.set(this.product.id);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['product'].currentValue) {
+      const product: Product = changes['product'].currentValue;
+      this.quantity = this._cartService.getQuantity(product.id);
     }
-
-    this._route.paramMap.subscribe((params) => {
-      const id = Number(params.get('id'));
-      if (id) {
-        this.productId.set(id);
-      }
-    });
-
-    this.quantity = computed(() => {
-      const id = this.productId();
-      return id ? this._cartService.getQuantity(id)() : 0;
-    });
   }
 
   minusProduct(event: Event) {

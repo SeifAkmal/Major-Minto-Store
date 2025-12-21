@@ -50,4 +50,19 @@ export class CartService {
     computed(() => {
       return this.cart().some((item) => item.id === productId);
     });
+
+  subtotal = computed(() =>
+    this.cart().reduce(
+      (acc, item) => acc + item.price * (item.quantity ?? 0),
+      0
+    )
+  );
+
+  tax = computed(() => {
+    const taxRate = 0.08;
+    return this.subtotal() * taxRate;
+  });
+  total = computed(() => {
+    return this.subtotal() + this.tax();
+  });
 }

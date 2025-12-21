@@ -43,9 +43,18 @@
 
         button {
           background-color: transparent;
-          border: none;
+          border-color: transparent;
           cursor: pointer;
-          padding: 10px;
+          border: none;
+          padding: 8px 16px;
+          border: 1px solid transparent;
+          border-radius: $radius-md;
+          transition: $basic-transition;
+
+          &:hover {
+            box-shadow: $primary-shadow;
+            border-color: $delete-color;
+          }
         }
       }
 
@@ -125,5 +134,17 @@
       text-align: center;
       margin-top: 12px;
     }
+  }
+}
+.recommended-products-container {
+  & > h2 {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    font-size: $font-size-xl;
+  }
+  .recommended-products {
+    margin-bottom: 75px;
+    padding: 0;
+    @extend %product-card-style;
   }
 }

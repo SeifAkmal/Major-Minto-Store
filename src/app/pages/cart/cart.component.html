@@ -17,7 +17,9 @@
         <div class="counter">
           <app-quantity-counter [product]="item"></app-quantity-counter>
         </div>
-        <button><img src="icons/delete.svg" alt="" /></button>
+        <button (click)="deleteProduct(item, $event)">
+          <img src="icons/delete.svg" alt="" />
+        </button>
       </div>
     </a>
     } }@else {
@@ -34,11 +36,11 @@
     <h3>Order Summary</h3>
     <div>
       <p>Subtotal</p>
-      <span>$101.96</span>
+      <span>{{ cartService.subtotal() | currency : "USD"  }}</span>
     </div>
     <div>
       <p>Tax (8%)</p>
-      <span>$8.16</span>
+      <span>{{ cartService.tax() | currency : "USD" }}</span>
     </div>
     <div>
       <p>Shipping</p>
@@ -47,9 +49,43 @@
     <hr />
     <div>
       <p>Total</p>
-      <span>$110.12</span>
+      <span>{{ cartService.total() | currency : "USD" }}</span>
     </div>
     <button>Proceed to Checkout</button>
     <p class="free-shipping">You qualify for free shipping! 🎉</p>
   </section>
 </article>
+<section class="recommended-products-container">
+  <h2>You May Also Like</h2>
+  <ul class="recommended-products">
+    @for (item of recommendedProducts; track $index) {
+    <a [routerLink]="['/home', item.id]">
+      <li class="product-card">
+        <div class="image-wrapper">
+          <img [src]="item.image" alt="{{ item.title }}" />
+        </div>
+        <article class="product-info">
+          <h3>{{ item.title }}</h3>
+
+          <section class="rating-section">
+            @for (star of (item.rating ?? 0)| stars; track $index) {
+            <img src="icons/1-star.svg" alt="" />
+            }@if (item.rating ?? 0) {
+            <span class="rating-value">{{ item.rating }}</span>
+            }
+          </section>
+
+          <section class="price-section">
+            <span class="price">{{ item.price | currency : "USD" }}</span>
+          </section>
+        </article>
+        @if (item.badge) {
+        <div [ngClass]="'badge ' + item.badge">
+          {{ item.badge }}
+        </div>
+        }
+      </li></a
+    >
+    }
+  </ul>
+</section>
