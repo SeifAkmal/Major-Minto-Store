@@ -1,6 +1,6 @@
 import { CartService } from './../../../core/services/cart.service';
 import { Product } from './../../../core/interfaces/product';
-import { Component } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { ProductsService } from '../../../core/services/products.service';
 import { CurrencyPipe, NgClass } from '@angular/common';
 import { StarsPipe } from '../../pipes/stars.pipe';
@@ -23,24 +23,20 @@ import { QuantityCounterComponent } from '../quantity-counter/quantity-counter.c
   styleUrl: './products-list.component.scss',
 })
 export class ProductsListComponent {
-  constructor(
-    public ProductsService: ProductsService,
-    public cartService: CartService
-  ) {}
-
   activatedPage: number | undefined = 1;
 
+  products!: Signal<Product[]>;
+
+  constructor(
+    public productsService: ProductsService,
+    public cartService: CartService
+  ) {}
+  ngOnInit() {
+    this.products = this.productsService.productsList;
+  }
+
   reOrderProducts(activated: number, maxShow?: number) {
-    let splicedProducts: Product[] = [
-      ...this.ProductsService.originalProducts,
-    ].sort(() => Math.random() - 0.5);
-
-    splicedProducts = maxShow
-      ? splicedProducts.slice(0, maxShow)
-      : this.ProductsService.originalProducts;
-
-    this.ProductsService.productsList = splicedProducts;
-
+    this.productsService.reOrderProducts(maxShow);
     this.activatedPage = activated;
   }
 }

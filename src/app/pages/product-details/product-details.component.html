@@ -1,7 +1,8 @@
-@for (item of productDetails; track $index) {
+@if (productDetails()) {
 <a routerLink="/home" class="back-btn">
   <img src="/icons/back-arrow.svg" alt="" />Back to Products</a
 >
+@for (item of productDetails(); track $index) {
 <article class="container">
   <section class="product-images">
     <div class="big-image-wrapper">
@@ -43,7 +44,10 @@
         <app-quantity-counter [product]="item"></app-quantity-counter>
       </div>
       <div class="add-cart-btn">
-        <app-add-to-cart buttonSize="add-xl" [product]="item"></app-add-to-cart>
+        <app-add-to-cart
+          buttonSize="add-xl"
+          [product]="item"
+        ></app-add-to-cart>
       </div>
     </div>
     <div class="accordion" id="accordionExample">
@@ -154,12 +158,12 @@
     </div>
   </section>
 </article>
-}
+} }
 <section class="similar-products-container">
   <h3>Similar Products</h3>
   <ul class="similar-products">
     @for (item of similarProducts; track $index) {
-    <a [routerLink]="['/home', item.id]" (click)="changeThePorduct(item.id)">
+    <a [routerLink]="['/home', item.id]">
       <li class="product-card">
         <div class="image-wrapper">
           <img [src]="item.image" alt="{{ item.title }}" />

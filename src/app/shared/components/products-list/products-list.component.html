@@ -1,6 +1,6 @@
-@if (ProductsService.productsList) {
+@if (products()) {
 <ul class="product-list">
-  @for (item of ProductsService.productsList; track $index) {
+  @for (item of products(); track $index) {
   <a [routerLink]="['/home', item.id]">
     <li class="product-card">
       <div class="image-wrapper">

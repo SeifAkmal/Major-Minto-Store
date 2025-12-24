@@ -41,7 +41,11 @@ export class CartComponent implements OnInit {
   }
   recommendedProducts: Product[] = [];
   ngOnInit(): void {
-    const similarProducts = this.productsService.productsList.slice(0, 4);
-    this.recommendedProducts = similarProducts;
+    //  this.productsService.productsList.subscribe(
+    //   (products) => {
+    //     this.recommendedProducts = products.slice(0, 4);
+    //   }
+    // );
+    // this.recommendedProducts = similarProducts;
   }
 }

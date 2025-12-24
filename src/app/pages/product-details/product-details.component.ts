@@ -1,6 +1,5 @@
-import { CartService } from './../../core/services/cart.service';
 import { ProductsService } from './../../core/services/products.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
@@ -28,7 +27,7 @@ export class ProductDetailsComponent implements OnInit {
     private _productsService: ProductsService
   ) {}
 
-  productDetails: Product[] = [];
+  productDetails!: Signal<Product[]>;
   similarProducts: Product[] = [];
   activatedImage: number = 0;
 
@@ -36,23 +35,39 @@ export class ProductDetailsComponent implements OnInit {
     this._route.paramMap.subscribe((params) => {
       const id = Number(params.get('id'));
       if (id) {
-        this.productDetails = this._productsService.productsList.filter(
-          (p) => p.id == id
-        );
+        this._productsService.originalProducts.update((currentProducts) => {
+          let filtered = currentProducts;
+
+          if (id) {
+            filtered = filtered.filter((p) => p.id === id);
+          }
+
+          return filtered;
+        });
       }
+      this.productDetails = this._productsService.productsList;
     });
 
-    let category = this.productDetails[0].category;
+    let category = this.productDetails()[0].category;
 
-    this.similarProducts = this._productsService.productsList.filter(
-      (p) => p.category == category
-    );
+    this._productsService.originalProducts.update((currentProducts) => {
+      currentProducts.filter((p) => p.category == category);
+
+      return currentProducts;
+    });
+    this.similarProducts = this._productsService.productsList();
   }
 
   changeThePorduct(id: number) {
-    this.productDetails = this._productsService.productsList.filter(
-      (p) => p.id === id
-    );
+    this._productsService.originalProducts.update((currentProducts) => {
+      let filtered = currentProducts;
+
+      if (id) {
+        filtered = filtered.filter((p) => p.id === id);
+      }
+
+      return filtered;
+    });
   }
 
   smallImages: string[] = [
