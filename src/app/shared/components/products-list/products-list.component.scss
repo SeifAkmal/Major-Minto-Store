@@ -9,8 +9,7 @@
 .products-nav {
   @extend %normal-flexible;
   gap: 10px;
-  // margin-top: 30px;
-  margin: 30px 0 60px 0;
+  margin-top: 30px;
   button {
     @include button(thirdly, add);
   }

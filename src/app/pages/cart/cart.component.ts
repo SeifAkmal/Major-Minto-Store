@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, OnInit } from '@angular/core';
 import { QuantityCounterComponent } from '../../shared/components/quantity-counter/quantity-counter.component';
 import { CartService } from '../../core/services/cart.service';
 import { CurrencyPipe, NgClass } from '@angular/common';
@@ -39,13 +39,8 @@ export class CartComponent implements OnInit {
       panelClass: ['custom-snackbar-delete'],
     });
   }
-  recommendedProducts: Product[] = [];
-  ngOnInit(): void {
-    //  this.productsService.productsList.subscribe(
-    //   (products) => {
-    //     this.recommendedProducts = products.slice(0, 4);
-    //   }
-    // );
-    // this.recommendedProducts = similarProducts;
-  }
+  recommendedProducts = computed(() => {
+    return this.productsService.productsList();
+  });
+  ngOnInit(): void {}
 }

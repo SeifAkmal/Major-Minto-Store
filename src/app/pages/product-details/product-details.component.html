@@ -44,10 +44,7 @@
         <app-quantity-counter [product]="item"></app-quantity-counter>
       </div>
       <div class="add-cart-btn">
-        <app-add-to-cart
-          buttonSize="add-xl"
-          [product]="item"
-        ></app-add-to-cart>
+        <app-add-to-cart buttonSize="add-xl" [product]="item"></app-add-to-cart>
       </div>
     </div>
     <div class="accordion" id="accordionExample">
@@ -162,7 +159,7 @@
 <section class="similar-products-container">
   <h3>Similar Products</h3>
   <ul class="similar-products">
-    @for (item of similarProducts; track $index) {
+    @for (item of similarProducts(); track $index) {
     <a [routerLink]="['/home', item.id]">
       <li class="product-card">
         <div class="image-wrapper">

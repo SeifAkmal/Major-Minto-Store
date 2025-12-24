@@ -1,5 +1,5 @@
 import { ProductsService } from './../../core/services/products.service';
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, computed, OnInit, signal, Signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
@@ -27,46 +27,35 @@ export class ProductDetailsComponent implements OnInit {
     private _productsService: ProductsService
   ) {}
 
-  productDetails!: Signal<Product[]>;
-  similarProducts: Product[] = [];
+  productId = signal<number | null>(null);
   activatedImage: number = 0;
+
+  productDetails = computed(() => {
+    const id = this.productId();
+    const products = this._productsService.originalProducts();
+
+    if (!id || products.length === 0) return null;
+
+    return products.filter((p) => p.id === id) ?? null;
+  });
+  similarProducts = computed(() => {
+    const product = this.productDetails();
+    const products = this._productsService.originalProducts();
+
+    if (!product) return [];
+
+    const categoryProducts = products.filter((p) => p.category == product[0].category);
+
+    return categoryProducts.filter((p) => p.id !== product[0].id);
+  });
 
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {
       const id = Number(params.get('id'));
-      if (id) {
-        this._productsService.originalProducts.update((currentProducts) => {
-          let filtered = currentProducts;
-
-          if (id) {
-            filtered = filtered.filter((p) => p.id === id);
-          }
-
-          return filtered;
-        });
-      }
-      this.productDetails = this._productsService.productsList;
-    });
-
-    let category = this.productDetails()[0].category;
-
-    this._productsService.originalProducts.update((currentProducts) => {
-      currentProducts.filter((p) => p.category == category);
-
-      return currentProducts;
-    });
-    this.similarProducts = this._productsService.productsList();
-  }
-
-  changeThePorduct(id: number) {
-    this._productsService.originalProducts.update((currentProducts) => {
-      let filtered = currentProducts;
 
       if (id) {
-        filtered = filtered.filter((p) => p.id === id);
+        this.productId.set(id);
       }
-
-      return filtered;
     });
   }
 

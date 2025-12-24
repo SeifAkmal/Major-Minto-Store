@@ -58,7 +58,7 @@
 <section class="recommended-products-container">
   <h3>You May Also Like</h3>
   <ul class="recommended-products">
-    @for (item of recommendedProducts; track $index) {
+    @for (item of recommendedProducts(); track $index) {
     <a [routerLink]="['/home', item.id]">
       <li class="product-card">
         <div class="image-wrapper">
