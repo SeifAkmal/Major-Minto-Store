@@ -7,6 +7,7 @@ import { StarsPipe } from '../../pipes/stars.pipe';
 import { RouterLink } from '@angular/router';
 import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 import { QuantityCounterComponent } from '../quantity-counter/quantity-counter.component';
+import { LoaderComponent } from "../loader/loader.component";
 
 @Component({
   selector: 'app-products-list',
@@ -18,7 +19,8 @@ import { QuantityCounterComponent } from '../quantity-counter/quantity-counter.c
     RouterLink,
     AddToCartComponent,
     QuantityCounterComponent,
-  ],
+    LoaderComponent
+],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
 })

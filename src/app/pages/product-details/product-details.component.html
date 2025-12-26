@@ -156,6 +156,7 @@
   </section>
 </article>
 } }
+
 <section class="similar-products-container">
   <h3>Similar Products</h3>
   <ul class="similar-products">
@@ -191,3 +192,6 @@
     }
   </ul>
 </section>
+@if (productsService.loading){
+<app-loader></app-loader>
+}

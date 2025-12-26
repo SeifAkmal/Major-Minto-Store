@@ -15,18 +15,26 @@ export class ProductsService {
   originalProducts = signal<Product[]>([]);
   filteredProducts = signal<Product[]>([]);
   productsList = this.filteredProducts.asReadonly();
+  loading: boolean = true;
 
   loadProducts() {
+    this.loading = true;
     this.http.get<Product[]>(this.apiUrl).subscribe({
       next: (products) => {
         const shuffled = [...products].sort(() => Math.random() - 0.5);
-        this.originalProducts.set(shuffled);
-        this.filteredProducts.set([...shuffled]);
+        setTimeout(() => {
+          this.originalProducts.set(shuffled);
+          this.filteredProducts.set([...shuffled]);
+          this.loading = false;
+        }, 1000);
       },
       error: () => {
         const shuffled = [...PRODUCTS].sort(() => Math.random() - 0.5);
-        this.originalProducts.set(shuffled);
-        this.filteredProducts.set([...shuffled]);
+        setTimeout(() => {
+          this.originalProducts.set(shuffled);
+          this.filteredProducts.set([...shuffled]);
+          this.loading = false;
+        }, 1000);
       },
     });
   }

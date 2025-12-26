@@ -1,11 +1,12 @@
 import { ProductsService } from './../../core/services/products.service';
-import { Component, computed, OnInit, signal, Signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
 import { CurrencyPipe, NgClass } from '@angular/common';
 import { AddToCartComponent } from '../../shared/components/add-to-cart/add-to-cart.component';
 import { QuantityCounterComponent } from '../../shared/components/quantity-counter/quantity-counter.component';
+import { LoaderComponent } from "../../shared/components/loader/loader.component";
 
 @Component({
   selector: 'app-product-details',
@@ -17,14 +18,15 @@ import { QuantityCounterComponent } from '../../shared/components/quantity-count
     NgClass,
     AddToCartComponent,
     QuantityCounterComponent,
-  ],
+    LoaderComponent
+],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
 export class ProductDetailsComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
-    private _productsService: ProductsService
+    public productsService: ProductsService
   ) {}
 
   productId = signal<number | null>(null);
@@ -32,7 +34,7 @@ export class ProductDetailsComponent implements OnInit {
 
   productDetails = computed(() => {
     const id = this.productId();
-    const products = this._productsService.originalProducts();
+    const products = this.productsService.originalProducts();
 
     if (!id || products.length === 0) return null;
 
@@ -40,7 +42,7 @@ export class ProductDetailsComponent implements OnInit {
   });
   similarProducts = computed(() => {
     const product = this.productDetails();
-    const products = this._productsService.originalProducts();
+    const products = this.productsService.originalProducts();
 
     if (!product) return [];
 

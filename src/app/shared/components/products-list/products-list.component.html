@@ -1,4 +1,6 @@
-@if (products()) {
+@if (productsService.loading){
+<app-loader></app-loader>
+} @if (!productsService.loading) {
 <ul class="product-list">
   @for (item of products(); track $index) {
   <a [routerLink]="['/home', item.id]">
