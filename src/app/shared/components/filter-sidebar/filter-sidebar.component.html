@@ -2,7 +2,7 @@
   <h2>Filters</h2>
   <div class="category-filter">
     <h3>Category</h3>
-    @for (cat of category; track $index) {
+    @for (cat of categories; track $index) {
     <div class="input-section">
       <input
         type="radio"
@@ -32,7 +32,7 @@
       />
       <label for="all-rating">All Rating</label>
     </div>
-    @for (rate of rating; track $index) {
+    @for (rate of ratings; track $index) {
     <div class="input-section">
       <input
         type="radio"

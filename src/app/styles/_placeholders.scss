@@ -1,5 +1,6 @@
 @use "variables" as *;
 @use "mixins" as *;
+
 //=========================
 //* FLEX UTILITIES *//
 //=========================
@@ -10,12 +11,14 @@
   justify-content: space-between;
   gap: 10px;
 }
+
 %normal-flexible {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
+
 //=========================
 //* CARD STYLING *//
 //=========================
@@ -23,6 +26,7 @@
   display: grid;
   gap: 25px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
   @include respond(phone) {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
@@ -30,6 +34,7 @@
   @include respond(small-phone) {
     grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
   }
+
   a {
     .product-card {
       background-color: $secondary-bg-color;
@@ -42,6 +47,7 @@
 
       .image-wrapper {
         width: 100%;
+
         img {
           width: 100%;
           object-fit: cover;
@@ -53,6 +59,7 @@
         transform: scale(1.03);
         box-shadow: $secondary-shadow;
       }
+
       .product-info {
         padding: 16px;
 
@@ -65,6 +72,7 @@
           display: flex;
           align-items: center;
           margin-bottom: 8px;
+
           img {
             width: 12px;
             margin-right: 4px;
@@ -90,8 +98,9 @@
           }
         }
       }
+
       //=========================
-      //* BADGE STYLE *//
+      //* BADGE STYLES *//
       //=========================
       .badge {
         position: absolute;
@@ -101,19 +110,25 @@
         z-index: 99;
         padding: 4px 12px;
         font-size: 12px;
+        font-weight: 500;
       }
+
       .badge.BestSeller {
         background-color: #137a3f;
       }
+
       .badge.New {
         background-color: #1976d2;
       }
+
       .badge.Premium {
         background-color: #f57c00;
       }
+
       .badge.Popular {
         background-color: #c2185b;
       }
+
       .badge.Trending {
         background-color: #7b1fa2;
       }

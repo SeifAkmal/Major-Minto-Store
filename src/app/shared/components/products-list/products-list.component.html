@@ -41,23 +41,23 @@
 </ul>
 <div class="products-nav">
   <button
-    [class.active]="activatedPage === 1"
-    [class.inactive]="activatedPage != 1"
-    (click)="reOrderProducts(1, undefined)"
+    [class.active]="activePage === 1"
+    [class.inactive]="activePage != 1"
+    (click)="reorderProducts(1, undefined)"
   >
     1
   </button>
   <button
-    [class.active]="activatedPage === 2"
-    [class.inactive]="activatedPage != 2"
-    (click)="reOrderProducts(2, 7)"
+    [class.active]="activePage === 2"
+    [class.inactive]="activePage != 2"
+    (click)="reorderProducts(2, 7)"
   >
     2
   </button>
   <button
-    [class.active]="activatedPage === 3"
-    [class.inactive]="activatedPage != 3"
-    (click)="reOrderProducts(3, 5)"
+    [class.active]="activePage === 3"
+    [class.inactive]="activePage != 3"
+    (click)="reorderProducts(3, 5)"
   >
     3
   </button>

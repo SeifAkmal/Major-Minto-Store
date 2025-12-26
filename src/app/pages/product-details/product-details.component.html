@@ -1,4 +1,6 @@
-@if (productDetails()) {
+@if (productsService.loading){
+<app-loader></app-loader>
+} @if (productDetails()) {
 <a routerLink="/home" class="back-btn">
   <img src="/icons/back-arrow.svg" alt="" />Back to Products</a
 >
@@ -13,8 +15,8 @@
       @for (item of smallImages; track $index) {
       <div
         class="small-images-wrapper"
-        [class.active]="activatedImage == $index"
-        [class.inactive]="!activatedImage"
+        [class.active]="activeImageIndex == $index"
+        [class.inactive]="!activeImageIndex"
         (click)="selectImage($index)"
       >
         <img src="{{ item }}" alt="" />
@@ -155,7 +157,7 @@
     </div>
   </section>
 </article>
-} }
+}
 
 <section class="similar-products-container">
   <h3>Similar Products</h3>
@@ -192,6 +194,4 @@
     }
   </ul>
 </section>
-@if (productsService.loading){
-<app-loader></app-loader>
 }

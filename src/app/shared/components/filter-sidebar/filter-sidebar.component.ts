@@ -1,5 +1,5 @@
-import { ProductsService } from '../../../core/services/products.service';
 import { Component } from '@angular/core';
+import { ProductsService } from '../../../core/services/products.service';
 import { StarsPipe } from '../../pipes/stars.pipe';
 
 @Component({
@@ -9,21 +9,22 @@ import { StarsPipe } from '../../pipes/stars.pipe';
   templateUrl: './filter-sidebar.component.html',
   styleUrl: './filter-sidebar.component.scss',
 })
-export class FilteridebarComponent {
-  constructor(public productsService: ProductsService) {}
-  
-  readonly category: string[] = [
+export class FilterSidebarComponent {
+  readonly categories: string[] = [
     'All Products',
     'Nuts',
     'Herbs',
     'Supplements',
   ];
-  readonly rating: number[] = [4, 3, 2];
-  
-  sendCategoryChange(cat: string) {
-    this.productsService.updateFiltersResults({ category: cat });
+  readonly ratings: number[] = [4, 3, 2];
+
+  constructor(public productsService: ProductsService) {}
+
+  sendCategoryChange(category: string) {
+    this.productsService.updateFiltersResults({ category });
   }
-  sendRatingChange(rate: number) {
-    this.productsService.updateFiltersResults({ rating: rate });
+
+  sendRatingChange(rating: number) {
+    this.productsService.updateFiltersResults({ rating });
   }
 }

@@ -1,11 +1,5 @@
-import { ProductsService } from './../../../core/services/products.service';
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Output,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
+import { ProductsService } from '../../../core/services/products.service';
 
 @Component({
   selector: 'app-filter-controls',
@@ -14,14 +8,9 @@ import {
   templateUrl: './filter-controls.component.html',
   styleUrl: './filter-controls.component.scss',
 })
-export class filterControlsComponent {
-  constructor(
-    private _ProductsService: ProductsService,
-    private _elementRef: ElementRef
-  ) {}
-
-  isOpen: boolean = false;
-  selectedOption: string = 'Sort by: Featured';
+export class FilterControlsComponent {
+  isOpen = false;
+  selectedOption = 'Sort by: Featured';
   sortOptions: string[] = [
     'Sort by: Featured',
     'Price: Low to High',
@@ -29,9 +18,16 @@ export class filterControlsComponent {
     'Rating',
   ];
 
+  @Output() filtersEvent = new EventEmitter<void>();
+
+  constructor(
+    private productsService: ProductsService,
+    private elementRef: ElementRef
+  ) {}
+
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
-    if (!this._elementRef.nativeElement.contains(event.target)) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
       this.isOpen = false;
     }
   }
@@ -39,13 +35,12 @@ export class filterControlsComponent {
   toggleDropdown() {
     this.isOpen = !this.isOpen;
   }
+
   selectOption(sort: string) {
     this.selectedOption = sort;
     this.isOpen = false;
-    this._ProductsService.updateFiltersResults({ sort: sort });
+    this.productsService.updateFiltersResults({ sort });
   }
-
-  @Output() filtersEvent = new EventEmitter<void>();
 
   toggleFilters() {
     this.filtersEvent.emit();

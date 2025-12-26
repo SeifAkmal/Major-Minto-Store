@@ -16,11 +16,12 @@ $breakpoints: (
     @content;
   }
 }
+
 //=========================
-//* BUTTONS STYLE *//
+//* BUTTON STYLES *//
 //=========================
 @mixin button($type, $size) {
-  // BASIC SHARED BUTTON
+  // Basic shared button styles
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +39,7 @@ $breakpoints: (
     box-shadow: $button-hover-shadow;
   }
 
-  // TYPE HANDLING
+  // Type handling
   @if $type == primary {
     background-color: $button-color;
     border: 2px solid transparent;
@@ -62,11 +63,11 @@ $breakpoints: (
     }
   }
 
-  // SIZE HANDLING
+  // Size handling
   @if $size == add-xl {
     padding: 16px 0;
   } @else if $size == checkout {
-    padding: 16px 0px;
+    padding: 16px 0;
   } @else if $size == cart {
     padding: 13px 20px;
   } @else if $size == add {

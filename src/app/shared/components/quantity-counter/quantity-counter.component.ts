@@ -1,12 +1,4 @@
-import {
-  Component,
-  computed,
-  Input,
-  OnChanges,
-  OnInit,
-  Signal,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, Signal, SimpleChanges } from '@angular/core';
 import { Product } from '../../../core/interfaces/product';
 import { CartService } from '../../../core/services/cart.service';
 
@@ -18,16 +10,16 @@ import { CartService } from '../../../core/services/cart.service';
   styleUrl: './quantity-counter.component.scss',
 })
 export class QuantityCounterComponent implements OnChanges {
-  constructor(private _cartService: CartService) {}
-
   @Input() product!: Product;
 
   quantity!: Signal<number>;
 
+  constructor(private cartService: CartService) {}
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['product'].currentValue) {
       const product: Product = changes['product'].currentValue;
-      this.quantity = this._cartService.getQuantity(product.id);
+      this.quantity = this.cartService.getQuantity(product.id);
     }
   }
 
@@ -37,7 +29,7 @@ export class QuantityCounterComponent implements OnChanges {
 
     const current = this.quantity();
     if (current > 0) {
-      this._cartService.updateCart(this.product, current - 1);
+      this.cartService.updateCart(this.product, current - 1);
     }
   }
 
@@ -47,7 +39,7 @@ export class QuantityCounterComponent implements OnChanges {
 
     const current = this.quantity();
     if (current < 10) {
-      this._cartService.updateCart(this.product, current + 1);
+      this.cartService.updateCart(this.product, current + 1);
     }
   }
 }
