@@ -1,21 +1,27 @@
-import { Product } from './../interfaces/product';
-import { PRODUCTS } from './../../../data/products';
 import { Injectable, signal } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Product } from '../interfaces/product';
+import { PRODUCTS } from '../../../data/products';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  constructor(private http: HttpClient) {
-    this.loadProducts();
-  }
-  apiUrl = environment.apiBaseUrl + '/products';
+  private readonly apiUrl = environment.apiBaseUrl + '/products';
+
   originalProducts = signal<Product[]>([]);
   filteredProducts = signal<Product[]>([]);
   productsList = this.filteredProducts.asReadonly();
-  loading: boolean = true;
+  loading = false;
+
+  currentSort = 'Sort by: Featured';
+  currentCategory = 'All Products';
+  currentRating = 0;
+
+  constructor(private http: HttpClient) {
+    this.loadProducts();
+  }
 
   loadProducts() {
     this.loading = true;
@@ -38,10 +44,6 @@ export class ProductsService {
       },
     });
   }
-
-  currentSort: string = 'Sort by: Featured';
-  currentCategory: string = 'All Products';
-  currentRating: number = 0;
 
   updateFiltersResults(options: {
     sort?: string;
@@ -84,8 +86,8 @@ export class ProductsService {
     this.filteredProducts.set(filtered);
   }
 
-  getSearchResults(keyWord: string) {
-    const key = keyWord.trim().toLowerCase();
+  getSearchResults(keyword: string) {
+    const key = keyword.trim().toLowerCase();
     if (!key) {
       this.filteredProducts.set([...this.originalProducts()]);
       return;
@@ -99,7 +101,7 @@ export class ProductsService {
     this.filteredProducts.set(filtered);
   }
 
-  reOrderProducts(maxShow?: number) {
+  reorderProducts(maxShow?: number) {
     let shuffled = [...this.originalProducts()].sort(() => Math.random() - 0.5);
 
     shuffled = maxShow

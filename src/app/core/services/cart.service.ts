@@ -5,11 +5,11 @@ import { Product } from '../interfaces/product';
   providedIn: 'root',
 })
 export class CartService {
+  public readonly cart = signal<Product[]>([]);
+
   constructor() {
     this.cart.set(this.getStorage());
   }
-
-  public readonly cart = signal<Product[]>([]);
 
   updateCart(product: Product, quantity: number) {
     this.cart.update((currentCart) => {
@@ -19,7 +19,7 @@ export class CartService {
         return this.addProduct(currentCart, product, quantity);
       }
 
-      if (quantity <= 0 && index !== -1) {
+      if (quantity <= 0) {
         return this.deleteProduct(currentCart, product.id);
       }
 
@@ -27,26 +27,34 @@ export class CartService {
     });
 
     this.updateStorage(this.cart());
-
-    console.log(this.cart());
   }
-  updateStorage(cart: Product[]) {
+
+  private updateStorage(cart: Product[]) {
     localStorage.setItem('userCart', JSON.stringify(cart));
   }
-  getStorage() {
+
+  private getStorage(): Product[] {
     const storedCart = localStorage.getItem('userCart');
     return storedCart ? JSON.parse(storedCart) : [];
   }
 
-  addProduct(currentCart: Product[], product: Product, quantity: number) {
+  private addProduct(
+    currentCart: Product[],
+    product: Product,
+    quantity: number
+  ) {
     return [...currentCart, { ...product, quantity }];
   }
 
-  deleteProduct(currentCart: Product[], productId: number) {
+  private deleteProduct(currentCart: Product[], productId: number) {
     return currentCart.filter((p) => p.id !== productId);
   }
 
-  changeQuantity(currentCart: Product[], productId: number, quantity: number) {
+  private changeQuantity(
+    currentCart: Product[],
+    productId: number,
+    quantity: number
+  ) {
     return currentCart.map((p) =>
       p.id === productId ? { ...p, quantity } : p
     );
@@ -73,6 +81,7 @@ export class CartService {
     const taxRate = 0.08;
     return this.subtotal() * taxRate;
   });
+
   total = computed(() => {
     return this.subtotal() + this.tax();
   });

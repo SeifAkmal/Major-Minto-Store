@@ -7,7 +7,7 @@ import { StarsPipe } from '../../pipes/stars.pipe';
 import { RouterLink } from '@angular/router';
 import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 import { QuantityCounterComponent } from '../quantity-counter/quantity-counter.component';
-import { LoaderComponent } from "../loader/loader.component";
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-products-list',
@@ -19,8 +19,8 @@ import { LoaderComponent } from "../loader/loader.component";
     RouterLink,
     AddToCartComponent,
     QuantityCounterComponent,
-    LoaderComponent
-],
+    LoaderComponent,
+  ],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
 })
@@ -38,7 +38,7 @@ export class ProductsListComponent {
   }
 
   reOrderProducts(activated: number, maxShow?: number) {
-    this.productsService.reOrderProducts(maxShow);
+    this.productsService.reorderProducts(maxShow);
     this.activatedPage = activated;
   }
 }
