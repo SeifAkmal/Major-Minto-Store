@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, computed, OnInit, Signal, signal } from '@angular/core';
 import { CurrencyPipe, NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
@@ -24,18 +24,30 @@ import { StarsPipe } from '../../pipes/stars.pipe';
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent {
   activePage: number | undefined = 1;
-  products!: Signal<Product[]>;
+  currentPage = signal<number>(1);
+  pageSize = 9;
+
+  products = computed(() => {
+    return this.productsService.productsList() ?? [];
+  });
+
+  visibleProducts = computed(() => {
+    const end = this.currentPage() * this.pageSize;
+    return this.products().slice(0, end);
+  });
+
+  loadMore() {
+    this.currentPage.update((page) => {
+      return page + 1;
+    });
+  }
 
   constructor(
     public productsService: ProductsService,
     public cartService: CartService
   ) {}
-
-  ngOnInit() {
-    this.products = this.productsService.productsList;
-  }
 
   reorderProducts(activePage: number, maxShow?: number) {
     this.productsService.reorderProducts(maxShow);

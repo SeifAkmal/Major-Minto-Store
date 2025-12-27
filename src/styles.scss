@@ -4,19 +4,19 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-@include mat.core();
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+@include mat.core();
+
 .custom-snackbar {
   background-color: $button-color;
   color: $primary-color;
   border-radius: $radius-lg;
 }
-
 .custom-snackbar-delete {
   background-color: $delete-color;
   color: $primary-color;

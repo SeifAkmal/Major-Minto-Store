@@ -2,8 +2,8 @@
 <app-loader></app-loader>
 } @if (!productsService.loading) {
 <ul class="product-list">
-  @for (item of products(); track $index) {
-  <a [routerLink]="['/home', item.id]">
+  @for (item of visibleProducts(); track $index) {
+  <a [routerLink]="['/product', item.id]">
     <li class="product-card">
       <div class="image-wrapper">
         <img [src]="item.image" alt="{{ item.title }}" />
@@ -40,6 +40,11 @@
   }
 </ul>
 <div class="products-nav">
+  @if (visibleProducts().length < products().length) {<button
+    (click)="loadMore()"
+  >
+    Show more ...</button
+  >}
   <button
     [class.active]="activePage === 1"
     [class.inactive]="activePage != 1"

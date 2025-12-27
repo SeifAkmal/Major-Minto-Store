@@ -163,7 +163,7 @@
   <h3>Similar Products</h3>
   <ul class="similar-products">
     @for (item of similarProducts(); track $index) {
-    <a [routerLink]="['/home', item.id]">
+    <a [routerLink]="['/product', item.id]">
       <li class="product-card">
         <div class="image-wrapper">
           <img [src]="item.image" alt="{{ item.title }}" />

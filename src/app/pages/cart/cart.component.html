@@ -3,7 +3,7 @@
   <section class="shopping-cart">
     @if (cartService.cart().length) { @for (item of cartService.cart(); track
     $index) {
-    <a [routerLink]="['/home', item.id]" class="product-card">
+    <a [routerLink]="['/product', item.id]" class="product-card">
       <div class="content">
         <div class="image-wrapper">
           <img [src]="item.image" alt="{{ item.image }}" />
@@ -62,7 +62,7 @@
   <h3>You May Also Like</h3>
   <ul class="recommended-products">
     @for (item of recommendedProducts(); track $index) {
-    <a [routerLink]="['/home', item.id]">
+    <a [routerLink]="['/product', item.id]">
       <li class="product-card">
         <div class="image-wrapper">
           <img [src]="item.image" alt="{{ item.title }}" />
