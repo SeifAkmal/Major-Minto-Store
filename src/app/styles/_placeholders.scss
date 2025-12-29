@@ -135,3 +135,109 @@
     }
   }
 }
+//=========================
+//* AUTH STYLING *//
+//=========================
+%auth-style {
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+  }
+
+  .modal {
+    position: fixed;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 420px;
+    padding: 28px 24px;
+    background: $primary-bg-color;
+    color: $primary-color;
+    border: 1px solid $primary-border-color;
+    border-radius: $radius-lg;
+    z-index: 1001;
+    box-shadow: $primary-shadow;
+    animation: scaleIn $basic-transition ease-out;
+
+    .close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: transparent;
+      border: none;
+      font-size: 22px;
+      color: $delete-color;
+      cursor: pointer;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+
+      label {
+        font-size: $font-size-sm;
+      }
+
+      input {
+        padding: 13px 20px;
+        background-color: $primary-bg-color;
+        border: 1px solid $primary-border-color;
+        border-radius: $radius-md;
+        color: $thirdly-color;
+        max-width: 600px;
+        flex-grow: 1;
+        box-shadow: $primary-shadow;
+        transition: all $basic-transition;
+        &::placeholder {
+          color: $thirdly-color;
+        }
+        &:focus {
+          outline: none;
+          max-width: 50%;
+          border-color: $button-color;
+          box-shadow: 0px 8px 20px rgba(19, 122, 63, 0.3);
+        }
+        &.ng-invalid.ng-touched {
+          border-color: $delete-color;
+        }
+      }
+
+      div {
+        font-size: 12px;
+        color: $delete-color;
+        margin-top: -8px;
+      }
+
+      button[type="submit"] {
+        margin-top: 12px;
+        @include button(primary, sort);
+        &:disabled {
+          background-color: #0f2b20;
+          cursor: not-allowed;
+          opacity: 0.7;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}

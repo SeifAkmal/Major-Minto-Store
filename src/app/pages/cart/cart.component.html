@@ -51,7 +51,9 @@
       <p>Total</p>
       <span>{{ cartService.total() | currency : "USD" }}</span>
     </div>
-    <button>Oops! Please log in before checkout</button>
+    <button (click)="showRegister = true">
+      Oops! Please register before checkout
+    </button>
     <p class="free-shipping">You qualify for free shipping! 🎉</p>
   </section>
 </article>
@@ -92,4 +94,6 @@
     }
   </ul>
 </section>
-}
+} @if (showRegister){<app-register (close)="showRegister = false">
+</app-register
+>}

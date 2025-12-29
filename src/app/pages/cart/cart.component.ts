@@ -8,6 +8,7 @@ import { CartService } from '../../core/services/cart.service';
 import { ProductsService } from '../../core/services/products.service';
 import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
+import { RegisterComponent } from '../../auth/register/register.component';
 
 @Component({
   selector: 'app-cart',
@@ -20,6 +21,7 @@ import { StarsPipe } from '../../shared/pipes/stars.pipe';
     NgClass,
     MatSnackBarModule,
     LoaderComponent,
+    RegisterComponent,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
@@ -30,7 +32,7 @@ export class CartComponent {
     public productsService: ProductsService,
     private snackBar: MatSnackBar
   ) {}
-
+  showRegister = false;
   deleteProduct(item: Product, event: Event) {
     event.preventDefault();
     event.stopPropagation();
@@ -53,7 +55,8 @@ export class CartComponent {
 
     return products
       .filter(
-        (p) => cartCategories.includes(p.category) && !cartProductIds.includes(p.id)
+        (p) =>
+          cartCategories.includes(p.category) && !cartProductIds.includes(p.id)
       )
       .slice(0, 4);
   });

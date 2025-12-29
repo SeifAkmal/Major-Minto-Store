@@ -16,5 +16,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/cart/cart.component').then((c) => c.CartComponent),
   },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./auth/login/login.component').then((c) => c.LoginComponent),
+  },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
