@@ -1,55 +1,55 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../interfaces/product';
 import { PRODUCTS } from '../../../data/products';
 import { environment } from '../../../environments/environment';
+import { Observable, catchError, delay, finalize, map, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  private readonly apiUrl = environment.apiBaseUrl + '/products';
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = `${environment.apiBaseUrl}/products`;
 
-  originalProducts = signal<Product[]>([]);
-  filteredProducts = signal<Product[]>([]);
-  productsList = this.filteredProducts.asReadonly();
-  loading = false;
+  readonly originalProducts = signal<Product[]>([]);
+  readonly filteredProducts = signal<Product[]>([]);
+  readonly productsList = this.filteredProducts.asReadonly();
+  readonly loading = signal<boolean>(false);
+  readonly progress = signal<number>(0);
 
   currentSort = 'Sort by: Featured';
   currentCategory = 'All Products';
   currentRating = 0;
 
-  constructor(private http: HttpClient) {
-    this.loadProducts();
+  constructor() {
+    this.loadProducts().subscribe();
   }
 
-  loadProducts() {
-    this.loading = true;
-    this.http.get<Product[]>(this.apiUrl).subscribe({
-      next: (products) => {
-        const shuffled = [...products].sort(() => Math.random() - 0.5);
-        setTimeout(() => {
-          this.originalProducts.set(shuffled);
-          this.filteredProducts.set([...shuffled]);
-          this.loading = false;
-        }, 1000);
-      },
-      error: () => {
-        const shuffled = [...PRODUCTS].sort(() => Math.random() - 0.5);
-        setTimeout(() => {
-          this.originalProducts.set(shuffled);
-          this.filteredProducts.set([...shuffled]);
-          this.loading = false;
-        }, 1000);
-      },
-    });
+  loadProducts(): Observable<Product[]> {
+    this.loading.set(true);
+    this.progress.set(0);
+
+    return this.http.get<Product[]>(this.apiUrl).pipe(
+      delay(300),
+      map((products) => this.shuffleProducts(products)),
+      catchError(() => of(this.shuffleProducts(PRODUCTS))),
+      tap((products) => {
+        this.originalProducts.set(products);
+        this.filteredProducts.set([...products]);
+        this.progress.set(100);
+      }),
+      finalize(() => {
+        setTimeout(() => this.loading.set(false), 500);
+      })
+    );
   }
 
-  updateFiltersResults(options: {
+  updateFilters(options: {
     sort?: string;
     category?: string;
     rating?: number;
-  }) {
+  }): void {
     if (options.sort !== undefined) {
       this.currentSort = options.sort;
     }
@@ -60,54 +60,71 @@ export class ProductsService {
       this.currentRating = options.rating;
     }
 
-    this.applyFiltersResults();
+    this.applyFilters();
   }
 
-  applyFiltersResults() {
+  applyFilters(): void {
     let filtered = [...this.originalProducts()];
 
     if (this.currentCategory !== 'All Products') {
-      filtered = filtered.filter((p) => p.category === this.currentCategory);
-    }
-    if (this.currentRating) {
-      filtered = filtered.filter((p) => (p.rating ?? 0) >= this.currentRating);
-    }
-
-    if (this.currentSort === 'Price: Low to High') {
-      filtered = [...filtered].sort((a, b) => a.price - b.price);
-    } else if (this.currentSort === 'Price: High to Low') {
-      filtered = [...filtered].sort((a, b) => b.price - a.price);
-    } else if (this.currentSort === 'Rating') {
-      filtered = [...filtered].sort(
-        (a, b) => (b.rating ?? 0) - (a.rating ?? 0)
+      filtered = filtered.filter(
+        (product) => product.category === this.currentCategory
       );
     }
+
+    if (this.currentRating > 0) {
+      filtered = filtered.filter(
+        (product) => (product.rating ?? 0) >= this.currentRating
+      );
+    }
+
+    filtered = this.sortProducts(filtered);
 
     this.filteredProducts.set(filtered);
   }
 
-  getSearchResults(keyword: string) {
-    const key = keyword.trim().toLowerCase();
-    if (!key) {
+  searchProducts(keyword: string): void {
+    const searchTerm = keyword.trim().toLowerCase();
+
+    if (!searchTerm) {
       this.filteredProducts.set([...this.originalProducts()]);
       return;
     }
-    let filtered = [...this.originalProducts()];
-    filtered = filtered.filter((p) => {
-      const titleWords = p.title.toLowerCase().split(' ');
-      return titleWords.some((w) => w.startsWith(key));
+
+    const filtered = this.originalProducts().filter((product) => {
+      const titleWords = product.title.toLowerCase().split(' ');
+      return titleWords.some((word) => word.startsWith(searchTerm));
     });
 
     this.filteredProducts.set(filtered);
   }
 
-  reorderProducts(maxShow?: number) {
-    let shuffled = [...this.originalProducts()].sort(() => Math.random() - 0.5);
+  getRandomProducts(maxCount?: number): void {
+    let shuffled = this.shuffleProducts(this.originalProducts());
 
-    shuffled = maxShow
-      ? shuffled.slice(0, maxShow)
-      : [...this.originalProducts()];
+    if (maxCount) {
+      shuffled = shuffled.slice(0, maxCount);
+    }
 
     this.filteredProducts.set(shuffled);
+  }
+
+  private sortProducts(products: Product[]): Product[] {
+    const sorted = [...products];
+
+    switch (this.currentSort) {
+      case 'Price: Low to High':
+        return sorted.sort((a, b) => a.price - b.price);
+      case 'Price: High to Low':
+        return sorted.sort((a, b) => b.price - a.price);
+      case 'Rating':
+        return sorted.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+      default:
+        return sorted;
+    }
+  }
+
+  private shuffleProducts(products: Product[]): Product[] {
+    return [...products].sort(() => Math.random() - 0.5);
   }
 }

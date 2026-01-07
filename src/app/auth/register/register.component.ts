@@ -1,9 +1,8 @@
-import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
-import { Register } from '../../core/interfaces/register';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Register } from '../../core/interfaces/register';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +14,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class RegisterComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
-  private router = inject(Router);
   private snackBar = inject(MatSnackBar);
-  @Output() close = new EventEmitter<void>();
+
+  close = output<void>();
+  openLogin = output<void>();
 
   registerForm = this.fb.group({
     name: ['', Validators.required],
@@ -25,40 +25,32 @@ export class RegisterComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  checkForm() {
-    if (this.registerForm.invalid) return;
+  submitRegister(): void {
+    if (this.registerForm.invalid) {
+      return;
+    }
 
-    const formValue = this.registerForm.getRawValue();
+    const credentials:Register = this.registerForm.getRawValue();
 
-    this.authService.getUsers().subscribe({
-      next: (res: any) => {
-        const exists = res.some((user: any) => user.email === formValue.email);
-
-        if (exists) {
-          this.registerForm.get('email')?.setErrors({ alreadyExists: true });
-          return;
-        }
-
-        this.submitForm(formValue);
-      },
-      error: (err) => console.log(err),
-    });
-  }
-
-  submitForm(formValue: Register) {
-    this.authService.createAccount(formValue).subscribe({
-      next: () => {
-        this.router.navigate(['/login']);
-        this.snackBar.open('Account created successfully', '', {
+    this.authService.register(credentials).subscribe((response) => {
+      if (response.success) {
+        this.close.emit();
+        this.openLogin.emit();
+        this.snackBar.open(response.message!, '', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
           panelClass: ['custom-snackbar'],
         });
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
+      } else {
+        this.registerForm.setErrors({ emailExists: true });
+        this.snackBar.open(response.message!, '', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+          panelClass: ['custom-snackbar-delete'],
+        });
+      }
     });
   }
 }

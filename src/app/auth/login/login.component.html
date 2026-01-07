@@ -1,1 +1,31 @@
-<p>login works!</p>
+<div class="container">
+  <div class="backdrop" (click)="close.emit()"></div>
+
+  <div class="modal">
+    <button class="close" (click)="close.emit()">x</button>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Email"
+        id="email"
+      />
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Password"
+        id="password"
+      />
+
+      <button [disabled]="loginForm.invalid" type="submit">Login</button>
+
+      @if(loginForm.errors?.['invalidCredentials']){
+      <div class="error">Invalid email or password</div>
+      }
+    </form>
+  </div>
+</div>

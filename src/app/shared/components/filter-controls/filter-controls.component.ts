@@ -39,7 +39,7 @@ export class FilterControlsComponent {
   selectOption(sort: string) {
     this.selectedOption = sort;
     this.isOpen = false;
-    this.productsService.updateFiltersResults({ sort });
+    this.productsService.updateFilters({ sort });
   }
 
   toggleFilters() {

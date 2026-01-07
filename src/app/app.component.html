@@ -2,3 +2,14 @@
 <div class="page-layout">
   <router-outlet></router-outlet>
 </div>
+
+@if (modalService.showLoginModal()) {
+<app-login (close)="modalService.closeLogin()"></app-login>
+} 
+@if (modalService.showRegisterModal()) {
+<app-register
+  (close)="modalService.closeRegister()"
+  (openLogin)="modalService.openLogin()"
+>
+</app-register>
+}

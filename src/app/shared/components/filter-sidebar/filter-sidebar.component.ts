@@ -21,10 +21,10 @@ export class FilterSidebarComponent {
   constructor(public productsService: ProductsService) {}
 
   sendCategoryChange(category: string) {
-    this.productsService.updateFiltersResults({ category });
+    this.productsService.updateFilters({ category });
   }
 
   sendRatingChange(rating: number) {
-    this.productsService.updateFiltersResults({ rating });
+    this.productsService.updateFilters({ rating });
   }
 }

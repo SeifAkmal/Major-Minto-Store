@@ -1,6 +1,6 @@
 <nav>
   <div class="navbar">
-    <a routerLink="/home"><h1>Minto Store</h1> </a>
+    <a routerLink="/home"><h1>Minto Store</h1></a>
 
     <input
       name="search"
@@ -10,8 +10,23 @@
       (keyup)="searchProducts()"
     />
 
-    <a class="cart-button" routerLink="/cart" [attr.cart-count]=" cartService.cart().length">
-      <img src="icons/cart-icon.svg" alt="Cart Icon" /> <span>Cart</span>
-    </a>
+    <div class="buttons-container">
+      @if (authService.isAuthenticated()) {
+      <button (click)="logout()" class="btns">
+        <span>Sign Out</span>
+      </button>
+      } @else {
+      <button (click)="openLogin()" class="btns">Sign In</button>
+      }
+
+      <a
+        class="cart-button btns"
+        routerLink="/cart"
+        [attr.cart-count]="cartService.cart().length"
+      >
+        <img src="icons/cart-icon.svg" alt="Cart Icon" />
+        <span>Cart</span>
+      </a>
+    </div>
   </div>
 </nav>

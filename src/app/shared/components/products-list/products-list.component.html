@@ -1,6 +1,7 @@
-@if (productsService.loading){
+@if (productsService.loading()){
 <app-loader></app-loader>
-} @if (!productsService.loading) {
+} 
+@if (!productsService.loading()) {
 <ul class="product-list">
   @for (item of visibleProducts(); track $index) {
   <a [routerLink]="['/product', item.id]">
@@ -48,21 +49,21 @@
   <button
     [class.active]="activePage === 1"
     [class.inactive]="activePage != 1"
-    (click)="reorderProducts(1, undefined)"
+    (click)="getRandomProducts(1, undefined)"
   >
     1
   </button>
   <button
     [class.active]="activePage === 2"
     [class.inactive]="activePage != 2"
-    (click)="reorderProducts(2, 7)"
+    (click)="getRandomProducts(2, 7)"
   >
     2
   </button>
   <button
     [class.active]="activePage === 3"
     [class.inactive]="activePage != 3"
-    (click)="reorderProducts(3, 5)"
+    (click)="getRandomProducts(3, 5)"
   >
     3
   </button>

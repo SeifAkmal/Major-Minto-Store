@@ -49,8 +49,8 @@ export class ProductsListComponent {
     public cartService: CartService
   ) {}
 
-  reorderProducts(activePage: number, maxShow?: number) {
-    this.productsService.reorderProducts(maxShow);
+  getRandomProducts(activePage: number, maxShow?: number) {
+    this.productsService.getRandomProducts(maxShow);
     this.activePage = activePage;
   }
 }

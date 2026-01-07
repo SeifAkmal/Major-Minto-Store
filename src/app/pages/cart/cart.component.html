@@ -51,15 +51,17 @@
       <p>Total</p>
       <span>{{ cartService.total() | currency : "USD" }}</span>
     </div>
-    <button (click)="showRegister = true">
-      Oops! Please register before checkout
-    </button>
+    @if (!authService.isAuthenticated()) {
+    <button (click)="openRegister()">
+      Oops! Please register before checkout</button
+    >} @if (authService.isAuthenticated()) { <button>Checkout</button>}
+
     <p class="free-shipping">You qualify for free shipping! 🎉</p>
   </section>
 </article>
-@if (productsService.loading){
+@if (productsService.loading()){
 <app-loader></app-loader>
-} @if (!productsService.loading){
+} @if (!productsService.loading()){
 <section class="recommended-products-container">
   <h3>You May Also Like</h3>
   <ul class="recommended-products">
@@ -94,6 +96,4 @@
     }
   </ul>
 </section>
-} @if (showRegister){<app-register (close)="showRegister = false">
-</app-register
->}
+}

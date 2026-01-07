@@ -1,6 +1,7 @@
-@if (productsService.loading){
+@if (productsService.loading()){
 <app-loader></app-loader>
-} @if (productDetails()) {
+} 
+@if (productDetails() && !productsService.loading()) {
 <a routerLink="/home" class="back-btn">
   <img src="/icons/back-arrow.svg" alt="" />Back to Products</a
 >

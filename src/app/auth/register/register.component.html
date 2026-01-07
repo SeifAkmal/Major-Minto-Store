@@ -4,42 +4,46 @@
   <div class="modal">
     <button class="close" (click)="close.emit()">x</button>
 
-    <form [formGroup]="registerForm" (ngSubmit)="checkForm()">
-      <label for="name">name</label>
-      <input type="text" formControlName="name" placeholder="name" id="name" />
-      @if(registerForm.get('name')?.touched
-      &&registerForm.get('name')?.errors?.['required']){
-      <div>Name is required</div>
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+      <label for="name">Name</label>
+      <input type="text" formControlName="name" placeholder="Name" id="name" />
+      @if(registerForm.get('name')?.touched &&
+      registerForm.get('name')?.errors?.['required']){
+      <div class="error">Name is required</div>
       }
-      <label for="email">email</label>
+
+      <label for="email">Email</label>
       <input
-        type="text"
+        type="email"
         formControlName="email"
-        placeholder="email"
+        placeholder="Email"
         id="email"
       />
-      @if(registerForm.get('email')?.touched
-      &&registerForm.get('email')?.errors?.['required'] ){
-      <div>email is required</div>
-      } @if (registerForm.get('email')?.errors?.['email']) {
-      <div>Email is not right</div>
+      @if(registerForm.get('email')?.touched &&
+      registerForm.get('email')?.errors?.['required']){
+      <div class="error">Email is required</div>
+      } @if(registerForm.get('email')?.errors?.['email']){
+      <div class="error">Please enter a valid email</div>
       }
-      <label for="password">password</label>
+
+      <label for="password">Password</label>
       <input
-        type="text"
+        type="password"
         formControlName="password"
-        placeholder="password"
+        placeholder="Password"
         id="password"
       />
-      @if(registerForm.get('password')?.touched
-      &&registerForm.get('password')?.errors?.['required'] ){
-      <div>password is required</div>
+      @if(registerForm.get('password')?.touched &&
+      registerForm.get('password')?.errors?.['required']){
+      <div class="error">Password is required</div>
       } @if(registerForm.get('password')?.errors?.['minlength']){
-      <div>password is not enough</div>
+      <div class="error">Password must be at least 6 characters</div>
       }
+
       <button [disabled]="registerForm.invalid" type="submit">Register</button>
-      @if(registerForm.get('email')?.errors?.['alreadyExists']){
-      <div>user is already there</div>
+
+      @if(registerForm.errors?.['emailExists']){
+      <div class="error">This email is already registered</div>
       }
     </form>
   </div>

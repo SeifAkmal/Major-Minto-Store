@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CurrencyPipe, NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -8,7 +8,8 @@ import { CartService } from '../../core/services/cart.service';
 import { ProductsService } from '../../core/services/products.service';
 import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
-import { RegisterComponent } from '../../auth/register/register.component';
+import { AuthService } from '../../auth/auth.service';
+import { ModalService } from '../../core/services/modal.service';
 
 @Component({
   selector: 'app-cart',
@@ -21,19 +22,18 @@ import { RegisterComponent } from '../../auth/register/register.component';
     NgClass,
     MatSnackBarModule,
     LoaderComponent,
-    RegisterComponent,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  constructor(
-    public cartService: CartService,
-    public productsService: ProductsService,
-    private snackBar: MatSnackBar
-  ) {}
-  showRegister = false;
-  deleteProduct(item: Product, event: Event) {
+  cartService = inject(CartService);
+  productsService = inject(ProductsService);
+  authService = inject(AuthService);
+  modalService = inject(ModalService);
+  snackBar = inject(MatSnackBar);
+
+  deleteProduct(item: Product, event: Event): void {
     event.preventDefault();
     event.stopPropagation();
     this.cartService.updateCart(item, 0);
@@ -43,6 +43,10 @@ export class CartComponent {
       verticalPosition: 'bottom',
       panelClass: ['custom-snackbar-delete'],
     });
+  }
+
+  openRegister(): void {
+    this.modalService.openRegister();
   }
 
   recommendedProducts = computed(() => {
