@@ -54,7 +54,11 @@
     @if (!authService.isAuthenticated()) {
     <button (click)="openRegister()">
       Oops! Please register before checkout</button
-    >} @if (authService.isAuthenticated()) { <button>Checkout</button>}
+    >} @if (authService.isAuthenticated() && cartService.cart().length > 0) {
+    <button>Checkout</button>} @if (authService.isAuthenticated() &&
+    cartService.cart().length <= 0){
+    <a routerLink="/home">Add some items to get started.</a>
+    }
 
     <p class="free-shipping">You qualify for free shipping! 🎉</p>
   </section>
