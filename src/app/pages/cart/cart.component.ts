@@ -10,6 +10,7 @@ import { Product } from '../../core/interfaces/product';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
 import { AuthService } from '../../auth/auth.service';
 import { ModalService } from '../../core/services/modal.service';
+import { CheckoutService } from '../../checkout/checkout.service';
 
 @Component({
   selector: 'app-cart',
@@ -27,17 +28,18 @@ import { ModalService } from '../../core/services/modal.service';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  cartService = inject(CartService);
-  productsService = inject(ProductsService);
-  authService = inject(AuthService);
-  modalService = inject(ModalService);
-  snackBar = inject(MatSnackBar);
+  readonly cartService = inject(CartService);
+  readonly productsService = inject(ProductsService);
+  readonly authService = inject(AuthService);
+  readonly modalService = inject(ModalService);
+  readonly checkoutService = inject(CheckoutService);
+  private readonly snackBar = inject(MatSnackBar);
 
   deleteProduct(item: Product, event: Event): void {
     event.preventDefault();
     event.stopPropagation();
     this.cartService.updateCart(item, 0);
-    this.snackBar.open(item.title + ' removed from cart', '', {
+    this.snackBar.open(`${item.title} removed from cart`, '', {
       duration: 2000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
@@ -45,14 +47,11 @@ export class CartComponent {
     });
   }
 
-  openRegister(): void {
-    this.modalService.openRegister();
-  }
-
   recommendedProducts = computed(() => {
     if (!this.cartService.cart().length) {
       return this.productsService.productsList().slice(0, 4);
     }
+
     const products = this.productsService.originalProducts();
     const cartCategories = this.cartService.cart().map((p) => p.category);
     const cartProductIds = this.cartService.cart().map((p) => p.id);
@@ -64,4 +63,9 @@ export class CartComponent {
       )
       .slice(0, 4);
   });
+
+  openCheckout(): void {
+    this.modalService.open('checkout');
+    this.checkoutService.reset();
+  }
 }

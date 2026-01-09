@@ -52,11 +52,12 @@
       <span>{{ cartService.total() | currency : "USD" }}</span>
     </div>
     @if (!authService.isAuthenticated()) {
-    <button (click)="openRegister()">
-      Oops! Please register before checkout</button
-    >} @if (authService.isAuthenticated() && cartService.cart().length > 0) {
-    <button>Checkout</button>} @if (authService.isAuthenticated() &&
-    cartService.cart().length <= 0){
+    <button (click)="modalService.open('register')">
+      Oops! Please register before checkout
+    </button>
+    } @if (authService.isAuthenticated() && cartService.cart().length > 0) {
+    <button (click)="openCheckout()">Checkout</button>
+    } @if (authService.isAuthenticated() && cartService.cart().length <= 0) {
     <a routerLink="/home">Add some items to get started.</a>
     }
 

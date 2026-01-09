@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="backdrop" (click)="close.emit()"></div>
+
+  <div class="modal">
+    <div class="heading">
+      <h2>Review your order</h2>
+      <button class="close" (click)="close.emit()">x</button>
+    </div>
+
+    <div class="section">
+      <h3>Shipping Information</h3>
+      <p><span>Name:</span> {{ checkoutService.shippingInfo()?.name }}</p>
+      <p><span>Phone:</span> {{ checkoutService.shippingInfo()?.phone }}</p>
+      <p><span>Address:</span> {{ checkoutService.shippingInfo()?.address }}</p>
+    </div>
+
+    <div class="section">
+      <h3>Order Summary</h3>
+
+      @for (item of cartService.cart(); track $index) {
+      <div class="item">
+        <span>{{ item.title }} × {{ item.quantity }}</span>
+        <span>{{ item.price * (item.quantity ?? 0) | currency }}</span>
+      </div>
+      }
+      <div class="tax">
+        <span>Tax (8%)</span>
+        <span> {{ cartService.tax() | currency : "USD" }}</span>
+      </div>
+
+      <div class="total">
+        <p>Total:</p>
+        <span>{{ cartService.total() | currency : "USD" }}</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="secondary" (click)="checkoutService.currentStep.set(1)">
+        Back
+      </button>
+      <button [disabled]="cartService.cart().length <= 0 " class="primary" (click)="checkoutService.goToStep(3)">
+        Continue
+      </button>
+    </div>
+  </div>
+</div>

@@ -85,4 +85,9 @@ export class CartService {
   total = computed(() => {
     return this.subtotal() + this.tax();
   });
+
+  clearCart() {
+    this.cart.set([]);
+    localStorage.removeItem('userCart');
+  }
 }

@@ -28,7 +28,7 @@ export class NavComponent {
   }
 
   openLogin(): void {
-    this.modalService.openLogin();
+    this.modalService.open('login');
   }
 
   logout(): void {

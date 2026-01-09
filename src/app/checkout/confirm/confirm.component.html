@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="backdrop" (click)="close.emit()"></div>
+
+  <div class="modal">
+    <div class="heading">
+      <h2>Confirm your order</h2>
+      <button class="close" (click)="close.emit()">x</button>
+    </div>
+
+    <div class="section">
+      <h3>Payment</h3>
+      <div class="cash-box">
+        <p class="title">Cash on delivery</p>
+        <p class="hint">You will pay when your order arrives.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Summary</h3>
+
+      @for (item of cartService.cart(); track $index) {
+      <div class="item">
+        <span>{{ item.title }} × {{ item.quantity }}</span>
+        <span>{{ item.price * (item.quantity ?? 0) | currency }}</span>
+      </div>
+      }
+      <div class="tax">
+        <span>Tax (8%)</span>
+        <span> {{ cartService.tax() | currency : "USD" }}</span>
+      </div>
+
+      <div class="total">
+        <p>Total:</p>
+        <span>{{ cartService.total() | currency : "USD" }}</span>
+      </div>
+    </div>
+
+    <div class="status" [class.loading]="loading()" [class.success]="success()">
+      @if (loading()) {
+      <div class="spinner"></div>
+      <p>Placing your order...</p>
+      } @else if (success()) {
+      <p class="ok">Order placed successfully ✅</p>
+      <p class="hint">Your cart has been cleared.</p>
+      } @else {
+      <p class="hint">Confirm to complete your order.</p>
+      }
+    </div>
+
+    <div class="actions">
+      <button
+        class="secondary"
+        (click)="checkoutService.goToStep(2)"
+        [disabled]="loading()"
+      >
+        Back
+      </button>
+
+      @if (!success()) {
+      <button
+        class="primary"
+        (click)="confirmOrder()"
+        [disabled]="loading() || cartService.cart().length === 0"
+      >
+        Confirm Order
+      </button>
+      } @else {
+      <button class="primary" (click)="modalService.close()">Done</button>
+
+      }
+    </div>
+  </div>
+</div>

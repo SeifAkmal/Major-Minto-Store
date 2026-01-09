@@ -30,11 +30,10 @@ export class RegisterComponent {
       return;
     }
 
-    const credentials:Register = this.registerForm.getRawValue();
+    const credentials: Register = this.registerForm.getRawValue();
 
     this.authService.register(credentials).subscribe((response) => {
       if (response.success) {
-        this.close.emit();
         this.openLogin.emit();
         this.snackBar.open(response.message!, '', {
           duration: 3000,

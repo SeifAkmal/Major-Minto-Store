@@ -2,7 +2,10 @@
   <div class="backdrop" (click)="close.emit()"></div>
 
   <div class="modal">
-    <button class="close" (click)="close.emit()">x</button>
+    <div class="heading">
+      <h2>Sign Up</h2>
+      <button class="close" (click)="close.emit()">x</button>
+    </div>
 
     <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
       <label for="name">Name</label>

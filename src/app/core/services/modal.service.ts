@@ -4,24 +4,13 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class ModalService {
-  showLoginModal = signal<boolean>(false);
-  showRegisterModal = signal<boolean>(false);
+  readonly activeModal = signal<'login' | 'register' | 'checkout' | null>(null);
 
-  openLogin(): void {
-    this.showLoginModal.set(true);
-    this.showRegisterModal.set(false);
+  open(modal: 'login' | 'register' | 'checkout'): void {
+    this.activeModal.set(modal);
   }
 
-  closeLogin(): void {
-    this.showLoginModal.set(false);
-  }
-
-  openRegister(): void {
-    this.showRegisterModal.set(true);
-    this.showLoginModal.set(false);
-  }
-
-  closeRegister(): void {
-    this.showRegisterModal.set(false);
+  close(): void {
+    this.activeModal.set(null);
   }
 }

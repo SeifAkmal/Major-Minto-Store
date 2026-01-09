@@ -2,7 +2,11 @@
   <div class="backdrop" (click)="close.emit()"></div>
 
   <div class="modal">
-    <button class="close" (click)="close.emit()">x</button>
+    <div class="heading">
+      <h2>Sign In</h2>
+      <button class="close" (click)="close.emit()">x</button>
+    </div>
+
 
     <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
       <label for="email">Email</label>

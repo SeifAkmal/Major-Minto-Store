@@ -1,0 +1,11 @@
+@if (checkoutService.currentStep() === 1) {
+  <app-shipping (close)="modalService.close()"></app-shipping>
+}
+
+@if (checkoutService.currentStep() === 2) {
+  <app-review (close)="modalService.close()"></app-review>
+}
+
+@if (checkoutService.currentStep() === 3) {
+  <app-confirm (close)="modalService.close()"></app-confirm>
+}

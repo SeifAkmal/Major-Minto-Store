@@ -162,19 +162,23 @@
     box-shadow: $primary-shadow;
     animation: scaleIn $basic-transition ease-out;
 
-    .close {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: transparent;
-      border: none;
-      font-size: 22px;
-      color: $delete-color;
-      cursor: pointer;
-      transition: color 0.2s;
+    .heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
 
-      &:hover {
-        color: #fff;
+      .close {
+        background: transparent;
+        border: none;
+        font-size: 22px;
+        color: $delete-color;
+        cursor: pointer;
+        transition: color 0.2s;
+
+        &:hover {
+          color: #fff;
+        }
       }
     }
 
@@ -220,12 +224,6 @@
       button[type="submit"] {
         margin-top: 12px;
         @include button(primary, sort);
-        &:disabled {
-          background-color: #0f2b20;
-          cursor: not-allowed;
-          opacity: 0.7;
-          box-shadow: none;
-        }
       }
     }
   }

@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="backdrop" (click)="close.emit()"></div>
+
+  <div class="modal">
+    <div class="heading">
+      <h2>Shipping Info</h2>
+      <button class="close" (click)="close.emit()">x</button>
+    </div>
+
+    <form [formGroup]="shippingInfoForm" (ngSubmit)="submitShippingInfo()">
+      <label for="name">name</label>
+      <input type="text" formControlName="name" placeholder="name" id="name" />
+
+      <label for="phone">phone</label>
+      <input
+        type="phone"
+        formControlName="phone"
+        placeholder="phone"
+        id="phone"
+      />
+
+      <label for="address">address</label>
+      <input
+        type="address"
+        formControlName="address"
+        placeholder="address"
+        id="address"
+      />
+
+      <button [disabled]="shippingInfoForm.invalid" type="submit">
+        Continue
+      </button>
+    </form>
+  </div>
+</div>

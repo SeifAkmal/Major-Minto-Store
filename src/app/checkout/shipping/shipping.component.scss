@@ -1,0 +1,11 @@
+@use "../../styles/variables" as *;
+@use "../../styles/placeholders" as *;
+@use "../../styles/mixins" as *;
+
+.container {
+  @extend %auth-style;
+  label {
+    color: $thirdly-color;
+    font-weight: 400;
+  }
+}

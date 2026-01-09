@@ -1,15 +1,16 @@
 <app-nav></app-nav>
+
 <div class="page-layout">
   <router-outlet></router-outlet>
 </div>
 
-@if (modalService.showLoginModal()) {
-<app-login (close)="modalService.closeLogin()"></app-login>
-} 
-@if (modalService.showRegisterModal()) {
+@if (modalService.activeModal() === 'login') {
+<app-login (close)="modalService.close()"></app-login>
+} @if (modalService.activeModal() === 'register') {
 <app-register
-  (close)="modalService.closeRegister()"
-  (openLogin)="modalService.openLogin()"
->
-</app-register>
+  (close)="modalService.close()"
+  (openLogin)="modalService.open('login')"
+></app-register>
+} @if (modalService.activeModal() === 'checkout') {
+<app-checkout (close)="modalService.close()"></app-checkout>
 }

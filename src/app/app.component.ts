@@ -4,15 +4,22 @@ import { NavComponent } from './shared/components/nav/nav.component';
 import { ModalService } from './core/services/modal.service';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { CheckoutComponent } from './checkout/checkout/checkout.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent, LoginComponent, RegisterComponent],
+  imports: [
+    RouterOutlet,
+    NavComponent,
+    LoginComponent,
+    RegisterComponent,
+    CheckoutComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'Major-Minto-Store';
-  modalService = inject(ModalService);
+  readonly modalService = inject(ModalService);
 }
