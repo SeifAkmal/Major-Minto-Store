@@ -1,27 +1,116 @@
-# MajorMintoStore
+# 🛒 Major Minto Store
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
+![Major Minto Store Home Page](public/preview/home-page.png)
 
-## Development server
+A modern **e-commerce web application** built with **Angular**, focused on clean architecture, real-world patterns, and junior-friendly best practices.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This project was created to simulate a real online store experience, including product listing, filtering, searching, and cart management, while applying core and advanced Angular concepts used in professional environments.
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## ✨ Features
 
-## Build
+* Browse a list of products fetched from a mock API
+* Filter products by category and other criteria
+* Search products in real time
+* Add and remove items from the shopping cart
+* Persistent cart state during the session
+* Route protection using Guards
+* Lazy-loaded feature modules for better performance
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🧰 Tech Stack
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* **Angular** (modern standalone setup)
+* **TypeScript**
+* **RxJS** for async data streams
+* **Angular Signals** for local and shared state management
+* **Angular Router** with Lazy Loading
+* **Route Guards** for access control
+* **SCSS** for styling
+* **Mock API** using `mock.io`
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 🧠 Architecture & Concepts
 
-## Further help
+This project focuses on writing maintainable and readable Angular code rather than just making things work.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Key concepts applied:
+
+* **Signals** for managing UI and application state in a predictable way
+* **RxJS** for handling HTTP requests and async flows
+* **Lazy Loading** to split the app into feature modules and improve initial load time
+* **Guards** to control navigation and protect routes
+* Clear separation of concerns between components, services, and shared logic
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+* Node.js (LTS recommended)
+* Angular CLI
+
+### Installation & Run
+
+```bash
+npm install
+ng serve
+```
+
+Then open your browser at:
+
+```
+http://localhost:4200
+```
+
+---
+
+## 🔗 Live Demo
+
+If you would like to try the project and explore its features in action, you can access the live demo here:
+
+🚀 **Live Demo:** [https://major-minto-store.netlify.app](https://major-minto-store.netlify.app)
+
+---
+
+## 🌐 API
+
+* The application consumes a **mock REST API** created using `mock.io`
+* Used to simulate real backend behavior during development
+* All product data is fetched asynchronously
+
+---
+
+## 📚 What I Learned From This Project
+
+* Structuring a real-world Angular application
+* When to use **Signals** vs **RxJS**
+* Writing reusable and maintainable services
+* Improving performance with Lazy Loading
+* Handling state in a clean and predictable way
+* Thinking like a frontend developer working in a team environment
+
+---
+
+## 🔮 Future Improvements
+
+* Add authentication and user profiles
+* Improve accessibility 
+* Add unit testing (Jasmine / Karma)
+
+---
+
+## 👨‍💻 Author
+
+**Seif Akmal**
+Junior Front-End Developer (Angular)
+
+* GitHub: [https://github.com/SeifAkmal](https://github.com/SeifAkmal)
+
+---
+
+> This project is part of my journey toward becoming a professional Front-End Developer. Feedback and suggestions are always welcome.
