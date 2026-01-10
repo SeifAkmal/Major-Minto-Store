@@ -107,7 +107,7 @@ If you would like to try the project and explore its features in action, you can
 ## 👨‍💻 Author
 
 **Seif Akmal**
-Junior Front-End Developer (Angular)
+Front-End Developer (Angular)
 
 * GitHub: [https://github.com/SeifAkmal](https://github.com/SeifAkmal)
 
