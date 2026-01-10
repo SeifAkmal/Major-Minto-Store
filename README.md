@@ -73,7 +73,7 @@ http://localhost:4200
 
 If you would like to try the project and explore its features in action, you can access the live demo here:
 
-🚀 **Live Demo:** [https://major-minto-store.netlify.app](https://major-minto-store.netlify.app)
+🚀 **Live Demo:** https://major-minto-store.netlify.app/home
 
 ---
 
