@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Register } from '../core/interfaces/register';
 import { AuthResponse } from '../core/interfaces/authResponse';
 import { environment } from '../../environments/environment';
-import { Login } from '../core/interfaces/login';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { User } from '../core/interfaces/user';
 
@@ -20,12 +18,12 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  register(credentials: Register): Observable<AuthResponse> {
+  register(credentials: User): Observable<AuthResponse> {
     return this.http.get<User[]>(this.apiUrl).pipe(
       switchMap((users: User[]) => {
         const userExists = users.some(
           (user) =>
-            user.email.toLowerCase() === credentials.email?.toLowerCase()
+            user.email?.toLowerCase() === credentials.email?.toLowerCase()
         );
 
         if (userExists) {
@@ -40,29 +38,42 @@ export class AuthService {
             success: true,
             message: 'Registration successful',
           })),
-          catchError(() =>
-            of({
-              success: false,
-              message: 'Registration failed. Please try again.',
-            })
-          )
+          catchError(() => this.localRegister(credentials))
         );
       }),
-      catchError(() =>
-        of({
-          success: false,
-          message: 'Unable to connect to the server',
-        })
-      )
+      catchError(() => this.localRegister(credentials))
     );
   }
 
-  login(credentials: Login): Observable<AuthResponse> {
+  private localRegister(credentials: User): Observable<AuthResponse> {
+    const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+
+    const userExists = users.some(
+      (user) => user.email?.toLowerCase() === credentials.email?.toLowerCase()
+    );
+
+    if (userExists) {
+      return of({
+        success: false,
+        message: 'An account with this email already exists',
+      });
+    }
+
+    users.push({ ...credentials });
+    localStorage.setItem('users', JSON.stringify(users));
+
+    return of({
+      success: true,
+      message: 'Registration successful (offline mode)',
+    });
+  }
+
+  login(credentials: User): Observable<AuthResponse> {
     return this.http.get<User[]>(this.apiUrl).pipe(
       map((users: User[]) => {
         const user = users.find(
           (u) =>
-            u.email.toLowerCase() === credentials.email?.toLowerCase() &&
+            u.email?.toLowerCase() === credentials.email?.toLowerCase() &&
             u.password === credentials.password
         );
 
@@ -83,13 +94,34 @@ export class AuthService {
           token,
         };
       }),
-      catchError(() =>
-        of({
-          success: false,
-          message: 'Login failed. Please try again.',
-        })
-      )
+      catchError(() => this.localLogin(credentials))
     );
+  }
+
+  private localLogin(credentials: User): Observable<AuthResponse> {
+    const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = users.find(
+      (u) =>
+        u.email?.toLowerCase() === credentials.email?.toLowerCase() &&
+        u.password === credentials.password
+    );
+
+    if (!user) {
+      return of({
+        success: false,
+        message: 'Invalid email or password',
+      });
+    }
+
+    const token = this.generateToken(user);
+    localStorage.setItem('token', token);
+    this.isAuthenticated.set(true);
+
+    return of({
+      success: true,
+      message: 'Login successful (offline mode)',
+      token,
+    });
   }
 
   logout(): void {
@@ -98,6 +130,6 @@ export class AuthService {
   }
 
   private generateToken(user: User): string {
-    return `${user.id}_${Date.now()}_${Math.random().toString(36)}`;
+    return `${user.name}_${Date.now()}_${Math.random().toString(36)}`;
   }
 }

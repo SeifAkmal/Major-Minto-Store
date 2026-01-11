@@ -82,6 +82,7 @@ If you would like to try the project and explore its features in action, you can
 * The application consumes a **mock REST API** created using `mock.io`
 * Used to simulate real backend behavior during development
 * All product data is fetched asynchronously
+* Authentication relies on the mock API when available, with an automatic **offline local auth fallback** to handle mock API instability
 
 ---
 

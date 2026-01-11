@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Login } from '../../core/interfaces/login';
+import { User } from '../../core/interfaces/user';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,7 @@ export class LoginComponent {
       return;
     }
 
-    const credentials: Login = this.loginForm.getRawValue();
+    const credentials: User = this.loginForm.getRawValue();
 
     this.authService.login(credentials).subscribe((response) => {
       if (response.success) {

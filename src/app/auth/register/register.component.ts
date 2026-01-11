@@ -2,7 +2,7 @@ import { Component, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Register } from '../../core/interfaces/register';
+import { User } from '../../core/interfaces/user';
 
 @Component({
   selector: 'app-register',
@@ -30,7 +30,7 @@ export class RegisterComponent {
       return;
     }
 
-    const credentials: Register = this.registerForm.getRawValue();
+    const credentials: User = this.registerForm.getRawValue();
 
     this.authService.register(credentials).subscribe((response) => {
       if (response.success) {
