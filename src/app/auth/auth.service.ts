@@ -37,8 +37,7 @@ export class AuthService {
           map(() => ({
             success: true,
             message: 'Registration successful',
-          })),
-          catchError(() => this.localRegister(credentials))
+          }))
         );
       }),
       catchError(() => this.localRegister(credentials))

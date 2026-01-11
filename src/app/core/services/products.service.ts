@@ -3,7 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from '../interfaces/product';
 import { PRODUCTS } from '../../../data/products';
 import { environment } from '../../../environments/environment';
-import { Observable, catchError, delay, finalize, map, of, tap } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  defer,
+  delay,
+  finalize,
+  map,
+  of,
+  tap,
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,22 +36,23 @@ export class ProductsService {
   }
 
   loadProducts(): Observable<Product[]> {
-    this.loading.set(true);
-    this.progress.set(0);
+    return defer(() => {
+      this.loading.set(true);
+      this.progress.set(0);
 
-    return this.http.get<Product[]>(this.apiUrl).pipe(
-      delay(300),
-      map((products) => this.shuffleProducts(products)),
-      catchError(() => of(this.shuffleProducts(PRODUCTS))),
-      tap((products) => {
-        this.originalProducts.set(products);
-        this.filteredProducts.set([...products]);
-        this.progress.set(100);
-      }),
-      finalize(() => {
-        setTimeout(() => this.loading.set(false), 500);
-      })
-    );
+      return this.http.get<Product[]>(this.apiUrl).pipe(
+        map((products) => this.shuffleProducts(products)),
+        catchError(() => of(this.shuffleProducts(PRODUCTS))),
+        delay(300),
+        tap((products) => {
+          this.originalProducts.set(products);
+          this.filteredProducts.set([...products]);
+          this.progress.set(100);
+        }),
+        delay(600),
+        finalize(() => this.loading.set(false))
+      );
+    });
   }
 
   updateFilters(options: {
