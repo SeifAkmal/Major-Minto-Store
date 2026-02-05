@@ -1,72 +1,96 @@
-@if (productsService.loading()){
-<app-loader></app-loader>
-} 
-@if (!productsService.loading()) {
-<ul class="product-list">
-  @for (item of visibleProducts(); track $index) {
-  <a [routerLink]="['/product', item.id]">
-    <li class="product-card">
-      <div class="image-wrapper">
-        <img [src]="item.image" alt="{{ item.title }}" />
-      </div>
-      <article class="product-info">
-        <h3>{{ item.title }}</h3>
+@if (productsService.loading()) {
+  <ul class="product-list">
+    @for (i of [1, 2, 3, 4, 5, 6]; track $index) {
+      <li class="product-card">
+        <div class="sk-card-media">
+          <app-skeleton-card />
+        </div>
 
-        <section class="rating-section">
-          @for (star of (item.rating ?? 0)| stars; track $index) {
-          <img src="icons/1-star.svg" alt="" />
-          }@if (item.rating ?? 0) {
-          <span class="rating-value">{{ item.rating }}</span>
-          }
-        </section>
+        <div class="sk-card-content">
+          <div><app-skeleton-card /></div>
+          <div><app-skeleton-card /></div>
 
-        <section class="price-section">
-          <span class="price">{{ item.price | currency : "USD" }}</span>
-          @if (cartService.isInCart(item.id)()) {
-          <div class="counter">
-            <app-quantity-counter [product]="item"></app-quantity-counter>
+          <div class="sk-card-footer">
+            <div><app-skeleton-card /></div>
+            <div><app-skeleton-card /></div>
           </div>
-          }@else {
-          <app-add-to-cart [product]="item"></app-add-to-cart>}
-        </section>
-      </article>
-      @if (item.badge) {
-      <div [ngClass]="'badge ' + item.badge">
-        {{ item.badge }}
-      </div>
-      }
-    </li></a
-  >
+        </div>
+      </li>
+    }
+  </ul>
+}
 
-  }
-</ul>
-<div class="products-nav">
-  @if (visibleProducts().length < products().length) {<button
-    (click)="loadMore()"
-  >
-    Show more ...</button
-  >}
-  <button
-    [class.active]="activePage === 1"
-    [class.inactive]="activePage != 1"
-    (click)="getRandomProducts(1, undefined)"
-  >
-    1
-  </button>
-  <button
-    [class.active]="activePage === 2"
-    [class.inactive]="activePage != 2"
-    (click)="getRandomProducts(2, 7)"
-  >
-    2
-  </button>
-  <button
-    [class.active]="activePage === 3"
-    [class.inactive]="activePage != 3"
-    (click)="getRandomProducts(3, 5)"
-  >
-    3
-  </button>
-</div>
+@if (!productsService.loading()) {
+  <ul class="product-list">
+    @for (item of visibleProducts(); track $index) {
+      <a [routerLink]="['/product', item.id]">
+        <li class="product-card">
+          <div class="image-wrapper">
+            <img
+              [src]="item.image"
+              alt="{{ item.title }}"
+              [attr.loading]="$index < 6 ? null : 'lazy'"
+              (load)="imageLoaded[item.id] = true"
+              (error)="imageLoaded[item.id] = true"
+              [class.hidden]="!imageLoaded[item.id]"
+            />
+          </div>
+          <article class="product-info">
+            <h3>{{ item.title }}</h3>
 
+            <section class="rating-section">
+              @for (star of item.rating ?? 0 | stars; track $index) {
+                <img src="icons/1-star.svg" alt="" />
+              }
+              @if (item.rating ?? 0) {
+                <span class="rating-value">{{ item.rating }}</span>
+              }
+            </section>
+
+            <section class="price-section">
+              <span class="price">{{ item.price | currency: "USD" }}</span>
+              @if (cartService.isInCart(item.id)()) {
+                <div class="counter">
+                  <app-quantity-counter [product]="item"></app-quantity-counter>
+                </div>
+              } @else {
+                <app-add-to-cart [product]="item"></app-add-to-cart>
+              }
+            </section>
+          </article>
+          @if (item.badge) {
+            <div [ngClass]="'badge ' + item.badge">
+              {{ item.badge }}
+            </div>
+          }
+        </li>
+      </a>
+    }
+  </ul>
+  <div class="products-nav">
+    @if (visibleProducts().length < products().length) {
+      <button (click)="loadMore()">Show more ...</button>
+    }
+    <button
+      [class.active]="activePage === 1"
+      [class.inactive]="activePage != 1"
+      (click)="getRandomProducts(1, undefined)"
+    >
+      1
+    </button>
+    <button
+      [class.active]="activePage === 2"
+      [class.inactive]="activePage != 2"
+      (click)="getRandomProducts(2, 7)"
+    >
+      2
+    </button>
+    <button
+      [class.active]="activePage === 3"
+      [class.inactive]="activePage != 3"
+      (click)="getRandomProducts(3, 5)"
+    >
+      3
+    </button>
+  </div>
 }

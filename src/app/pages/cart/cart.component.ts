@@ -11,6 +11,7 @@ import { StarsPipe } from '../../shared/pipes/stars.pipe';
 import { AuthService } from '../../auth/auth.service';
 import { ModalService } from '../../core/services/modal.service';
 import { CheckoutService } from '../../checkout/checkout.service';
+import { SkeletonCardComponent } from "../../shared/components/skeleton-card/skeleton-card.component";
 
 @Component({
   selector: 'app-cart',
@@ -23,7 +24,8 @@ import { CheckoutService } from '../../checkout/checkout.service';
     NgClass,
     MatSnackBarModule,
     LoaderComponent,
-  ],
+    SkeletonCardComponent
+],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })

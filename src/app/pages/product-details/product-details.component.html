@@ -1,198 +1,237 @@
-@if (productsService.loading()){
-<app-loader></app-loader>
-} 
-@if (productDetails() && !productsService.loading()) {
 <a routerLink="/home" class="back-btn">
   <img src="/icons/back-arrow.svg" alt="" />Back to Products</a
 >
-@for (item of productDetails(); track $index) {
-<article class="container">
-  <section class="product-images">
-    <div class="big-image-wrapper">
-      <img [src]="item.image" alt="" />
+
+@if (productsService.loading()) {
+  <div class="sk-product-layout">
+    <div class="sk-product-media">
+      <app-skeleton-card />
     </div>
 
-    <div class="small-images">
-      @for (item of smallImages; track $index) {
-      <div
-        class="small-images-wrapper"
-        [class.active]="activeImageIndex == $index"
-        [class.inactive]="!activeImageIndex"
-        (click)="selectImage($index)"
-      >
-        <img src="{{ item }}" alt="" />
+    <div class="sk-product-info">
+      <div class="sk-title"><app-skeleton-card /></div>
+      <div class="sk-rating"><app-skeleton-card /></div>
+      <div class="sk-price"><app-skeleton-card /></div>
+
+      <div class="sk-description">
+        <app-skeleton-card />
+        <app-skeleton-card />
       </div>
-      }
-    </div>
-  </section>
-  <section class="product-description">
-    <h1>{{ item.title }}</h1>
-    <div class="rating-section">
-      @for (star of (item.rating ?? 0)| stars; track $index) {
-      <img src="icons/1-star.svg" alt="" />
-      }@if (item.rating ?? 0) {
-      <span class="rating-value">{{ item.rating }}</span>
-      <span> (128 reviews)</span>
-      }
-    </div>
-    <h2 class="price">{{ item.price | currency : "USD" }}</h2>
-    <p>
-      Product made with reliable materials and consistent care to ensure solid
-      quality.
-      <br />
-      Offers a smooth experience and dependable value for everyday use.
-    </p>
-    <div class="add-product">
-      <div class="counter">
-        <app-quantity-counter [product]="item"></app-quantity-counter>
+
+      <div class="sk-actions">
+        <div class="sk-qty"><app-skeleton-card /></div>
+        <div class="sk-button"><app-skeleton-card /></div>
       </div>
-      <div class="add-cart-btn">
-        <app-add-to-cart buttonSize="add-xl" [product]="item"></app-add-to-cart>
+
+      <div class="sk-accordion">
+        <app-skeleton-card />
+        <app-skeleton-card />
+        <app-skeleton-card />
+        <app-skeleton-card />
       </div>
     </div>
-    <div class="accordion" id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseOne"
-            aria-expanded="true"
-            aria-controls="collapseOne"
-          >
-            Full Description
-          </button>
-        </h2>
-        <div
-          id="collapseOne"
-          class="accordion-collapse collapse show"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            Crafted from thoughtfully sourced materials designed for dependable
-            quality, each item is prepared with care to maintain balanced
-            performance and consistency, formulated to support everyday use
-            while aligning with wellness-minded standards, with careful handling
-            that helps retain its natural character and overall freshness,
-            delivering a clean, pleasant experience suitable for a wide range of
-            lifestyles.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseTwo"
-            aria-expanded="false"
-            aria-controls="collapseTwo"
-          >
-            Ingredients
-          </button>
-        </h2>
-        <div
-          id="collapseTwo"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo quia
-            nam illum, fugiat aliquid temporibus ratione libero soluta hic eius
-            reiciendis dignissimos totam, aperiam provident impedit voluptatum
-            tempore blanditiis dicta.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
-            aria-expanded="false"
-            aria-controls="collapseThree"
-          >
-            Shipping Info
-          </button>
-        </h2>
-        <div
-          id="collapseThree"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio
-            deleniti dolorem sed impedit eos asperiores repellendus, numquam
-            reiciendis recusandae aut.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseFour"
-            aria-expanded="false"
-            aria-controls="collapseFour"
-          >
-            How to Brew
-          </button>
-        </h2>
-        <div
-          id="collapseFour"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id libero
-            quos similique dolore? Saepe, quo.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</article>
+  </div>
 }
 
-<section class="similar-products-container">
-  <h3>Similar Products</h3>
-  <ul class="similar-products">
-    @for (item of similarProducts(); track $index) {
-    <a [routerLink]="['/product', item.id]">
-      <li class="product-card">
-        <div class="image-wrapper">
-          <img [src]="item.image" alt="{{ item.title }}" />
+@if (productDetails() && !productsService.loading()) {
+  @for (item of productDetails(); track $index) {
+    <article class="container">
+      <section class="product-images">
+        <div class="big-image-wrapper">
+          <img
+            [src]="item.image"
+            alt="{{ item.title }}"
+            (load)="imageLoaded[item.id] = true"
+            (error)="imageLoaded[item.id] = true"
+            [class.hidden]="!imageLoaded[item.id]"
+          />
         </div>
-        <article class="product-info">
-          <h3>{{ item.title }}</h3>
 
-          <section class="rating-section">
-            @for (star of (item.rating ?? 0)| stars; track $index) {
+        <div class="small-images">
+          @for (item of smallImages; track $index) {
+            <div
+              class="small-images-wrapper"
+              [class.active]="activeImageIndex == $index"
+              [class.inactive]="!activeImageIndex"
+              (click)="selectImage($index)"
+            >
+              <img src="{{ item }}" alt="" />
+            </div>
+          }
+        </div>
+      </section>
+      <section class="product-description">
+        <h1>{{ item.title }}</h1>
+        <div class="rating-section">
+          @for (star of item.rating ?? 0 | stars; track $index) {
             <img src="icons/1-star.svg" alt="" />
-            }@if (item.rating ?? 0) {
+          }
+          @if (item.rating ?? 0) {
             <span class="rating-value">{{ item.rating }}</span>
-            }
-          </section>
-
-          <section class="price-section">
-            <span class="price">{{ item.price | currency : "USD" }}</span>
-          </section>
-        </article>
-        @if (item.badge) {
-        <div [ngClass]="'badge ' + item.badge">
-          {{ item.badge }}
+            <span> (128 reviews)</span>
+          }
         </div>
-        }
-      </li></a
-    >
+        <h2 class="price">{{ item.price | currency: "USD" }}</h2>
+        <p>
+          Product made with reliable materials and consistent care to ensure
+          solid quality.
+          <br />
+          Offers a smooth experience and dependable value for everyday use.
+        </p>
+        <div class="add-product">
+          <div class="counter">
+            <app-quantity-counter [product]="item"></app-quantity-counter>
+          </div>
+          <div class="add-cart-btn">
+            <app-add-to-cart
+              buttonSize="add-xl"
+              [product]="item"
+            ></app-add-to-cart>
+          </div>
+        </div>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                Full Description
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                Crafted from thoughtfully sourced materials designed for
+                dependable quality, each item is prepared with care to maintain
+                balanced performance and consistency, formulated to support
+                everyday use while aligning with wellness-minded standards, with
+                careful handling that helps retain its natural character and
+                overall freshness, delivering a clean, pleasant experience
+                suitable for a wide range of lifestyles.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Ingredients
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo
+                quia nam illum, fugiat aliquid temporibus ratione libero soluta
+                hic eius reiciendis dignissimos totam, aperiam provident impedit
+                voluptatum tempore blanditiis dicta.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Shipping Info
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Distinctio deleniti dolorem sed impedit eos asperiores
+                repellendus, numquam reiciendis recusandae aut.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFour"
+                aria-expanded="false"
+                aria-controls="collapseFour"
+              >
+                How to Brew
+              </button>
+            </h2>
+            <div
+              id="collapseFour"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id
+                libero quos similique dolore? Saepe, quo.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  }
 
-    }
-  </ul>
-</section>
+  <section class="similar-products-container">
+    <h3>Similar Products</h3>
+    <ul class="similar-products">
+      @for (item of similarProducts(); track $index) {
+        <a [routerLink]="['/product', item.id]">
+          <li class="product-card">
+            <div class="image-wrapper">
+              <img [src]="item.image" alt="{{ item.title }}" />
+            </div>
+            <article class="product-info">
+              <h3>{{ item.title }}</h3>
+
+              <section class="rating-section">
+                @for (star of item.rating ?? 0 | stars; track $index) {
+                  <img src="icons/1-star.svg" alt="" />
+                }
+                @if (item.rating ?? 0) {
+                  <span class="rating-value">{{ item.rating }}</span>
+                }
+              </section>
+
+              <section class="price-section">
+                <span class="price">{{ item.price | currency: "USD" }}</span>
+              </section>
+            </article>
+            @if (item.badge) {
+              <div [ngClass]="'badge ' + item.badge">
+                {{ item.badge }}
+              </div>
+            }
+          </li></a
+        >
+      }
+    </ul>
+  </section>
 }

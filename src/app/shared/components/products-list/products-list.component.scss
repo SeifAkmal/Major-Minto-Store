@@ -4,6 +4,13 @@
 
 .product-list {
   @extend %product-card-style;
+
+  img {
+    transition: opacity 0.3s ease;
+    &.hidden {
+      opacity: 0;
+    }
+  }
 }
 
 .products-nav {

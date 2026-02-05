@@ -1,13 +1,13 @@
-import { Component, computed, OnInit, Signal, signal } from '@angular/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { Component, computed, signal } from '@angular/core';
 import { CurrencyPipe, NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 import { QuantityCounterComponent } from '../quantity-counter/quantity-counter.component';
-import { LoaderComponent } from '../loader/loader.component';
 import { CartService } from '../../../core/services/cart.service';
 import { ProductsService } from '../../../core/services/products.service';
-import { Product } from '../../../core/interfaces/product';
 import { StarsPipe } from '../../pipes/stars.pipe';
+import { SkeletonCardComponent } from "../skeleton-card/skeleton-card.component";
 
 @Component({
   selector: 'app-products-list',
@@ -19,8 +19,9 @@ import { StarsPipe } from '../../pipes/stars.pipe';
     RouterLink,
     AddToCartComponent,
     QuantityCounterComponent,
-    LoaderComponent,
-  ],
+    NgxSkeletonLoaderModule,
+    SkeletonCardComponent
+],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
 })
@@ -28,6 +29,7 @@ export class ProductsListComponent {
   activePage: number | undefined = 1;
   currentPage = signal<number>(1);
   pageSize = 9;
+  imageLoaded: Record<number, boolean> = {};
 
   products = computed(() => {
     return this.productsService.productsList() ?? [];
@@ -46,7 +48,7 @@ export class ProductsListComponent {
 
   constructor(
     public productsService: ProductsService,
-    public cartService: CartService
+    public cartService: CartService,
   ) {}
 
   getRandomProducts(activePage: number, maxShow?: number) {

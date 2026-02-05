@@ -1,46 +1,47 @@
 <h2>Shopping Cart</h2>
 <article class="container">
   <section class="shopping-cart">
-    @if (cartService.cart().length) { @for (item of cartService.cart(); track
-    $index) {
-    <a [routerLink]="['/product', item.id]" class="product-card">
-      <div class="content">
-        <div class="image-wrapper">
-          <img [src]="item.image" alt="{{ item.image }}" />
-        </div>
-        <div class="product-titles">
-          <h4>{{ item.title }}</h4>
-          <span>{{ item.price | currency : "USD" }}</span>
-        </div>
+    @if (cartService.cart().length) {
+      @for (item of cartService.cart(); track $index) {
+        <a [routerLink]="['/product', item.id]" class="product-card">
+          <div class="content">
+            <div class="image-wrapper">
+              <img [src]="item.image" alt="{{ item.image }}" />
+            </div>
+            <div class="product-titles">
+              <h4>{{ item.title }}</h4>
+              <span>{{ item.price | currency: "USD" }}</span>
+            </div>
+          </div>
+          <div class="content">
+            <div class="counter">
+              <app-quantity-counter [product]="item"></app-quantity-counter>
+            </div>
+            <button (click)="deleteProduct(item, $event)">
+              <img src="icons/delete.svg" alt="" />
+            </button>
+          </div>
+        </a>
+      }
+    } @else {
+      <div class="empty-cart dark">
+        <h3>Your cart is empty</h3>
+        <p>
+          You haven't added any items yet. Browse the store and pick what you
+          like.
+        </p>
       </div>
-      <div class="content">
-        <div class="counter">
-          <app-quantity-counter [product]="item"></app-quantity-counter>
-        </div>
-        <button (click)="deleteProduct(item, $event)">
-          <img src="icons/delete.svg" alt="" />
-        </button>
-      </div>
-    </a>
-    } }@else {
-    <div class="empty-cart dark">
-      <h3>Your cart is empty</h3>
-      <p>
-        You haven't added any items yet. Browse the store and pick what you
-        like.
-      </p>
-    </div>
     }
   </section>
   <section class="order-summary">
     <h3>Order Summary</h3>
     <div>
       <p>Subtotal</p>
-      <span>{{ cartService.subtotal() | currency : "USD" }}</span>
+      <span>{{ cartService.subtotal() | currency: "USD" }}</span>
     </div>
     <div>
       <p>Tax (8%)</p>
-      <span>{{ cartService.tax() | currency : "USD" }}</span>
+      <span>{{ cartService.tax() | currency: "USD" }}</span>
     </div>
     <div>
       <p>Shipping</p>
@@ -49,56 +50,81 @@
     <hr />
     <div>
       <p>Total</p>
-      <span>{{ cartService.total() | currency : "USD" }}</span>
+      <span>{{ cartService.total() | currency: "USD" }}</span>
     </div>
     @if (!authService.isAuthenticated()) {
-    <button (click)="modalService.open('register')">
-      Oops! Please register before checkout
-    </button>
-    } @if (authService.isAuthenticated() && cartService.cart().length > 0) {
-    <button (click)="openCheckout()">Checkout</button>
-    } @if (authService.isAuthenticated() && cartService.cart().length <= 0) {
-    <a routerLink="/home">Add some items to get started.</a>
+      <button (click)="modalService.open('register')">
+        Oops! Please register before checkout
+      </button>
+    }
+    @if (authService.isAuthenticated() && cartService.cart().length > 0) {
+      <button (click)="openCheckout()">Checkout</button>
+    }
+    @if (authService.isAuthenticated() && cartService.cart().length <= 0) {
+      <a routerLink="/home">Add some items to get started.</a>
     }
 
     <p class="free-shipping">You qualify for free shipping! 🎉</p>
   </section>
 </article>
-@if (productsService.loading()){
-<app-loader></app-loader>
-} @if (!productsService.loading()){
-<section class="recommended-products-container">
-  <h3>You May Also Like</h3>
-  <ul class="recommended-products">
-    @for (item of recommendedProducts(); track $index) {
-    <a [routerLink]="['/product', item.id]">
-      <li class="product-card">
-        <div class="image-wrapper">
-          <img [src]="item.image" alt="{{ item.title }}" />
-        </div>
-        <article class="product-info">
-          <h3>{{ item.title }}</h3>
+@if (productsService.loading()) {
+  <section class="recommended-products-container">
+    <h3>You May Also Like</h3>
+    <ul class="recommended-products">
+      @for (i of [1, 2, 3, 4]; track $index) {
+        <li class="product-card">
+          <div class="sk-card-media">
+            <app-skeleton-card />
+          </div>
 
-          <section class="rating-section">
-            @for (star of (item.rating ?? 0)| stars; track $index) {
-            <img src="icons/1-star.svg" alt="" />
-            }@if (item.rating ?? 0) {
-            <span class="rating-value">{{ item.rating }}</span>
+          <div class="sk-card-content">
+            <div><app-skeleton-card /></div>
+            <div><app-skeleton-card /></div>
+
+            <div class="sk-card-footer">
+              <div><app-skeleton-card /></div>
+            </div>
+          </div>
+        </li>
+      }
+    </ul>
+  </section>
+}
+
+@if (!productsService.loading()) {
+  <section class="recommended-products-container">
+    <h3>You May Also Like</h3>
+    <ul class="recommended-products">
+      @for (item of recommendedProducts(); track $index) {
+        <a [routerLink]="['/product', item.id]">
+          <li class="product-card">
+            <div class="image-wrapper">
+              <img [src]="item.image" alt="{{ item.title }}" />
+            </div>
+            <article class="product-info">
+              <h3>{{ item.title }}</h3>
+
+              <section class="rating-section">
+                @for (star of item.rating ?? 0 | stars; track $index) {
+                  <img src="icons/1-star.svg" alt="" />
+                }
+                @if (item.rating ?? 0) {
+                  <span class="rating-value">{{ item.rating }}</span>
+                }
+              </section>
+
+              <section class="price-section">
+                <span class="price">{{ item.price | currency: "USD" }}</span>
+              </section>
+            </article>
+            @if (item.badge) {
+              <div [ngClass]="'badge ' + item.badge">
+                {{ item.badge }}
+              </div>
             }
-          </section>
-
-          <section class="price-section">
-            <span class="price">{{ item.price | currency : "USD" }}</span>
-          </section>
-        </article>
-        @if (item.badge) {
-        <div [ngClass]="'badge ' + item.badge">
-          {{ item.badge }}
-        </div>
-        }
-      </li></a
-    >
-    }
-  </ul>
-</section>
+          </li></a
+        >
+      }
+    </ul>
+  </section>
 }

@@ -1,41 +1,6 @@
 import { Product } from '../app/core/interfaces/product';
 
 export const PRODUCTS: Product[] = [
-  // Herbs
-  {
-    id: 1,
-    title: 'Herbal Sleep Blend',
-    price: 9.99,
-    category: 'Herbs',
-    image: 'Herbs/Herbal-Sleep-Blend.png',
-    rating: 4.5,
-  },
-  {
-    id: 2,
-    title: 'Lavender Tea',
-    price: 7.5,
-    category: 'Herbs',
-    image: 'Herbs/Lavender-Tea.png',
-    rating: 3.6,
-  },
-  {
-    id: 3,
-    title: 'Matcha Powder Premium',
-    price: 14.99,
-    category: 'Herbs',
-    image: 'Herbs/Matcha-Powder-Premium.png',
-    rating: 4.8,
-    badge: 'New',
-  },
-  {
-    id: 4,
-    title: 'Organic Green Tea',
-    price: 8.75,
-    category: 'Herbs',
-    image: 'Herbs/Organic-Green-Tea.png',
-    rating: 2.7,
-  },
-
   // Nuts
   {
     id: 5,
@@ -97,5 +62,39 @@ export const PRODUCTS: Product[] = [
     category: 'Supplements',
     image: 'Supplements/Zinc-Tablets.png',
     rating: 3.5,
+  },
+  // Herbs
+  {
+    id: 1,
+    title: 'Herbal Sleep Blend',
+    price: 9.99,
+    category: 'Herbs',
+    image: 'Herbs/Herbal-Sleep-Blend.png',
+    rating: 4.5,
+  },
+  {
+    id: 2,
+    title: 'Lavender Tea',
+    price: 7.5,
+    category: 'Herbs',
+    image: 'Herbs/Lavender-Tea.png',
+    rating: 3.6,
+  },
+  {
+    id: 3,
+    title: 'Matcha Powder Premium',
+    price: 14.99,
+    category: 'Herbs',
+    image: 'Herbs/Matcha-Powder-Premium.png',
+    rating: 4.8,
+    badge: 'New',
+  },
+  {
+    id: 4,
+    title: 'Organic Green Tea',
+    price: 8.75,
+    category: 'Herbs',
+    image: 'Herbs/Organic-Green-Tea.png',
+    rating: 2.7,
   },
 ];

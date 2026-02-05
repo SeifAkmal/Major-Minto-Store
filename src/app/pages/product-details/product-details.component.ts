@@ -3,9 +3,9 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CurrencyPipe, NgClass } from '@angular/common';
 import { AddToCartComponent } from '../../shared/components/add-to-cart/add-to-cart.component';
 import { QuantityCounterComponent } from '../../shared/components/quantity-counter/quantity-counter.component';
-import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { ProductsService } from '../../core/services/products.service';
 import { StarsPipe } from '../../shared/pipes/stars.pipe';
+import { SkeletonCardComponent } from '../../shared/components/skeleton-card/skeleton-card.component';
 
 @Component({
   selector: 'app-product-details',
@@ -17,7 +17,7 @@ import { StarsPipe } from '../../shared/pipes/stars.pipe';
     NgClass,
     AddToCartComponent,
     QuantityCounterComponent,
-    LoaderComponent,
+    SkeletonCardComponent,
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
@@ -25,7 +25,7 @@ import { StarsPipe } from '../../shared/pipes/stars.pipe';
 export class ProductDetailsComponent implements OnInit {
   productId = signal<number | null>(null);
   activeImageIndex = 0;
-
+  imageLoaded: Record<number, boolean> = {};
   smallImages: string[] = [
     '/icons/details-img-1.svg',
     '/icons/details-img-2.svg',
@@ -35,7 +35,7 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public productsService: ProductsService
+    public productsService: ProductsService,
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +64,7 @@ export class ProductDetailsComponent implements OnInit {
     if (!product) return [];
 
     const categoryProducts = products.filter(
-      (p) => p.category === product[0].category
+      (p) => p.category === product[0].category,
     );
 
     return categoryProducts.filter((p) => p.id !== product[0].id);
